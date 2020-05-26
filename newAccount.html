@@ -3,71 +3,95 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New Account - FastFood</title>
+    <link rel="stylesheet" href="C:\xampp\htdocs\labDB2020\04-27_lez4\es_dbLogin\style.css">
 </head>
 <body>
-    <div id="newAcc">
+    <div class="container" id="newAcc">
 
         <form action="" id="newAcc-formChoice">
-            <label for="newAcc-formChoice-type-c">Customer</label>
             <input type="radio" name="newAcc-formChoice-type" id="newAcc-formChoice-type-c" value="Customer">
-            <label for="newAcc-formChoice-type-r">Restaurateur</label>
+            <label for="newAcc-formChoice-type-c">Cliente</label>
             <input type="radio" name="newAcc-formChoice-type" id="newAcc-formChoice-type-r" value="Restaurateur">
+            <label for="newAcc-formChoice-type-r">Ristoratore</label>
         </form>
 
-        <!--CUSTOMER FORM-->
-        <div id="newAcc-c">
+        <!--RESTAURATEUR-->
+        <div id="newAcc-r">
 
-            <form action="" id="newAcc-c-form">
+            <form action="" id="newAcc-r-form">
                 
+                <!---->
+
             </form>
         
         </div>
         
-        <!--RESTAURATEUR FORM-->
+        <!--CUSTOMER FORM-->
         <div id="newAcc-c">
 
-            <form action="" id="newAcc-c-form">
+            <form action="" id="newAcc-c-">
 
                 <!--PERSONAL DATA-->
-                <label for="newAcc-c-form-name">Nome:</label>
-                <input type="text" name="newAcc-c-form-name" id="newAcc-c-form-name">
-                <label for="newAcc-c-form-surname">Cognome:</label>
-                <input type="text" name="newAcc-c-form-surname" id="newAcc-c-form-surname">
-                <label for="newAcc-c-form-phone">Telefono:</label>
-                <input type="text" name="newAcc-c-form-phone" id="newAcc-c-form-phone">
-                <br><br>
+                <label for="newAcc-c-name">Nome:</label>
+                <input class="field" type="text" name="newAcc-c-name" id="newAcc-c-name" required>
+                <br>
+                <label for="newAcc-c-surname">Cognome:</label>
+                <input class="field" type="text" name="newAcc-c-surname" id="newAcc-c-surname" required>
+                <br>
+                <label for="newAcc-c-phone">Telefono:</label>
+                <input class="field" type="text" name="newAcc-c-phone" id="newAcc-c-phone" required>
+                <br><br><br>
 
                 <!--ADDRESS-->
-                <label for="newAcc-c-form-address-region">Regione:</label>
-                <select name="newAcc-c-form-address-region" id="newAcc-c-form-address-region">
-                    <option value="default"></option>Scegli la regione</option>
+                <p>Indirizzo: </p>
+                <label for="newAcc-c-address-region">Regione:</label>
+                <select name="newAcc-c-address-region" id="newAcc-c-address-region">
+                    <option value="default">Scegli la regione</option>
                     <option value="abruzzo">Abruzzo</option>
                     <option value="valleDAosta">Valle D'Aosta</option>
                     <option value="molise">Molise</option>
                     <option value="sardegna">Sardegna</option>
                 </select>
-                <label for="newAcc-c-form-address-province">Provincia:</label>
-                <input type="text" name="newAcc-c-form-address-province" id="newAcc-c-form-address-province">
-                <label for="newAcc-c-form-address-city">Citt√†:</label>
-                <input type="text" name="newAcc-c-form-address-city" id="newAcc-c-form-address-city">
-                <label for="newAcc-c-form-address-zip">CAP:</label>
-                <input type="text" name="newAcc-c-form-address-zip" id="newAcc-c-form-address-zip">
-                <label for="newAcc-c-form-address-street">Via: </label>
-                <input type="text" name="newAcc-c-form-address-street" id="newAcc-c-form-address-street">
-                <br><br>
+                <br>
+                <label for="newAcc-c-address-province">Provincia:</label>
+                <input class="field" type="text" name="newAcc-c-address-province" id="newAcc-c-address-province">
+                <br>
+                <label for="newAcc-c-address-city">Citt&aacute;†:</label>
+                <input class="field" type="text" name="newAcc-c-address-city" id="newAcc-c-address-city">
+                <br>
+                <label for="newAcc-c-address-zip">CAP:</label>
+                <input class="field" type="text" name="newAcc-c-address-zip" id="newAcc-c-address-zip">
+                <br>
+                <label for="newAcc-c-address-street">Via: </label>
+                <input class="field" type="text" name="newAcc-c-address-street" id="newAcc-c-address-street">
+                <br><br><br>
                 
                 <!--EMAIL-->
-                <label for="newAcc-c-form-email">Email:</label>
-                <input type="email" name="newAcc-c-form-email" id="newAcc-c-form-email">
-                <label for="newAcc-c-form-psw">Password:</label>
-                <input type="password" name="newAcc-c-form-psw" id="newAcc-c-form-psw">
-                <label for="newAcc-c-form-pswOk">Conferma password:</label>
-                <input type="password" name="newAcc-c-form-pswOk" id="newAcc-c-form-pswOk">
-                <br><br><br>
+                <label for="newAcc-c-email">Email:</label>
+                <input class="field" type="email" name="newAcc-c-email" id="newAcc-c-email" required>
+                <br>
+                <label for="newAcc-c-psw">Password:</label>
+                <input class="field" type="password" name="newAcc-c-psw" id="newAcc-c-psw" required>
+                <br>
+                <label for="newAcc-c-pswOk">Conferma password:</label>
+                <input class="field" type="password" name="newAcc-c-pswOk" id="newAcc-c-pswOk" required>
+                <br><br><br><br>
 
                 <!--CONSENTS-->
-                <label for="newAcc-c-form-"></label>
-
+                <input type="checkbox" name="newAcc-c-therms" id="newAcc-c-therms" required>
+                <label class="right" for="newAcc-c-therms">Dichiaro di aver letto e accetto i <span> Termini e le Condizioni d'uso </span> del servizio</label>
+                <br>
+                <input type="checkbox" name="newAcc-c-privacy" id="newAcc-c-privacy" required>
+                <label class="right" for="newAcc-c-privacy">Acconsento al trattamento dei miei dati personali secondo le modalit‡ descritte nell'<span>Informativa sulla Privacy</span></label>
+                <br>
+                <input type="checkbox" name="newAcc-c-ad" id="newAcc-c-ad">
+                <label class="right" for="newAcc-c-ad">Confermo di voler ricevere tramite email offerte e proposte personalizzate,
+                    basate su preferenze personali raccolte secondo l'<span>Informativa sulla pubblicit‡ definita in base agli interessi</span></label>
+                <br><br><br>
+                
+                <!--BUTTONS-->
+                <input class="button" type="submit" name="newAcc-c-sub" id="newAcc-c-sub" value="Iscriviti">
+                <input class="button" type="reset" name="newAcc-c-res" id="newAcc-c-res" value="Cancella">
                 
 
 
@@ -78,7 +102,7 @@
         
         
         <div id="newAcc-credits">
-            <p>Created by <br> Valentina Lor√®</p>
+            <p>Created by <br> Valentina LorË</p>
         </div>
 
     </div>

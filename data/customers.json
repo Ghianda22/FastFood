@@ -1,0 +1,26 @@
+[
+    {
+        "name":"Alessio",
+        "surname":"Franceschi",
+        "phone":"3925072662",
+        "email":"alessiofranceschi2@gmail.com",
+        "psw":"panda1",
+        "address":"Giorgio Ambrosoli 17 20822 Seveso MB",
+        "therms":true,
+        "privacy":true,
+        "ad":true,
+        "orderNum":[]
+    },
+    {
+        "name":"Laura",
+        "surname":"Pagani",
+        "phone":"3317036505",
+        "email":"pagani.laura@gmail.com",
+        "psw":"maestra25",
+        "address":"Mattioli 20 bis 28012 Cressa NO",
+        "therms":true,
+        "privacy":true,
+        "ad":false,
+        "orderNum":[]
+    }
+]

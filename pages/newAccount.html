@@ -1,0 +1,167 @@
+<html lang="en">
+<head>
+    <script src="..\scripts\newAccount.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrati - FastFood</title>
+</head>
+<body>
+    <div id="newAcc">
+        
+        <form action="" id="newAcc-formChoice">
+            <input type="radio" name="newAcc-formChoice-type" id="newAcc-formChoice-type-c" value="Customer">
+            <label for="newAcc-formChoice-type-c">Cliente</label>
+            <input type="radio" name="newAcc-formChoice-type" id="newAcc-formChoice-type-r" value="Restaurateur">
+            <label for="newAcc-formChoice-type-r">Ristoratore</label>
+        </form>
+        
+        
+    <!--CUSTOMER FORM-->
+        <div id="newAcc-c">
+            
+            <form action="" onsubmit="pswCheckC();" id="newAcc-c">
+                
+                <!--PERSONAL DATA-->
+                <label for="newAcc-c-name">Nome:</label>
+                <input type="text" name="newAcc-c-name" id="newAcc-c-name" required>
+                <br>
+                <label for="newAcc-c-surname">Cognome:</label>
+                <input type="text" name="newAcc-c-surname" id="newAcc-c-surname" required>
+                <br>
+                <label for="newAcc-c-phone">Telefono:</label>
+                <input type="tel" name="newAcc-c-phone" id="newAcc-c-phone" pattern="[0-9]{10}" required>
+                <br>
+                <label for="newAcc-c-email">Email:</label>
+                <input type="email" name="newAcc-c-email" id="newAcc-c-email" required>
+                <br>               
+                <label for="newAcc-c-psw">Password:</label>
+                <input type="password" name="newAcc-c-psw" id="newAcc-c-psw" required>
+                <br>
+                <label for="newAcc-c-pswOk">Conferma password:</label>
+                <input type="password" name="newAcc-c-pswOk" id="newAcc-c-pswOk" required>
+                <br><br>
+                
+                <!--ADDRESS-->
+                <span>Indirizzo: </span>
+                <br>
+                <label for="newAcc-c-address-province">Provincia:</label>
+                <input type="text" name="newAcc-c-address-province" id="newAcc-c-address-province" pattern="[A-Z]{2}" title ="Sigla della provincia">
+                <br>
+                <label for="newAcc-c-address-city">Citt&aacute;:</label>
+                <input type="text" name="newAcc-c-address-city" id="newAcc-c-address-city">
+                <br>
+                <label for="newAcc-c-address-zip">CAP:</label>
+                <input type="text" name="newAcc-c-address-zip" id="newAcc-c-address-zip">
+                <br>
+                <label for="newAcc-c-address-street">Via/Piazza:</label>
+                <input type="text" name="newAcc-c-address-street" id="newAcc-c-address-street">
+                <br>
+                <label for="newAcc-c-address-civN">Civico: </label>
+                <input type="text" name="newAcc-c-address-civN" id="newAcc-c-address-civN">
+                <br><br>
+                
+                <!--CONSENTS-->
+                <input type="checkbox" name="newAcc-c-therms" id="newAcc-c-therms" requiredp>
+                <label for="newAcc-c-therms">Dichiaro di aver letto e accetto i <span> Termini e le Condizioni d'uso </span> del servizio</label>
+                <br>
+                <input type="checkbox" name="newAcc-c-privacy" id="newAcc-c-privacy" required>
+                <label for="newAcc-c-privacy">Acconsento al trattamento dei miei dati personali secondo le modalit&aacute; descritte nell'<span>Informativa sulla Privacy</span></label>
+                <br>
+                <input type="checkbox" name="newAcc-c-ad" id="newAcc-c-ad">
+                <label for="newAcc-c-ad">Confermo di voler ricevere tramite email offerte e proposte personalizzate,
+                    basate su preferenze personali raccolte secondo l'<span>Informativa sulla pubblicit&aacute; definita in base agli interessi</span></label>
+                    <br><br><br>
+                    
+                    <!--BUTTONS-->
+                    <input type="submit" name="newAcc-c-sub" id="newAcc-c-sub" value="Iscriviti">
+                    <input type="reset" name="newAcc-c-res" id="newAcc-c-res" value="Cancella">
+                    
+                </form>
+                
+            </div>
+            
+
+
+
+
+            
+        <!--RESTAURATEUR-->
+            <div id="newAcc-r">
+                
+                <form action="" onsubmit="accountCreationR()" id="newAcc-r-form">
+                    
+                    <!--COMMERCIAL DATA--> 
+                    <label for="newAcc-r-businessName">Nome Attivit&aacute;:</label>
+                    <input type="text" name="newAcc-r-businessName" id="newAcc-r-businessName" required>
+                    <br>
+                    <label for="newAcc-r-email">Email:</label>
+                    <input type="email" name="newAcc-r-email" id="newAcc-r-email" required>
+                    <br>
+                    <label for="newAcc-r-phone">Telefono:</label>
+                    <input type="tel" name="newAcc-r-phone" id="newAcc-r-phone" pattern="[0-9]{10}" required>
+                    <br><br>
+                    <label for="newAcc-r-psw">Password:</label>
+                    <input type="password" name="newAcc-r-psw" id="newAcc-r-psw" required>
+                    <br>
+                    <label for="newAcc-r-pswOk">Conferma password:</label>
+                    <input type="password" name="newAcc-r-pswOk" id="newAcc-r-pswOk" required>
+                    <br><br>
+                    
+                    <!--ADDRESS-->
+                    <span>Indirizzo del locale: </span>
+                    <br>
+                    <label for="newAcc-r-address-province">Provincia:</label>
+                    <input type="text" name="newAcc-r-address-province" id="newAcc-r-address-province" pattern="[A-Z]{2}" title ="Sigla della provincia">
+                    <br>
+                    <label for="newAcc-r-address-city">Citt&aacute;:</label>
+                    <input type="text" name="newAcc-r-address-city" id="newAcc-r-address-city">
+                    <br>
+                    <label for="newAcc-r-address-zip">CAP:</label>
+                    <input type="text" name="newAcc-r-address-zip" id="newAcc-r-address-zip">
+                    <br>
+                    <label for="newAcc-r-address-street">Via: </label>
+                    <input type="text" name="newAcc-r-address-street" id="newAcc-r-address-street">
+                    <br>
+                    <label for="newAcc-r-address-civN">Civico: </label>
+                    <input type="text" name="newAcc-r-address-civN" id="newAcc-r-address-civN">
+                    <br><br>
+                    
+                    <!--PAYMENT DATA-->
+                    <label for="newAcc-r-vatNum">Partita IVA: </label>
+                    <input type="number" name="newAcc-r-vatNum" id="newAcc-r-vatNum" pattern="[o-9]{11}" required>
+                    <br>
+                    <span>Metodi di pagamento accettati: </span>
+                    <br>
+                    <input type="checkbox" name="newAcc-r-payment-paypal" id="newAcc-r-payment-paypal">
+                    <label for="newAcc-r-payment-paypal">PayPal</label>
+                    <br>
+                    <input type="checkbox" name="newAcc-r-payment-prepaid" id="prepaid">
+                    <label for="newAcc-r-payment-prepaid">Prepagata</label>
+                    <br>
+                    <input type="checkbox" name="newAcc-r-payment-card" id="newAcc-r-payment-card">
+                    <label for="newAcc-r-payment-card">Carta di credito</label>
+                    <br>
+                    <input type="checkbox" name="newAcc-r-payment-cash" id="newAcc-r-payment-cash">
+                    <label for="newAcc-r-payment-cash">Contanti</label>
+                    <br><br>
+                    
+                    <!--CONSENTS-->
+                    <input type="checkbox" name="newAcc-r-therms" id="newAcc-r-therms" required>
+                    <label for="newAcc-r-therms">Dichiaro di aver letto e accetto i <span> Termini e le Condizioni d'uso </span> del servizio</label>
+                    <br><br><br>
+    
+                    <input type="submit" name="newAcc-r-sub" id="newAcc-r-sub" value="Registrati">
+                    <input type="reset" name="newAcc-r-res" id="newAcc-r-res" value="Cancella">
+                    
+                </form>
+                
+            </div>
+            
+        <footer>
+            <p>Created by <br> Valentina Lor&eacute;</p>
+        </footer>
+
+    </div>
+    
+</body>
+</html>

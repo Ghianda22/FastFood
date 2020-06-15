@@ -1,0 +1,28 @@
+[
+    {
+        "businessName":"Ristorante Pizzeria Amici Miei",
+        "email":"amicimiei07@virgilio.it",
+        "phone":"0322890053",
+        "psw":"amici",
+        "address":"S. Regionale 229 5 28010 Fontaneto D'agogna NO",
+        "vatNum":"01239710039",
+        "payment":[false, true, true, true],
+        "therms":true,
+        "rating":null,
+        "orderNum":[],
+        "menu":[]
+    },
+    {
+        "businessName":"Ristorante Pizzeria da Aldo",
+        "email":"info@aldopizzeria.it",
+        "phone":"0322243195",
+        "psw":"aldo2020",
+        "address":"Piazza del Popolo 26 28041 Arona NO",
+        "vatNum":"11000874354",
+        "payment":[true,false,true,false],
+        "therms":true,
+        "rating":null,
+        "orderNum":[],
+        "menu":[]
+    }
+]

@@ -1,0 +1,10 @@
+modifica    <i class="fas fa-edit"></i> 
+hamburger menù    <i class="fas fa-bars"></i> 
+spunta    <i class="fas fa-check"></i>
+stella vuota    <i class="far fa-star"></i>
+stella piena    <i class="fas fa-star"></i>
+warning    <i class="fas fa-exclamation-triangle"></i>
+freccia su    <i class="fas fa-chevron-up"></i>
+freccia giù    <i class="fas fa-chevron-down"></i>
+carrello con freccia    <i class="fas fa-cart-arrow-down"></i>
+pi?    <i class="fas fa-plus"></i>

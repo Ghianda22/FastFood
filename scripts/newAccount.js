@@ -1,14 +1,23 @@
+function back(){
+            if(document.referrer.indexOf("login.html") == -1 ){     //la pagina precedente non � login
+                window.history.goBack(-2);
+            }else{
+                window.history.back();
+            }
+}
+
 /* -- CUSTOMER SECTION -- */
 
     // CLASS
         class Customer{
-            constructor(name, surname, phone, email, psw, address, ad){
+            constructor(name, surname, phone, email, psw, address, payment, ad){
                 this.name = name;
                 this.surname = surname;
                 this.phone = phone;
                 this.email = email;
                 this.psw = psw;
                 this.address = address;
+                this.payment = payment;
                 this.therms = true;
                 this.privacy = true;
                 this.ad = ad;
@@ -21,12 +30,27 @@
     // CHECKS
         function pswCheckC(){
             if(document.getElementById("newAcc-c-psw").value == document.getElementById("newAcc-c-pswOk").value){
-                accountCreationC();
-                alert("Registrazione avvenuta con successo, clicca ok per continuare");
+                return true;
             }else{
-                //document.getElementById("psw-c-alert").style.display = "block";
-                alert("cogliona");
+                //mostra simbolo di errore rosso
+                return false;
             }
+        }
+
+        function noDoubleC(){
+            let email = document.getElementById("newAcc-c-email").value;
+            let cArray = JSON.parse(localStorage.getItem("customers"));
+            for(let i of cArray){
+                if(email == i.email){
+                    alert("C'è già un account collegato a questa email.\nHai dimenticato la password? Recuperala qui");
+                    return false;
+                }
+            };
+            return true;
+        }
+
+        function paymentC(){
+            //dev'esserci almeno una spunta nei check
         }
 
 
@@ -42,13 +66,34 @@
                 document.getElementById("newAcc-c-address-zip").value+" "+
                 document.getElementById("newAcc-c-address-city").value+" "+
                 document.getElementById("newAcc-c-address-province").value;
+            let payment = [document.getElementById("newAcc-c-payment-paypal").checked,
+                document.getElementById("newAcc-c-payment-prepaid").checked,
+                document.getElementById("newAcc-c-payment-card").checked,
+                document.getElementById("newAcc-c-payment-cash").checked];
             let ad = document.getElementById("newAcc-c-ad").checked;
 
-            let customer = new Customer (name, surname, phone, email, psw, address, ad);
+            let customer = new Customer (name, surname, phone, email, psw, address, payment, ad);
             
-            let cArray = JSON.parse(localStorage.getItem("customer"));
+            let cArray = JSON.parse(localStorage.getItem("customers"));
             cArray.push(customer);
-            localStorage.setItem("customer", JSON.stringify(cArray));
+            localStorage.setItem("customers", JSON.stringify(cArray));
+        }
+
+        function checksC(){
+            if(pswCheckC()==true && noDoubleC()==true){
+                accountCreationC();
+                back();
+                alert("Registrazione avvenuta con successo!");
+            }else{
+                console.log("Si sono verificati degli errori");
+            }
+        }
+
+        
+
+        function cMode(){
+            document.getElementById("newAcc-c").style.display = "block";
+            document.getElementById("newAcc-r").style.display = "none";
         }
 
 
@@ -57,7 +102,8 @@
 
 
 /* -- RESTAURATEUR SECTION -- */
-
+    
+    
 
     // CLASS
         class Restaurateur{
@@ -72,18 +118,31 @@
                 this.therms = true;
                 this.rating = null;
                 this.orderNum = [];
+                this.menu = [];
             }
         }
 
     
     // CHECKS
         function pswCheckR(){
-            if(document.getElementById("newAcc-r-psw") == document.getElementById("newAcc-r-pswOk")){
-                accountCreationR();
-                alert("Registrazione avvenuta con successo, clicca ok per continuare");
+            if(document.getElementById("newAcc-r-psw").value == document.getElementById("newAcc-r-pswOk").value){
+                return true;
             }else{
-                //document.getElementById("psw-r-alert").style.display = "block";
-            }    
+                //mostra simbolo di errore rosso
+                return false;
+            }
+        }
+
+        function noDoubleR(){
+            let email = document.getElementById("newAcc-r-email").value;
+            let rArray = JSON.parse(localStorage.getItem("restaurateurs"));
+            for(let i of rArray){
+                if(email == i.email){
+                    alert("C'è già un account collegato a questa email.\nHai dimenticato la password? Recuperala qui");
+                    return false;
+                }
+            };
+            return true;
         }
 
 
@@ -98,16 +157,31 @@
                 document.getElementById("newAcc-r-address-zip").value+" "+
                 document.getElementById("newAcc-r-address-city").value+" "+
                 document.getElementById("newAcc-r-address-province").value;
-            let vatNum = document.getElementById("newAcc-r-vatNum").checked;
-            let payment = [ document.getElementById("newAcc-r-payment-paypal").checked,
+            let vatNum = document.getElementById("newAcc-r-vatNum").value;
+            let payment = [document.getElementById("newAcc-r-payment-paypal").checked,
                 document.getElementById("newAcc-r-payment-prepaid").checked,
                 document.getElementById("newAcc-r-payment-card").checked,
-                document.getElementById("newAcc-r-payment-cash").checked ];
+                document.getElementById("newAcc-r-payment-cash").checked];
             
             let restaurateur = new Restaurateur (businessName, email, phone, psw, address, vatNum, payment);
             
-            let rArray = JSON.parse(localStorage.getItem("restaurateur"));
+            let rArray = JSON.parse(localStorage.getItem("restaurateurs"));
             rArray.push(restaurateur);
-            localStorage.setItem("restaurateur", JSON.stringify(rArray));
+            localStorage.setItem("restaurateurs", JSON.stringify(rArray));
+        }
+
+        function checksR(){
+            if(pswCheckR()==true && noDoubleR()==true){
+                accountCreationR();
+                back();
+                alert("Registrazione avvenuta con successo!");
+            }else{
+                console.log("Si sono verificati degli errori");
+            }
+        }
+
+        function rMode(){
+            document.getElementById("newAcc-r").style.display = "block";
+            document.getElementById("newAcc-c").style.display = "none";
         }
 

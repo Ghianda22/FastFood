@@ -1,38 +1,39 @@
 <html lang="en">
 <head>
+    <script src="..\scripts\login.js"></script>
+    <script src="..\data\customers.json"></script>
+    <script src="..\data\restaurateurs.json"></script>
+    <link rel="stylesheet" href="..\styles\style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Fastfood</title>
 </head>
 <body>
 
-    <div id="logPage">
+        <main id="logPage">
 
-        <div id="logPage-log">
-
-            <form action="" id="logPage-log-form">
-                <label for="logPage-log-form-email">Email:</label>
-                <input type="text" name="logPage-log-form-email" id="logPage-log-form-email" placeholder="Write your email..">
+            <form action="" onsubmit="login()" id="logPage-form">
+                <label for="logPage-form-email">Email:</label>
+                <input type="text" name="logPage-form-email" id="logPage-form-email">
                 <br>
-                <label for="logPage-log-form-psw">Password:</label>
-                <input type="password" name="logPage-log-form-psw" id="logPage-log-form-psw" placeholder="Choose a password..">
+                <label for="logPage-form-psw">Password:</label>
+                <input type="password" name="logPage-form-psw" id="logPage-form-psw">
                 <br><br>
-                <input type="submit" name="logPage-log-form-submit" id="logPage-log-form-submit" value="Accedi">
+                <input type="submit" name="logPage-form-submit" id="logPage-form-submit" value="Accedi">
             </form>
 
             <span>Hai dimenticato la password? <a href="">Clicca qui</a> per recuperarla</span>
             <br>
-            <span id="logPage-log-registration">Non sei ancora iscritto? 
+            <span id="logPage-registration">Non sei ancora iscritto? 
                 <a href="newAccount.html">Registrati!</a>
             </span>
 
-        </div>
+        </main>
         
         <footer>
             <p>Created by <br> Valentina Lor&eacute;</p>
         </footer>
 
-    </div>
         
 </body>
 </html>

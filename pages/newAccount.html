@@ -1,6 +1,9 @@
 <html lang="en">
 <head>
     <script src="..\scripts\newAccount.js"></script>
+    <script type="text/javascript" src="..\data\customers.json"></script>
+    <script type="text/javascript" src="..\data\restaurateurs.json"></script>
+    <link rel="stylesheet" href="..\styles\style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrati - FastFood</title>
@@ -8,10 +11,10 @@
 <body>
     <div id="newAcc">
         
-        <form action="" id="newAcc-formChoice">
-            <input type="radio" name="newAcc-formChoice-type" id="newAcc-formChoice-type-c" value="Customer">
+        <form id="newAcc-formChoice">
+            <input type="radio" name="newAcc-formChoice-type" id="newAcc-formChoice-type-c" value="Customer" onclick="cMode()">
             <label for="newAcc-formChoice-type-c">Cliente</label>
-            <input type="radio" name="newAcc-formChoice-type" id="newAcc-formChoice-type-r" value="Restaurateur">
+            <input type="radio" name="newAcc-formChoice-type" id="newAcc-formChoice-type-r" value="Restaurateur" onclick="rMode()">
             <label for="newAcc-formChoice-type-r">Ristoratore</label>
         </form>
         
@@ -19,7 +22,7 @@
     <!--CUSTOMER FORM-->
         <div id="newAcc-c">
             
-            <form action="" onsubmit="pswCheckC();" id="newAcc-c">
+            <form action="" onsubmit="checksC();" id="newAcc-c-form">
                 
                 <!--PERSONAL DATA-->
                 <label for="newAcc-c-name">Nome:</label>
@@ -45,7 +48,7 @@
                 <span>Indirizzo: </span>
                 <br>
                 <label for="newAcc-c-address-province">Provincia:</label>
-                <input type="text" name="newAcc-c-address-province" id="newAcc-c-address-province" pattern="[A-Z]{2}" title ="Sigla della provincia">
+                <input type="text" name="newAcc-c-address-province" id="newAcc-c-address-province" pattern="[A-Z]{2}" placeholder ="Sigla della provincia es. MI">
                 <br>
                 <label for="newAcc-c-address-city">Citt&aacute;:</label>
                 <input type="text" name="newAcc-c-address-city" id="newAcc-c-address-city">
@@ -59,6 +62,23 @@
                 <label for="newAcc-c-address-civN">Civico: </label>
                 <input type="text" name="newAcc-c-address-civN" id="newAcc-c-address-civN">
                 <br><br>
+
+                <!--PAYMENT-->
+                <span>Metodi di pagamento: </span>
+                <br>
+                <input type="checkbox" name="newAcc-c-payment-paypal" id="newAcc-c-payment-paypal">
+                <label for="newAcc-c-payment-paypal">PayPal</label>
+                <br>
+                <input type="checkbox" name="newAcc-c-payment-prepaid" id="newAcc-c-payment-prepaid">
+                <label for="newAcc-c-payment-prepaid">Prepagata</label>
+                <br>
+                <input type="checkbox" name="newAcc-c-payment-card" id="newAcc-c-payment-card">
+                <label for="newAcc-c-payment-card">Carta di credito</label>
+                <br>
+                <input type="checkbox" name="newAcc-c-payment-cash" id="newAcc-c-payment-cash">
+                <label for="newAcc-c-payment-cash">Contanti</label>
+                <br><br>
+                
                 
                 <!--CONSENTS-->
                 <input type="checkbox" name="newAcc-c-therms" id="newAcc-c-therms" requiredp>
@@ -88,7 +108,7 @@
         <!--RESTAURATEUR-->
             <div id="newAcc-r">
                 
-                <form action="" onsubmit="accountCreationR()" id="newAcc-r-form">
+                <form action="" onsubmit="checksR()" id="newAcc-r-form">
                     
                     <!--COMMERCIAL DATA--> 
                     <label for="newAcc-r-businessName">Nome Attivit&aacute;:</label>
@@ -128,14 +148,14 @@
                     
                     <!--PAYMENT DATA-->
                     <label for="newAcc-r-vatNum">Partita IVA: </label>
-                    <input type="number" name="newAcc-r-vatNum" id="newAcc-r-vatNum" pattern="[o-9]{11}" required>
+                    <input type="text" name="newAcc-r-vatNum" id="newAcc-r-vatNum" pattern="[0-9]{11}" required>
                     <br>
                     <span>Metodi di pagamento accettati: </span>
                     <br>
                     <input type="checkbox" name="newAcc-r-payment-paypal" id="newAcc-r-payment-paypal">
                     <label for="newAcc-r-payment-paypal">PayPal</label>
                     <br>
-                    <input type="checkbox" name="newAcc-r-payment-prepaid" id="prepaid">
+                    <input type="checkbox" name="newAcc-r-payment-prepaid" id="newAcc-r-payment-prepaid">
                     <label for="newAcc-r-payment-prepaid">Prepagata</label>
                     <br>
                     <input type="checkbox" name="newAcc-r-payment-card" id="newAcc-r-payment-card">

@@ -5,7 +5,9 @@
 .hidden{
     display: none;
 }
-
+#logo{
+    width: 50%;
+}
 
 /* MOBILE */
 

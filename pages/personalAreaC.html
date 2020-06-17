@@ -1,6 +1,6 @@
 <html lang="en">
 <head>
-    <script src="..\scripts\personalArea.js"></script>
+    <script src="..\scripts\personalAreaC.js"></script>
     <script src="..\data\customers.json"></script>
     <script src="..\data\restaurateurs.json"></script>
     <script src="https://kit.fontawesome.com/62ec85265f.js" crossorigin="anonymous"></script>
@@ -10,57 +10,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Area Personale - FastFood</title>
 </head>
-<body>
+<body ondblclick="exitModify()">
     
     <div id="pArea">
         <ul id="pArea-dropdown">
             <li>
-                <div id="pArea-pData">
-                    <i class="fas fahevron-down" onclick="showPData()"></i>
-                    <i class="hidden fas fa-chevron-up" onclick="hidePData()"></i>
+                <div class="titlebox" id="pArea-pData">
+                    <i id="pArea-pData-down" class="fas fa-chevron-down" onclick="showPersonalData()"></i>
+                    <i id="pArea-pData-up" class="hidden fas fa-chevron-up" onclick="hidePersonalData()"></i>
                     <span>Dati personali</span>
                 </div>
 
-                <div class="data hidden" id="pArea-pData-show">
+                <div class="drop hidden" id="pArea-pData-show">
                     
-                    <div id="pArea-pData-show-name">
+                    <!--name-->
+                    <div class="data" id="pArea-pData-show-name">
                         <p id="pArea-pData-show-name-p"></p>
                         <i class="fas fa-edit" onclick="nameModifier()"></i>
                     </div>
                     <div class="mod hidden" id="pArea-pData-mod-name">
                         <input type="text" name="pArea-pData-mod-name-input" id="pArea-pData-mod-name-input">
-                        <i onclick="nameOk()" class="fas faheck"></i>
+                        <i class="fas fa-check" onclick="nameOk()"></i>
                     </div>
 
-                    <div id="pArea-pData-show-surname">
+                    <!--surname-->
+                    <div class="data" id="pArea-pData-show-surname">
                         <p id="pArea-pData-show-surname-p"></p>
                         <i class="fas fa-edit" onclick="surnameModifier()"></i>
                     </div>
                     <div class="mod hidden" id="pArea-pData-mod-surname">
                         <input type="text" name="pArea-pData-mod-surname-input" id="pArea-pData-mod-surname-input">
-                        <i class="fas faheck"></i>
+                        <i class="fas fa-check" onclick="surnameOk()"></i>
                     </div>
 
-                    <div id="pArea-pData-show-phone">
+                    <!--phone-->
+                    <div class="data" id="pArea-pData-show-phone">
                         <p id="pArea-pData-show-phone-p"></p>
                         <i class="fas fa-edit" onclick="phoneModifier()"></i>
                     </div>
                     <div class="mod hidden" id="pArea-pData-mod-phone">
                         <input type="tel" name="pArea-pData-mod-phone-input" id="pArea-pData-mod-phone-input" pattern="[0-9]{10}">
-                        <i class="fas faheck"></i>
+                        <i class="fas fa-check" onclick="phoneOk()"></i>
                     </div>
 
-                    <div id="pArea-pData-show-email">
+                    <!--email-->
+                    <div class="data" id="pArea-pData-show-email">
                         <p id="pArea-pData-show-email-p"></p>
                         <i class="fas fa-edit" onclick="emailModifier()"></i>
                     </div>
                     <div class="mod hidden" id="pArea-pData-mod-email">
                         <input type="email" name="pArea-pData-mod-email-input" id="pArea-pData-mod-email-input">
-                        <i class="fas faheck"></i>
+                        <i class="fas fa-check" onclick="emailOk()"></i>
                     </div>
 
-                    <div id="pArea-pData-show-psw">
-                        <p onclick="pswModifier()">Cambia password</p>
+                    <!--psw-->
+                    <div class="data" id="pArea-pData-show-psw">
+                        <p id="pArea-pData-show-psw-p"></p>
+                        <i class="fas fa-edit" onclick="pswModifier()"></i>                    </div>
+                    <div class="mod hidden" id="pArea-pData-mod-psw">
+                        <input type="psw" name="pArea-pData-mod-psw-input" id="pArea-pData-mod-psw-input">
+                        <span class="warning hidden" id="psw-warning">
+                            Le password non corrispondono
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </span>
+                        <input type="psw" name="pArea-pData-mod-pswOk-input" id="pArea-pData-mod-pswOk-input" onchange="pswCheck()">
+                        <i class="fas fa-check" onclick="pswOk()"></i>
                     </div>
 
 

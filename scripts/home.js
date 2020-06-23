@@ -3,8 +3,9 @@ function detectUser(){
         let user = JSON.parse(sessionStorage.getItem("logged"));
         if(user.vatNum == null){
             //customer mode
-            document.getElementById("userIcon").style.display = "inline";
-            document.getElementById("userIcon").href = "pages/personalAreaC.html";
+            document.getElementById("userArea-login").style.display = "none";
+            document.getElementById("userArea-logged").style.display = "inline";
+            document.getElementById("userArea-logged").href = "pages/personalAreaC.html";
 
         }else{
             //restaurateur mode

@@ -14,85 +14,128 @@
     
     <div id="pArea">
         <ul id="pArea-dropdown">
+            <!--PERSONAL AREA-->
             <li>
                 <div class="titlebox" id="pArea-pData">
                     <i id="pArea-pData-down" class="fas fa-chevron-down" onclick="showPersonalData()"></i>
-                    <i id="pArea-pData-up" class="hidden fas fa-chevron-up" onclick="hidePersonalData()"></i>
+                    <i id="pArea-pData-up" class="hidden fas fa-chevron-up" onclick="hideData('pData')"></i>
                     <span>Dati personali</span>
                 </div>
-
+                
                 <div class="drop hidden" id="pArea-pData-show">
                     
-                    <!--name-->
-                    <div class="data" id="pArea-pData-show-name">
-                        <p id="pArea-pData-show-name-p"></p>
-                        <i class="fas fa-edit" onclick="nameModifier()"></i>
-                    </div>
-                    <div class="mod hidden" id="pArea-pData-mod-name">
-                        <input type="text" name="pArea-pData-mod-name-input" id="pArea-pData-mod-name-input">
-                        <i class="fas fa-check" onclick="nameOk()"></i>
-                    </div>
-
-                    <!--surname-->
-                    <div class="data" id="pArea-pData-show-surname">
-                        <p id="pArea-pData-show-surname-p"></p>
-                        <i class="fas fa-edit" onclick="surnameModifier()"></i>
-                    </div>
-                    <div class="mod hidden" id="pArea-pData-mod-surname">
-                        <input type="text" name="pArea-pData-mod-surname-input" id="pArea-pData-mod-surname-input">
-                        <i class="fas fa-check" onclick="surnameOk()"></i>
-                    </div>
-
-                    <!--phone-->
-                    <div class="data" id="pArea-pData-show-phone">
-                        <p id="pArea-pData-show-phone-p"></p>
-                        <i class="fas fa-edit" onclick="phoneModifier()"></i>
-                    </div>
-                    <div class="mod hidden" id="pArea-pData-mod-phone">
-                        <input type="tel" name="pArea-pData-mod-phone-input" id="pArea-pData-mod-phone-input" pattern="[0-9]{10}">
-                        <i class="fas fa-check" onclick="phoneOk()"></i>
-                    </div>
-
                     <!--email-->
+                    <span class="dataDescription">Email: </span>
                     <div class="data" id="pArea-pData-show-email">
                         <p id="pArea-pData-show-email-p"></p>
-                        <i class="fas fa-edit" onclick="emailModifier()"></i>
+                        <i class="fas fa-edit" onclick="pDataModifier('email')"></i>                        
                     </div>
                     <div class="mod hidden" id="pArea-pData-mod-email">
                         <input type="email" name="pArea-pData-mod-email-input" id="pArea-pData-mod-email-input">
-                        <i class="fas fa-check" onclick="emailOk()"></i>
+                        <i class="fas fa-check" onclick="pDataOk('email')"></i>
                     </div>
-
+                
                     <!--psw-->
+                    <span>Password: </span>
                     <div class="data" id="pArea-pData-show-psw">
-                        <p id="pArea-pData-show-psw-p"></p>
-                        <i class="fas fa-edit" onclick="pswModifier()"></i>                    </div>
+                        <p id="pArea-pData-show-psw-p">********</p>
+                        <i class="fas fa-edit" onclick="pDataModifier('psw')"></i>
+                    </div>
                     <div class="mod hidden" id="pArea-pData-mod-psw">
-                        <input type="psw" name="pArea-pData-mod-psw-input" id="pArea-pData-mod-psw-input">
+                        <input type="password" name="pArea-pData-mod-psw-input" id="pArea-pData-mod-psw-input">
                         <span class="warning hidden" id="psw-warning">
                             Le password non corrispondono
                             <i class="fas fa-exclamation-triangle"></i>
                         </span>
-                        <input type="psw" name="pArea-pData-mod-pswOk-input" id="pArea-pData-mod-pswOk-input" onchange="pswCheck()">
-                        <i class="fas fa-check" onclick="pswOk()"></i>
+                        <input type="password" name="pArea-pData-mod-pswOk-input" id="pArea-pData-mod-pswOk-input" onchange="pswCheck()">
+                        <i class="fas fa-check" onclick="pswOk('psw')"></i>
                     </div>
 
+                    <!--name-->
+                    <span>Nome: </span>
+                    <div class="data" id="pArea-pData-show-name">
+                        <p id="pArea-pData-show-name-p"></p>
+                        <i class="fas fa-edit" onclick="pDataModifier('name')"></i>
+                    </div>
+                    <div class="mod hidden" id="pArea-pData-mod-name">
+                        <input type="text" name="pArea-pData-mod-name-input" id="pArea-pData-mod-name-input">
+                        <i class="fas fa-check" onclick="pDataOk('name')"></i>
+                    </div>
+
+                    <!--surname-->
+                    <span>Cognome: </span>
+                    <div class="data" id="pArea-pData-show-surname">
+                        <p id="pArea-pData-show-surname-p"></p>
+                        <i class="fas fa-edit" onclick="pDataModifier('surname')"></i>
+                    </div>
+                    <div class="mod hidden" id="pArea-pData-mod-surname">
+                        <input type="text" name="pArea-pData-mod-surname-input" id="pArea-pData-mod-surname-input">
+                        <i class="fas fa-check" onclick="pDataOk('surname')"></i>
+                    </div>
+
+                    <!--phone-->
+                    <span>Tel: </span>
+                    <div class="data" id="pArea-pData-show-phone">
+                        <p id="pArea-pData-show-phone-p"></p>
+                        <i class="fas fa-edit" onclick="pDataModifier('phone')"></i>
+                    </div>
+                    <div class="mod hidden" id="pArea-pData-mod-phone">
+                        <input type="tel" name="pArea-pData-mod-phone-input" id="pArea-pData-mod-phone-input" pattern="[0-9]{10}">
+                        <i class="fas fa-check" onclick="pDataOk('phone')"></i>
+                    </div>
+                </div>
+            </li>
+            <!--PAYMENT-->
+            <li>
+                <div class="titlebox" id="pArea-payment">
+                    <i id="pArea-payment-down" class="fas fa-chevron-down" onclick="showPaymentData()"></i>
+                    <i id="pArea-payment-up" class="hidden fas fa-chevron-up" onclick="hideData('payment')"></i>
+                    <span>Metodi di pagamento</span>
+                </div>
+
+                <div  class="drop hidden" id="pArea-payment-show">
+
+                    <span>Metodi di pagamento attivi:</span>
+                    <div class="data" id="pArea-payment-show-all">
+                        <i class="hidden fas fa-minus"onclick="paymentRemover(0)"></i>
+                        <i class="hidden fas fa-plus" onclick="paymentAdder(0)"></i>
+                        <p id="pArea-payment-show-0">Paypal</p>
+                        
+                        <i class="hidden fas fa-minus"onclick="paymentRemover(1)"></i>
+                        <i class="hidden fas fa-plus" onclick="paymentAdder(1)"></i>
+                        <p id="pArea-payment-show-1">Prepagata</p>
+                        
+                        <i class="hidden fas fa-minus"onclick="paymentRemover(2)"></i>
+                        <i class="hidden fas fa-plus" onclick="paymentAdder(2)"></i>
+                        <p id="pArea-payment-show-2">Carta di credito</p>
+                        
+                        <i class="hidden fas fa-minus" onclick="paymentRemover(3)"></i>
+                        <i class="hidden fas fa-plus" onclick="paymentAdder(3)"></i>
+                        <p id="pArea-payment-show-3">Contanti</p>
+                        
+                    </div>
+                    <i id="pArea-payment-show-mod" class="fas fa-edit" onclick="paymentModifier()"></i>
+                    <i id="pArea-payment-show-ok" class="hidden fas fa-check" onclick="paymentOk()"></i>
+                    
 
 
                 </div>
+                
             </li>
+            <!--ADDRESS-->
             <li>
-                <div id="pArea-payment">
-                    <i class="fas fahevron-down"></i>
-                    <span>Dati personali</span>
-                    <i class="fas fa-edit"></i>
+                <div class="titlebox" id="pArea-address">
+                    <i id="pArea-address-down" class="fas fa-chevron-down" onclick="showAddressData()"></i>
+                    <i id="pArea-address-up" class="hidden fas fa-chevron-up" onclick="hideData('address')"></i>
+                    <span>Indirizzi di consegna:</span>
                 </div>
-            </li>
-            <li>
-                <div id="pArea-address">
-                    <i class="fas fahevron-down"></i>
-                    <span>Dati personali</span>
-                    <i class="fas fa-edit"></i>
+
+                <div class="drop hidden" id="pArea-address-show">
+                    
+
+                    
+
+
                 </div>
             </li>
 

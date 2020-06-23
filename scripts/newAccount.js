@@ -6,6 +6,19 @@ function back(){
             }
 }
 
+class Address{
+    constructor(name, street, civN, zip, city, province){
+        this.owner = name;
+        this.street = street;
+        this.civN = civN;
+        this.zip = zip;
+        this.city = city;
+        this.province = province;
+        this.default = false;
+        this.other = false;
+    }
+}
+
 // DEFAULT DATA CHECK
     if(localStorage.getItem("customers")==null){
         let request = new XMLHttpRequest();
@@ -31,7 +44,7 @@ function back(){
 
 
 /* -- CUSTOMER SECTION -- */
-
+{   
     // CLASS
         class Customer{
             constructor(name, surname, phone, email, psw, address, payment, ad){
@@ -40,6 +53,7 @@ function back(){
                 this.phone = phone;
                 this.email = email;
                 this.psw = psw;
+                address.default = true;
                 this.address = [address];
                 this.payment = payment;
                 this.therms = true;
@@ -47,9 +61,26 @@ function back(){
                 this.ad = ad;
                 this.orderNum = [];
             }
+            defaultAddress(addressIndex) {
+                let def = 0;
+                for (let x in this.address) {
+                    if (x.default == true) {
+                        def++;
+                    }
+                }
+                if(def == 0){
+                    this.address[addressIndex].default = true;
+                }else{
+                    for (let x in this.address) {
+                        if (x.default == true) {
+                            x.default = false;
+                        }
+                    }
+                    this.address[addressIndex].default = true;
+                }
+            }
         }
         
-
 
     // CHECKS
         function pswCheckC(){
@@ -85,11 +116,12 @@ function back(){
             let phone = document.getElementById("newAcc-c-phone").value;
             let email = document.getElementById("newAcc-c-email").value;
             let psw = document.getElementById("newAcc-c-psw").value;
-            let address = document.getElementById("newAcc-c-address-street").value+" "+
-                document.getElementById("newAcc-c-address-civN").value+" "+
-                document.getElementById("newAcc-c-address-zip").value+" "+
-                document.getElementById("newAcc-c-address-city").value+" "+
-                document.getElementById("newAcc-c-address-province").value;
+            let address = new Address ((name+" "+surname),
+                document.getElementById("newAcc-c-address-street").value,
+                document.getElementById("newAcc-c-address-civN").value,
+                document.getElementById("newAcc-c-address-zip").value,
+                document.getElementById("newAcc-c-address-city").value,
+                document.getElementById("newAcc-c-address-province").value);
             let payment = [document.getElementById("newAcc-c-payment-paypal").checked,
                 document.getElementById("newAcc-c-payment-prepaid").checked,
                 document.getElementById("newAcc-c-payment-card").checked,
@@ -97,7 +129,7 @@ function back(){
             let ad = document.getElementById("newAcc-c-ad").checked;
 
             let customer = new Customer (name, surname, phone, email, psw, address, payment, ad);
-            
+
             let cArray = JSON.parse(localStorage.getItem("customers"));
             cArray.push(customer);
             localStorage.setItem("customers", JSON.stringify(cArray));
@@ -113,12 +145,11 @@ function back(){
             }
         }
 
-        
-
         function cMode(){
             document.getElementById("newAcc-c").style.display = "block";
             document.getElementById("newAcc-r").style.display = "none";
         }
+}
 
 
 
@@ -126,9 +157,7 @@ function back(){
 
 
 /* -- RESTAURATEUR SECTION -- */
-    
-    
-
+{
     // CLASS
         class Restaurateur{
             constructor(businessName, email, phone, psw, address, vatNum, payment){
@@ -136,6 +165,7 @@ function back(){
                 this.email = email;
                 this.phone = phone;
                 this.psw = psw;
+                address.default = true;
                 this.address = address;
                 this.vatNum = vatNum;
                 this.payment = payment;
@@ -176,11 +206,12 @@ function back(){
             let email = document.getElementById("newAcc-r-email").value;
             let phone = document.getElementById("newAcc-r-phone").value;
             let psw = document.getElementById("newAcc-r-psw").value;
-            let address = document.getElementById("newAcc-r-address-street").value+" "+
-                document.getElementById("newAcc-r-address-civN").value+" "+
-                document.getElementById("newAcc-r-address-zip").value+" "+
-                document.getElementById("newAcc-r-address-city").value+" "+
-                document.getElementById("newAcc-r-address-province").value;
+            let address = new Address (businessName,
+                document.getElementById("newAcc-r-address-street").value,
+                document.getElementById("newAcc-r-address-civN").value,
+                document.getElementById("newAcc-r-address-zip").value,
+                document.getElementById("newAcc-r-address-city").value,
+                document.getElementById("newAcc-r-address-province").value);
             let vatNum = document.getElementById("newAcc-r-vatNum").value;
             let payment = [document.getElementById("newAcc-r-payment-paypal").checked,
                 document.getElementById("newAcc-r-payment-prepaid").checked,
@@ -208,4 +239,4 @@ function back(){
             document.getElementById("newAcc-r").style.display = "block";
             document.getElementById("newAcc-c").style.display = "none";
         }
-
+}

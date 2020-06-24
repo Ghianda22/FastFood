@@ -18,6 +18,7 @@ function hideData(data){
     sessionStorage.setItem("logged",JSON.stringify(user));
 }
 
+//necessary classes to handle addresses
 {   
     class Customer{
         constructor(name, surname, phone, email, psw, address, ad){
@@ -79,6 +80,7 @@ function hideData(data){
             return true;
         }
     }
+
     //show
     function showPersonalData(){
         document.getElementById("pArea-pData-show-name-p").innerHTML = user.name;
@@ -184,22 +186,88 @@ function hideData(data){
 
 /* -- ADDRESS -- */
 {
+    //icons
+    let emptyStar = document.createElement("i");
+    emptyStar.className = "far fa-star";
+    let fullStar = document.createElement("i");
+    fullStar.className = "fas fa-star";
+    let modify = document.createElement("i");
+    modify.className = "fas fa-edit";
+    
+    function address(){
+        for(let i = 0; i<user.address.length; i++){
+            if(document.getElementById("pArea-address-show-"+i) == null){
+                modify.setAttribute("onclick","addressModifier("+i+")");
+                
+                let line0 = document.createElement("p");
+                let content0 = document.createTextNode(user.address[i].owner);
+                line0.id = "pArea-address-show-" + i + "-owner";
+                line0.appendChild(content0);
+                //class name for css
+
+                let line1 = document.createElement("p");
+                let content1 = document.createTextNode(user.address[i].street +" "+ user.address[i].civN);
+                line1.id = "pArea-address-show-" + i + "-line1";
+                line1.appendChild(content1);
+                //class name
+
+                let line2 = document.createElement("P");
+                let content2 = document.createTextNode(user.address[i].zip + ", " + user.address[i].city + "(" + user.address[i].province + ")");
+                line2.id = "pArea-address-show-" + i + "-line2";
+                line2.appendChild(content2);
+                //class name
+
+                let container = document.createElement("div");
+                container.id = "pArea-address-show-" + i;
+                if(user.address[i].default == true){
+                    container.appendChild(fullStar);
+                }else{
+                    emptyStar.onclick = setDefault(i);
+                    container.appendChild(emptyStar);
+                }
+                container.appendChild(line0);
+                container.appendChild(line1);
+                container.appendChild(line2);
+                container.appendChild(modify);
+                document.getElementById("pArea-address-show").insertBefore(container,(document.getElementById("pArea-address-show").firstChild));
+                
+            }
+        }
+    }
+    function cleanAddress(){
+        for (let i = 0; i < user.address.length; i++) {
+            document.getElementById("pArea-address-show-"+i).remove();            
+        }
+    }
+
     //show
     function showAddressData(){
-        let i=0;
-        for(let address of user.address){
-            i++;
-            let line0 = document.createElement("span").id = "pArea-address-show-" + i + "-owner";
-            let content0 = document.createTextNode(address.owner);
-            let line1 = document.createElement("p").innerHTML = address.street +" "+ address.civN;
-            let line2 = document.createElement("P").innerHTML = address.zip + ", " + address.city + "(" + address.province + ")";
-            let container = document.createElement("div").id = "pArea-address-show-" + i;
-            document.getElementById("pArea-address-show").appendChild(line0);
-            container.appendChild(line0);
-            line0.appendChild(content0);
-            
-        }
+        address();
+        document.getElementById("pArea-address-show").style.display = "block";
+        document.getElementById("pArea-address-down").style.display = "none";
+        document.getElementById("pArea-address-up").style.display = "inline";
+    }
+
+    //modify
+    function setDefault(i){
+        user.defaultAddress(i);
+        address();
+    }
+    function addressModifier(i){
+        let address = user.address[i];
+        //line0
+        let input = document.createElement("input");
+        let line = document.createElement("p");
+        let line0 = document.getElementById("pArea-address-show-" + i + "-owner");
+        input.type = "text";
+        input.id = "pArea-address-show-" + i + "-owner-mod";
+        input.placeholder = "Nome sul campanello";
+        input.value = address.owner;
+        document.getElementById("pArea-address-show-" + i).replaceChild(input,line0);
         
     }
-    //modify
+    function addressAdder(){
+
+    }
+
 }

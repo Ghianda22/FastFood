@@ -19,8 +19,7 @@ function hideData(data){
 }
 
 //necessary classes to handle addresses
-{   
-    class Customer{
+class Customer{
         constructor(name, surname, phone, email, psw, address, ad){
             this.name = name;
             this.surname = surname;
@@ -52,9 +51,8 @@ function hideData(data){
                 this.address[addressIndex].default = true;
             }
         }
-    }
-
-    class Address{
+}
+class Address{
         constructor(name, street, civN, zip, city, province){
             this.owner = name;
             this.street = street;
@@ -65,8 +63,8 @@ function hideData(data){
             this.default = false;
             this.other = false;
         }
-    }
 }
+
 
 /* -- PERSONAL DATA -- */
 {
@@ -187,56 +185,133 @@ function hideData(data){
 /* -- ADDRESS -- */
 {
     //icons
-    let emptyStar = document.createElement("i");
-    emptyStar.className = "far fa-star";
     let fullStar = document.createElement("i");
     fullStar.className = "fas fa-star";
+    let emptyStar = document.createElement("i");
+    emptyStar.className = "far fa-star";
     let modify = document.createElement("i");
     modify.className = "fas fa-edit";
-    
+    let check = document.createElement("i");
+    check.className = "fas fa-check";
+
     function address(){
         for(let i = 0; i<user.address.length; i++){
             if(document.getElementById("pArea-address-show-"+i) == null){
-                modify.setAttribute("onclick","addressModifier("+i+")");
-                
-                let line0 = document.createElement("p");
-                let content0 = document.createTextNode(user.address[i].owner);
-                line0.id = "pArea-address-show-" + i + "-owner";
-                line0.appendChild(content0);
-                //class name for css
+                //data
+                {
+                    modify.setAttribute("onclick","addressModifier("+i+")");
+                    
+                    let line0 = document.createElement("p");
+                    let content0 = document.createTextNode(user.address[i].owner);
+                    line0.id = "pArea-address-show-" + i + "-owner";
+                    line0.appendChild(content0);
+                    //class name for css
 
-                let line1 = document.createElement("p");
-                let content1 = document.createTextNode(user.address[i].street +" "+ user.address[i].civN);
-                line1.id = "pArea-address-show-" + i + "-line1";
-                line1.appendChild(content1);
-                //class name
+                    let line1 = document.createElement("p");
+                    let content1 = document.createTextNode(user.address[i].street +" "+ user.address[i].civN);
+                    line1.id = "pArea-address-show-" + i + "-line1";
+                    line1.appendChild(content1);
+                    //class name
 
-                let line2 = document.createElement("P");
-                let content2 = document.createTextNode(user.address[i].zip + ", " + user.address[i].city + "(" + user.address[i].province + ")");
-                line2.id = "pArea-address-show-" + i + "-line2";
-                line2.appendChild(content2);
-                //class name
+                    let line2 = document.createElement("p");
+                    let content2 = document.createTextNode(user.address[i].zip + ", " + user.address[i].city + " (" + user.address[i].province + ")");
+                    line2.id = "pArea-address-show-" + i + "-line2";
+                    line2.appendChild(content2);
+                    //class name
 
-                let container = document.createElement("div");
-                container.id = "pArea-address-show-" + i;
-                if(user.address[i].default == true){
-                    container.appendChild(fullStar);
-                }else{
-                    emptyStar.onclick = setDefault(i);
-                    container.appendChild(emptyStar);
+                    let container = document.createElement("div");
+                    container.id = "pArea-address-show-" + i;
+                    container.className = "data";
+                    if(user.address[i].default == true){
+                        let fullStar = document.createElement("i");
+                        fullStar.className = "fas fa-star";
+                        container.appendChild(fullStar);
+                    }else{
+                        let emptyStar = document.createElement("i");
+                        emptyStar.className = "far fa-star";
+                        emptyStar.setAttribute("onclick","setDefault("+i+")");
+                        container.appendChild(emptyStar);
+                    }
+                    container.appendChild(line0);
+                    container.appendChild(line1);
+                    container.appendChild(line2);
+                    if(user.address[i].other != false){
+                        let line3 = document.createElement("p");
+                        let content3 = document.createTextNode(user.address[i].other);
+                        line3.id = "pArea-address-show-" + i + "-line3";
+                        line3.appendChild(content3);
+                        //class name
+                        container.appendChild(line3);
+                    }
+                    container.appendChild(modify);
+                    document.getElementById("pArea-address-show").insertBefore(container,(document.getElementById("pArea-address-show-add")));
                 }
-                container.appendChild(line0);
-                container.appendChild(line1);
-                container.appendChild(line2);
-                container.appendChild(modify);
-                document.getElementById("pArea-address-show").insertBefore(container,(document.getElementById("pArea-address-show").firstChild));
-                
+                //mod
+                {
+                    check.setAttribute("onclick","addressOk("+i+")");
+
+                    let line0mod = createAddressInput(i,'owner');
+                    line0mod.placeholder = "Nome sul citofono";
+                    
+                    let line1mod = document.createElement("p");
+                    let line1modStreet = createAddressInput(i,'street');
+                    line1modStreet.placeholder = "Via/Piazza";
+                    let line1modCivN = createAddressInput(i,'civN');
+                    line1modCivN.placeholder = "Civico";
+                    line1mod.appendChild(line1modStreet);
+                    line1mod.appendChild(line1modCivN);
+                    
+                    let line2mod = document.createElement("p");
+                    let line2modZip = createAddressInput(i,'zip');
+                    line2modZip.placeholder = "CAP";
+                    let line2modCity = createAddressInput(i,'city');
+                    line2modCity.placeholder = "Citt&aacute;";
+                    let line2modProvince = createAddressInput(i,'province');
+                    line2modProvince.placeholder = "Provincia (sigla)";
+                    line2modProvince.pattern = "[A-Z]{2}";
+                    line2mod.appendChild(line2modZip);
+                    line2mod.appendChild(line2modCity);
+                    line2mod.appendChild(line2modProvince);
+
+                    let line3mod = createAddressInput(i,'other');
+                    line3mod.placeholder = "Consigli per la consegna";
+                    line3mod.required = false;
+                    
+                    let containerMod = document.createElement("div");
+                    containerMod.id = "pArea-address-mod-" + i;
+                    containerMod.className = "mod hidden";
+                    if(user.address[i].default == true){
+                        containerMod.appendChild(fullStar);
+                    }else{
+                        emptyStar.setAttribute("onclick","setDefault("+i+")");
+                        containerMod.appendChild(emptyStar);
+                    }
+                    containerMod.appendChild(line0mod);
+                    containerMod.appendChild(line1mod);
+                    containerMod.appendChild(line2mod);
+                    containerMod.appendChild(line3mod);
+                    containerMod.appendChild(check);
+                    document.getElementById("pArea-address-show").insertBefore(containerMod,(document.getElementById("pArea-address-show-add")));
+                    
+                }
             }
         }
     }
+
+    function createAddressInput(i, x){
+        let input = document.createElement("input");
+        input.id = "pArea-address-mod-" + i + "-" + x;
+        input.required = true;
+        if(user.address[i] != undefined && (user.address[i])[x] != false){
+            input.value = (user.address[i])[x];
+        }
+        return input;
+    }
+
     function cleanAddress(){
         for (let i = 0; i < user.address.length; i++) {
             document.getElementById("pArea-address-show-"+i).remove();            
+            document.getElementById("pArea-address-mod-"+i).remove();            
         }
     }
 
@@ -251,23 +326,77 @@ function hideData(data){
     //modify
     function setDefault(i){
         user.defaultAddress(i);
+        cleanAddress();
         address();
     }
     function addressModifier(i){
-        let address = user.address[i];
-        //line0
-        let input = document.createElement("input");
-        let line = document.createElement("p");
-        let line0 = document.getElementById("pArea-address-show-" + i + "-owner");
-        input.type = "text";
-        input.id = "pArea-address-show-" + i + "-owner-mod";
-        input.placeholder = "Nome sul campanello";
-        input.value = address.owner;
-        document.getElementById("pArea-address-show-" + i).replaceChild(input,line0);
-        
+        document.getElementById("pArea-address-mod-"+i).style.display = "block";        
+        document.getElementById("pArea-address-show-"+i).style.display = "none";
     }
     function addressAdder(){
+        let i = user.address.length;
+        check.setAttribute("onclick","addressOk("+i+")");
 
+        let line0new = createAddressInput(i,'owner');
+        line0new.placeholder = "Nome sul citofono";
+        
+        let line1new = document.createElement("p");
+        let line1newStreet = createAddressInput(i,'street');
+        line1newStreet.placeholder = "Via/Piazza";
+        let line1newCivN = createAddressInput(i,'civN');
+        line1newCivN.placeholder = "Civico";
+        line1new.appendChild(line1newStreet);
+        line1new.appendChild(line1newCivN);
+        
+        let line2new = document.createElement("p");
+        let line2newZip = createAddressInput(i,'zip');
+        line2newZip.placeholder = "CAP";
+        let line2newCity = createAddressInput(i,'city');
+        line2newCity.placeholder = "Citt&aacute;";
+        let line2newProvince = createAddressInput(i,'province');
+        line2newProvince.placeholder = "Provincia (sigla)";
+        line2newProvince.pattern = "[A-Z]{2}";
+        line2new.appendChild(line2newZip);
+        line2new.appendChild(line2newCity);
+        line2new.appendChild(line2newProvince);
+
+        let line3new = createAddressInput(i,'other');
+        line3new.placeholder = "Consigli per la consegna";
+        
+        let containerNew = document.createElement("div");
+        containerNew.id = "pArea-address-mod-" + i;
+        containerNew.appendChild(line0new);
+        containerNew.appendChild(line1new);
+        containerNew.appendChild(line2new);
+        containerNew.appendChild(line3new);
+        containerNew.appendChild(check);
+        document.getElementById("pArea-address-show-add").style.display = "none";
+        document.getElementById("pArea-address-show").appendChild(containerNew);
     }
+
+    //ok
+    function addressOk(i){
+        if(user.address[i] == undefined){
+            let address = new Address("", "", "", "", "", "");
+            (user.address).push(address);
+        }
+        ok(i,'owner');
+        ok(i,'street');
+        ok(i,'civN');
+        ok(i,'zip');
+        ok(i,'city');
+        ok(i,'province');
+        ok(i,'other');
+        address();
+        cleanAddress();
+        address();
+        document.getElementById("pArea-address-show-"+i).style.display = "block";        
+        document.getElementById("pArea-address-mod-"+i).style.display = "none";
+    }
+
+    function ok(i,x){
+        (user.address[i])[x] = document.getElementById("pArea-address-mod-" + i + "-" + x).value;
+    }
+    
 
 }

@@ -1,4 +1,17 @@
 let user = JSON.parse(sessionStorage.getItem("logged"));
+let users = JSON.parse(localStorage.getItem("customers"));
+let corresp;
+for (let j = 0; j < users.length; j++) {
+    if(users[j].name == user.name){
+        corresp = j;
+    }
+}
+function updateUser(){
+    console.log("chiamato");
+    sessionStorage.setItem("logged",JSON.stringify(user));
+    users[corresp] = user;
+    localStorage.setItem("customers",JSON.stringify(users));
+}
 
 function exitModify(){
     let data = document.getElementsByClassName("data");
@@ -15,43 +28,9 @@ function hideData(data){
     document.getElementById("pArea-"+data+"-show").style.display = "none";
     document.getElementById("pArea-"+data+"-down").style.display = "inline";
     document.getElementById("pArea-"+data+"-up").style.display = "none";
-    sessionStorage.setItem("logged",JSON.stringify(user));
 }
 
-//necessary classes to handle addresses
-class Customer{
-        constructor(name, surname, phone, email, psw, address, ad){
-            this.name = name;
-            this.surname = surname;
-            this.phone = phone;
-            this.email = email;
-            this.psw = psw;
-            this.address = [address];
-            this.therms = true;
-            this.privacy = true;
-            this.ad = ad;
-            this.orderNum = [];
-        }
 
-        defaultAddress(addressIndex) {
-            let def = 0;
-            for (let x in this.address) {
-                if (x.default == true) {
-                    def++;
-                }
-            }
-            if(def == 0){
-                this.address[addressIndex].default = true;
-            }else{
-                for (let x in this.address) {
-                    if (x.default == true) {
-                        x.default = false;
-                    }
-                }
-                this.address[addressIndex].default = true;
-            }
-        }
-}
 class Address{
         constructor(name, street, civN, zip, city, province){
             this.owner = name;
@@ -100,6 +79,7 @@ class Address{
     function pDataOk(data){
         if(document.getElementById("pArea-pData-mod-"+data+"-input").value != ""){
             user[data] = document.getElementById("pArea-pData-mod-"+data+"-input").value;
+            updateUser()
         }
         document.getElementById("pArea-pData-mod-"+data).style.display="none";
         document.getElementById("pArea-pData-mod-"+data+"-input").value = "";
@@ -112,6 +92,7 @@ class Address{
             document.getElementById("pArea-pData-mod-psw").style.display="none";
             document.getElementById("pArea-pData-mod-psw-input").value = "";
             document.getElementById("pArea-pData-show-psw").style.display="block";
+            updateUser();
         }
     }
     
@@ -140,7 +121,7 @@ class Address{
     }
 
     //modify
-    function paymentModifier(){
+    function paymentModifier(){     //prev +
         for (const tag of document.getElementById("pArea-payment-show-all").getElementsByTagName("p")){
             let prev = tag.previousElementSibling;
             if(tag.style.display == "block"){
@@ -148,7 +129,7 @@ class Address{
                 prev.previousElementSibling.style.display = "inline";
             }else{
                 prev.style.display = "inline";
-                prev.previousElementSibling.style.display = "non";
+                prev.previousElementSibling.style.display = "none";
             }
             tag.style.display = "block";
         }
@@ -161,12 +142,14 @@ class Address{
         let prev = document.getElementById("pArea-payment-show-"+p).previousElementSibling;
         prev.previousElementSibling.style.display = "inline";
         prev.style.display = "none";
+        updateUser();
     }
     function paymentRemover(p){
         user.payment[p] = false;
         let prev = document.getElementById("pArea-payment-show-"+p).previousElementSibling;
         prev.style.display = "inline";
         prev.previousElementSibling.style.display = "none";
+        updateUser();
     }
 
     //ok
@@ -325,7 +308,11 @@ class Address{
 
     //modify
     function setDefault(i){
-        user.defaultAddress(i);
+        for (let x of user.address) {
+            x.default = false;
+        }   
+        user.address[i].default = true;
+        updateUser();
         cleanAddress();
         address();
     }
@@ -363,7 +350,7 @@ class Address{
         let line3new = createAddressInput(i,'other');
         line3new.placeholder = "Consigli per la consegna";
         
-        let containerNew = document.createElement("div");
+        let containerNew = document.createElement("form");
         containerNew.id = "pArea-address-mod-" + i;
         containerNew.appendChild(line0new);
         containerNew.appendChild(line1new);
@@ -387,16 +374,19 @@ class Address{
         ok(i,'city');
         ok(i,'province');
         ok(i,'other');
+        document.getElementById("pArea-address-mod-"+i).remove();
         address();
-        cleanAddress();
-        address();
-        document.getElementById("pArea-address-show-"+i).style.display = "block";        
-        document.getElementById("pArea-address-mod-"+i).style.display = "none";
+        document.getElementById("pArea-address-show-"+i).style.display = "block";
+        updateUser();
     }
 
     function ok(i,x){
         (user.address[i])[x] = document.getElementById("pArea-address-mod-" + i + "-" + x).value;
     }
-    
+}
 
+
+/* -- AD -- */
+{
+    
 }

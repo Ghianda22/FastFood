@@ -47,7 +47,7 @@ class Address{
 {   
     // CLASS
         class Customer{
-            constructor(name, surname, phone, email, psw, address, payment, ad){
+            constructor(name, surname, phone, email, psw, address, payment, ads){
                 this.name = name;
                 this.surname = surname;
                 this.phone = phone;
@@ -58,26 +58,8 @@ class Address{
                 this.payment = payment;
                 this.therms = true;
                 this.privacy = true;
-                this.ad = ad;
+                this.ads = ads;
                 this.orderNum = [];
-            }
-            defaultAddress(addressIndex) {
-                let def = 0;
-                for (let x in this.address) {
-                    if (x.default == true) {
-                        def++;
-                    }
-                }
-                if(def == 0){
-                    this.address[addressIndex].default = true;
-                }else{
-                    for (let x in this.address) {
-                        if (x.default == true) {
-                            x.default = false;
-                        }
-                    }
-                    this.address[addressIndex].default = true;
-                }
             }
         }
         
@@ -126,9 +108,9 @@ class Address{
                 document.getElementById("newAcc-c-payment-prepaid").checked,
                 document.getElementById("newAcc-c-payment-card").checked,
                 document.getElementById("newAcc-c-payment-cash").checked];
-            let ad = document.getElementById("newAcc-c-ad").checked;
+            let ads = document.getElementById("newAcc-c-ads").checked;
 
-            let customer = new Customer (name, surname, phone, email, psw, address, payment, ad);
+            let customer = new Customer (name, surname, phone, email, psw, address, payment, ads);
 
             let cArray = JSON.parse(localStorage.getItem("customers"));
             cArray.push(customer);

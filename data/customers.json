@@ -17,7 +17,7 @@
         "payment":[false,true,false,true],
         "therms":true,
         "privacy":true,
-        "ad":false,
+        "ads":false,
         "orderNum":[]
     },
     {
@@ -34,11 +34,19 @@
             "city":"Seveso",
             "province":"MB",
             "default":true,
+            "other":false},
+            {"owner":"Lionello Franceschi",
+            "street":"XX Settembre",
+            "civN":"14",
+            "zip":"20821",
+            "city":"Meda",
+            "province":"MB",
+            "default":false,
             "other":false}],
         "payment":[true,false,false,false],
         "therms":true,
         "privacy":true,
-        "ad":false,
+        "ads":false,
         "orderNum":[]
     },
     {
@@ -59,7 +67,7 @@
         "payment":[false,false,false,true],
         "therms":true,
         "privacy":true,
-        "ad":false,
+        "ads":false,
         "orderNum":[]
     }
 ]

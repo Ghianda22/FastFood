@@ -7,7 +7,6 @@ for (let j = 0; j < users.length; j++) {
     }
 }
 function updateUser(){
-    console.log("chiamato");
     sessionStorage.setItem("logged",JSON.stringify(user));
     users[corresp] = user;
     localStorage.setItem("customers",JSON.stringify(users));
@@ -22,6 +21,13 @@ function exitModify(){
     for (const div of mod) {
         div.style.display = "none";
     }
+}
+
+function showData(data){
+    document.getElementById("pArea-"+data+"-show").style.display = "block";
+    document.getElementById("pArea-"+data+"-down").style.display = "none";
+    document.getElementById("pArea-"+data+"-up").style.display = "inline";
+
 }
 
 function hideData(data){
@@ -64,9 +70,7 @@ class Address{
         document.getElementById("pArea-pData-show-surname-p").innerHTML = user.surname;
         document.getElementById("pArea-pData-show-phone-p").innerHTML = user.phone;
         document.getElementById("pArea-pData-show-email-p").innerHTML = user.email;
-        document.getElementById("pArea-pData-show").style.display = "block";
-        document.getElementById("pArea-pData-down").style.display = "none";
-        document.getElementById("pArea-pData-up").style.display = "inline";
+        showData('pData');
     }
 
     //modify
@@ -114,9 +118,7 @@ class Address{
 
     //show
     function showPaymentData(){     
-        document.getElementById("pArea-payment-show").style.display = "block";
-        document.getElementById("pArea-payment-down").style.display = "none";
-        document.getElementById("pArea-payment-up").style.display = "inline";
+        showData('payment');
         payment();
     }
 
@@ -176,6 +178,8 @@ class Address{
     modify.className = "fas fa-edit";
     let check = document.createElement("i");
     check.className = "fas fa-check";
+    let trashcan = document.createElement("i");
+    trashcan.className = "fas fa-trash-alt";
 
     function address(){
         for(let i = 0; i<user.address.length; i++){
@@ -183,6 +187,7 @@ class Address{
                 //data
                 {
                     modify.setAttribute("onclick","addressModifier("+i+")");
+                    trashcan.setAttribute("onclick","addressRemover("+i+")");
                     
                     let line0 = document.createElement("p");
                     let content0 = document.createTextNode(user.address[i].owner);
@@ -227,6 +232,7 @@ class Address{
                         container.appendChild(line3);
                     }
                     container.appendChild(modify);
+                    container.appendChild(trashcan);
                     document.getElementById("pArea-address-show").insertBefore(container,(document.getElementById("pArea-address-show-add")));
                 }
                 //mod
@@ -301,9 +307,7 @@ class Address{
     //show
     function showAddressData(){
         address();
-        document.getElementById("pArea-address-show").style.display = "block";
-        document.getElementById("pArea-address-down").style.display = "none";
-        document.getElementById("pArea-address-up").style.display = "inline";
+        showData('address');
     }
 
     //modify
@@ -352,6 +356,7 @@ class Address{
         
         let containerNew = document.createElement("form");
         containerNew.id = "pArea-address-mod-" + i;
+        containerNew.className = "mod";
         containerNew.appendChild(line0new);
         containerNew.appendChild(line1new);
         containerNew.appendChild(line2new);
@@ -363,6 +368,7 @@ class Address{
 
     //ok
     function addressOk(i){
+        
         if(user.address[i] == undefined){
             let address = new Address("", "", "", "", "", "");
             (user.address).push(address);
@@ -383,10 +389,81 @@ class Address{
     function ok(i,x){
         (user.address[i])[x] = document.getElementById("pArea-address-mod-" + i + "-" + x).value;
     }
+
+    //delete
+    function addressRemover(i){
+        if(user.address.length - 1 > 0){
+            if(user.address[i].default == false){
+                cleanAddress();
+                let temp = user.address[0];
+                user.address[0] = user.address[i];
+                user.address[i] = temp;
+                (user.address).shift();
+                address();
+                updateUser();
+            }else{
+                alert("Scegli un altro indirizzo predefinito prima di cancellare quello attuale");
+            }
+        }else{
+            alert("Non puoi cancellare l'unico indirizzo presente. Creane prima un altro con cui sostituirlo");
+        }
+    }
 }
 
 
-/* -- AD -- */
+/* -- ADS -- */
 {
-    
+    //show
+    function showAdsData(){
+        showData('ads');
+        document.getElementById("pArea-ads-show-pref-newsletter").checked = user.ads;
+    }
+
+    //popup
+    function popup(data){
+        document.getElementById("pArea-ads-show-"+data+"-text").style.display = "block";
+    }
+    function closePopup(data){
+        document.getElementById("pArea-ads-show-"+data+"-text").style.display = "none";
+    }
+
+    //modify
+    function adsModifier(){
+        if(document.getElementById("pArea-ads-show-pref-newsletter").checked == true){
+            user.ads = true;
+        }else{
+            user.ads = false;
+        }
+    }
+}
+
+
+/* -- ELIMINA -- */
+{
+    function areYouSure(){
+        let buttons = document.createElement("div");
+        let buttonY = document.createElement("button");
+        buttonY.id = "pArea-deleteUser-y";
+        buttonY.innerHTML = "Si, elimina";
+        buttonY.setAttribute("onclick","deleteUser()");
+        //class name
+        let buttonN = document.createElement("button");
+        buttonN.id = "pArea-deleteUser-n";
+        buttonN.innerHTML = "No, meglio tenerlo";
+        //class name
+
+        buttons.appendChild(buttonY);
+        buttons.appendChild(buttonN);
+        alert("Sei sicuro di voler eliminare il tuo account?\n" + buttons);
+    }
+
+    function deleteUser(){
+        let temp = user[users.length - 1];
+        users[users.length] = users[corresp];
+        users[corresp] = temp;
+        pop(user);
+        localStorage.setItem("customers",JSON.stringify(users));
+        sessionStorage.clear();
+        document.location.href = "../index.html";
+    }
 }

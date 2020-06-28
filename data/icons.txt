@@ -10,3 +10,5 @@ carrello con freccia    <i class="fas fa-cart-arrow-down"></i>
 meno    <i class="fas fa-minus"></i>
 piu    <i class="fas fa-plus"></i>
 occhio pieno    <i class="far fa-eye"></i>
+x    <i class="fas fa-times"></i>
+bidone    <i class="fas fa-trash-alt"></i>

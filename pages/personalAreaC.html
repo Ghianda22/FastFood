@@ -131,7 +131,30 @@
 
                 <div class="drop hidden" id="pArea-address-show">
                                      
-                    <i id="pArea-address-show-add" class="fas fa-plus" onclick="addressAdder()">Aggiungi un indirizzo di consegna</i>
+                    <i id="pArea-address-show-add" class="fas fa-plus" onclick="addressAdder();">Aggiungi un indirizzo di consegna</i>
+                    <form class="mod hidden" id="pArea-address-mod-new" onsubmit="addressNew();return false;">
+                        <input type="text" name="pArea-address-mod-new-owner" id="pArea-address-mod-new-owner" placeholder="Nome sul citofono" required>
+                        <p>
+                            <input type="text" name="pArea-address-mod-new-street" id="pArea-address-mod-new-street" placeholder="Via/Piazza" required>
+                            <input type="text" name="pArea-address-mod-new-civN" id="pArea-address-mod-new-civN" placeholder="Civico" required>
+                        </p>
+                        <p >
+                            <input type="text" name="pArea-address-mod-new-zip" id="pArea-address-mod-new-zip" pattern="[0-9]{5}" placeholder="CAP" required>
+                            <input type="text" name="pArea-address-mod-new-city" id="pArea-address-mod-new-city" placeholder="Città" required>
+                            <input type="text" name="pArea-address-mod-new-province" id="pArea-address-mod-new-province" pattern="[A-Z]{2}" placeholder ="Sigla della provincia es. MI" required>
+                        </p>
+                        <input type="text" name="pArea-address-mod-new-other" id="pArea-address-mod-new-other" placeholder="Dettagli per la consegna">
+
+                        <button type="reset">
+                            <i class="fas fa-eraser"></i>
+                            Cancella
+                        </button>
+                        <button type="submit">
+                            <i class="fas fa-check"></i>
+                            Crea
+                        </button>
+                
+                    </form>
 
                 </div>
             </li>
@@ -217,7 +240,18 @@
 
         </ul>
 
-        <span onclick="areYouSure()">Cancella l'account</span>
+        <p onclick="areYouSure()">Cancella l'account</p>
+        <div class="hidden" id="pArea-deleteUser">
+            Sei sicuro di voler eliminare il tuo account?
+            <button type="button" id="pArea-deleteUser-y" onclick="deleteUser();">
+                <i class="fas fa-heart-broken"></i>
+                Si, Elimina
+            </button>
+            <button type="button" id="pArea-deleteUser-n" onclick="userSave()">
+                <i class="fas fa-heart"></i>
+                No, meglio tenerlo
+            </button>
+        </div>
 
     </div>
     

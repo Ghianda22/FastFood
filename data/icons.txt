@@ -12,3 +12,6 @@ piu    <i class="fas fa-plus"></i>
 occhio pieno    <i class="far fa-eye"></i>
 x    <i class="fas fa-times"></i>
 bidone    <i class="fas fa-trash-alt"></i>
+gomma    <i class="fas fa-eraser"></i>
+cuore spezzato    <i class="fas fa-heart-broken"></i>
+cuore    <i class="fas fa-heart"></i>

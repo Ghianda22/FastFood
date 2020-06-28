@@ -2,7 +2,7 @@ let user = JSON.parse(sessionStorage.getItem("logged"));
 let users = JSON.parse(localStorage.getItem("customers"));
 let corresp;
 for (let j = 0; j < users.length; j++) {
-    if(users[j].name == user.name){
+    if(users[j].email == user.email){
         corresp = j;
     }
 }
@@ -21,6 +21,8 @@ function exitModify(){
     for (const div of mod) {
         div.style.display = "none";
     }
+    document.getElementById("pArea-address-show-add").style.display = "inline";
+
 }
 
 function showData(data){
@@ -169,21 +171,19 @@ class Address{
 
 /* -- ADDRESS -- */
 {
-    //icons
-    let fullStar = document.createElement("i");
-    fullStar.className = "fas fa-star";
-    let emptyStar = document.createElement("i");
-    emptyStar.className = "far fa-star";
-    let modify = document.createElement("i");
-    modify.className = "fas fa-edit";
-    let check = document.createElement("i");
-    check.className = "fas fa-check";
-    let trashcan = document.createElement("i");
-    trashcan.className = "fas fa-trash-alt";
-
     function address(){
         for(let i = 0; i<user.address.length; i++){
             if(document.getElementById("pArea-address-show-"+i) == null){
+                let fullStar = document.createElement("i");
+                fullStar.className = "fas fa-star";
+                let emptyStar = document.createElement("i");
+                emptyStar.className = "far fa-star";
+                let modify = document.createElement("i");
+                modify.className = "fas fa-edit";
+                let check = document.createElement("i");
+                check.className = "fas fa-check";        
+                let trashcan = document.createElement("i");
+                trashcan.className = "fas fa-trash-alt";
                 //data
                 {
                     modify.setAttribute("onclick","addressModifier("+i+")");
@@ -286,7 +286,6 @@ class Address{
             }
         }
     }
-
     function createAddressInput(i, x){
         let input = document.createElement("input");
         input.id = "pArea-address-mod-" + i + "-" + x;
@@ -296,14 +295,13 @@ class Address{
         }
         return input;
     }
-
     function cleanAddress(){
         for (let i = 0; i < user.address.length; i++) {
             document.getElementById("pArea-address-show-"+i).remove();            
             document.getElementById("pArea-address-mod-"+i).remove();            
         }
     }
-
+    
     //show
     function showAddressData(){
         address();
@@ -324,55 +322,9 @@ class Address{
         document.getElementById("pArea-address-mod-"+i).style.display = "block";        
         document.getElementById("pArea-address-show-"+i).style.display = "none";
     }
-    function addressAdder(){
-        let i = user.address.length;
-        check.setAttribute("onclick","addressOk("+i+")");
-
-        let line0new = createAddressInput(i,'owner');
-        line0new.placeholder = "Nome sul citofono";
-        
-        let line1new = document.createElement("p");
-        let line1newStreet = createAddressInput(i,'street');
-        line1newStreet.placeholder = "Via/Piazza";
-        let line1newCivN = createAddressInput(i,'civN');
-        line1newCivN.placeholder = "Civico";
-        line1new.appendChild(line1newStreet);
-        line1new.appendChild(line1newCivN);
-        
-        let line2new = document.createElement("p");
-        let line2newZip = createAddressInput(i,'zip');
-        line2newZip.placeholder = "CAP";
-        let line2newCity = createAddressInput(i,'city');
-        line2newCity.placeholder = "Citt&aacute;";
-        let line2newProvince = createAddressInput(i,'province');
-        line2newProvince.placeholder = "Provincia (sigla)";
-        line2newProvince.pattern = "[A-Z]{2}";
-        line2new.appendChild(line2newZip);
-        line2new.appendChild(line2newCity);
-        line2new.appendChild(line2newProvince);
-
-        let line3new = createAddressInput(i,'other');
-        line3new.placeholder = "Consigli per la consegna";
-        
-        let containerNew = document.createElement("form");
-        containerNew.id = "pArea-address-mod-" + i;
-        containerNew.className = "mod";
-        containerNew.appendChild(line0new);
-        containerNew.appendChild(line1new);
-        containerNew.appendChild(line2new);
-        containerNew.appendChild(line3new);
-        containerNew.appendChild(check);
-        document.getElementById("pArea-address-show-add").style.display = "none";
-        document.getElementById("pArea-address-show").appendChild(containerNew);
-    }
-
+    
     //ok
     function addressOk(i){
-        
-        if(user.address[i] == undefined){
-            let address = new Address("", "", "", "", "", "");
-            (user.address).push(address);
-        }
         ok(i,'owner');
         ok(i,'street');
         ok(i,'civN');
@@ -380,16 +332,33 @@ class Address{
         ok(i,'city');
         ok(i,'province');
         ok(i,'other');
-        document.getElementById("pArea-address-mod-"+i).remove();
+        cleanAddress();
         address();
+        document.getElementById("pArea-address-show-add").style.display = "inline";
         document.getElementById("pArea-address-show-"+i).style.display = "block";
         updateUser();
     }
-
     function ok(i,x){
         (user.address[i])[x] = document.getElementById("pArea-address-mod-" + i + "-" + x).value;
     }
 
+    //new
+    function addressAdder(){
+        document.getElementById("pArea-address-show-add").style.display = "none";
+        document.getElementById("pArea-address-mod-new").style.display = "block";
+    }
+    function addressNew(){
+        let addressPart = ['owner','street','civN','zip','city','province','other'];
+        let i = user.address.length;
+        user.address[i] = new Address("","","","","","");
+        addressPart.forEach(part => {
+            (user.address[i])[part] = document.getElementById("pArea-address-mod-new-" + part).value;
+        });
+        document.getElementById("pArea-address-mod-new").style.display = "none";
+        address();
+        updateUser();
+    }
+    
     //delete
     function addressRemover(i){
         if(user.address.length - 1 > 0){
@@ -441,29 +410,20 @@ class Address{
 /* -- ELIMINA -- */
 {
     function areYouSure(){
-        let buttons = document.createElement("div");
-        let buttonY = document.createElement("button");
-        buttonY.id = "pArea-deleteUser-y";
-        buttonY.innerHTML = "Si, elimina";
-        buttonY.setAttribute("onclick","deleteUser()");
-        //class name
-        let buttonN = document.createElement("button");
-        buttonN.id = "pArea-deleteUser-n";
-        buttonN.innerHTML = "No, meglio tenerlo";
-        //class name
-
-        buttons.appendChild(buttonY);
-        buttons.appendChild(buttonN);
-        alert("Sei sicuro di voler eliminare il tuo account?\n" + buttons);
+        document.getElementById("pArea-deleteUser").style.display = "block";
     }
 
     function deleteUser(){
-        let temp = user[users.length - 1];
-        users[users.length] = users[corresp];
+        let temp = users[0];
+        users[0] = users[corresp];
         users[corresp] = temp;
-        pop(user);
+        users.shift();
         localStorage.setItem("customers",JSON.stringify(users));
         sessionStorage.clear();
         document.location.href = "../index.html";
+    }
+
+    function userSave(){
+        document.getElementById("pArea-deleteUser").style.display = "none";
     }
 }

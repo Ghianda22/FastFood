@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <script src="..\scripts\personalAreaC.js"></script>
+    <script src="..\scripts\personalAreaR.js"></script>
     <link rel="stylesheet" href="..\styles\style.css">
     <script src="https://kit.fontawesome.com/62ec85265f.js" crossorigin="anonymous"></script>
 
@@ -18,12 +18,12 @@
                 <div class="titlebox" id="pArea-pData">
                     <i id="pArea-pData-down" class="fas fa-chevron-down" onclick="showPersonalData()"></i>
                     <i id="pArea-pData-up" class="hidden fas fa-chevron-up" onclick="exitModify();hideData('pData')"></i>
-                    <span>Dati personali</span>
+                    <span>Dati commerciali</span>
                 </div>
                 
                 <div class="drop hidden" id="pArea-pData-show">
                     
-                    <!--email-->
+                    <!--business email-->
                     <span class="dataDescription">Email: </span>
                     <div class="data" id="pArea-pData-show-email">
                         <p id="pArea-pData-show-email-p"></p>
@@ -50,26 +50,26 @@
                         <i class="fas fa-check" onclick="pswOk('psw')"></i>
                     </div>
 
-                    <!--name-->
-                    <span>Nome: </span>
-                    <div class="data" id="pArea-pData-show-name">
-                        <p id="pArea-pData-show-name-p"></p>
-                        <i class="fas fa-edit" onclick="pDataModifier('name')"></i>
+                    <!--business name-->
+                    <span>Nome dell'attivit&aacute;: </span>
+                    <div class="data" id="pArea-pData-show-businessName">
+                        <p id="pArea-pData-show-businessName-p"></p>
+                        <i class="fas fa-edit" onclick="pDataModifier('businessName')"></i>
                     </div>
-                    <div class="mod hidden" id="pArea-pData-mod-name">
-                        <input type="text" name="pArea-pData-mod-name-input" id="pArea-pData-mod-name-input">
-                        <i class="fas fa-check" onclick="pDataOk('name')"></i>
+                    <div class="mod hidden" id="pArea-pData-mod-businessName">
+                        <input type="text" name="pArea-pData-mod-businessName-input" id="pArea-pData-mod-businessName-input">
+                        <i class="fas fa-check" onclick="pDataOk('businessName')"></i>
                     </div>
 
-                    <!--surname-->
-                    <span>Cognome: </span>
-                    <div class="data" id="pArea-pData-show-surname">
-                        <p id="pArea-pData-show-surname-p"></p>
-                        <i class="fas fa-edit" onclick="pDataModifier('surname')"></i>
+                    <!--vat number-->
+                    <span>P.IVA: </span>
+                    <div class="data" id="pArea-pData-show-vatNum">
+                        <p id="pArea-pData-show-vatNum-p"></p>
+                        <i class="fas fa-edit" onclick="pDataModifier('vatNum')"></i>
                     </div>
-                    <div class="mod hidden" id="pArea-pData-mod-surname">
-                        <input type="text" name="pArea-pData-mod-surname-input" id="pArea-pData-mod-surname-input">
-                        <i class="fas fa-check" onclick="pDataOk('surname')"></i>
+                    <div class="mod hidden" id="pArea-pData-mod-vatNum">
+                        <input type="text" name="pArea-pData-mod-vatNum-input" id="pArea-pData-mod-vatNum-input">
+                        <i class="fas fa-check" onclick="pDataOk('vatNum')"></i>
                     </div>
 
                     <!--phone-->
@@ -94,7 +94,7 @@
 
                 <div  class="drop hidden" id="pArea-payment-show">
 
-                    <span>Metodi di pagamento attivi:</span>
+                    <span>Metodi di pagamento accettati:</span>
                     <div class="data" id="pArea-payment-show-all">
                         <i class="hidden fas fa-minus"onclick="paymentRemover(0)"></i>
                         <i class="hidden fas fa-plus" onclick="paymentAdder(0)"></i>
@@ -111,7 +111,6 @@
                         <i class="hidden fas fa-minus" onclick="paymentRemover(3)"></i>
                         <i class="hidden fas fa-plus" onclick="paymentAdder(3)"></i>
                         <p id="pArea-payment-show-3">Contanti</p>
-                        
                     </div>
                     <i id="pArea-payment-show-mod" class="fas fa-edit" onclick="paymentModifier()"></i>
                     <i id="pArea-payment-show-ok" class="hidden fas fa-check" onclick="paymentOk()"></i>
@@ -126,24 +125,30 @@
                 <div class="titlebox" id="pArea-address">
                     <i id="pArea-address-down" class="fas fa-chevron-down" onclick="showAddressData();"></i>
                     <i id="pArea-address-up" class="hidden fas fa-chevron-up" onclick="exitModify();hideData('address');"></i>
-                    <span>Indirizzi di consegna:</span>
+                    <span>Indirizzo del locale:</span>
                 </div>
 
                 <div class="drop hidden" id="pArea-address-show">
-                                     
-                    <i id="pArea-address-show-add" class="fas fa-plus" onclick="addressAdder();">Aggiungi un indirizzo di consegna</i>
-                    <form class="mod hidden" id="pArea-address-mod-new" onsubmit="addressNew();return false;">
-                        <input type="text" name="pArea-address-mod-new-owner" id="pArea-address-mod-new-owner" placeholder="Nome sul citofono" required>
+                    
+                    <div class="data" id="pArea-address-show-venue">
+                        <p id="pArea-address-show-line0"></p>
+                        <p id="pArea-address-show-line1"></p>
+                        <p id="pArea-address-show-line2"></p>
+                        <p id="pArea-address-show-line3"></p>
+                        <i id="pArea-payment-show-mod" class="fas fa-edit" onclick="addressModifier()"></i>
+                    </div>
+                    <form class="mod hidden" id="pArea-address-mod-venue" onsubmit="addressOk();return false;">
+                        <input type="text" name="pArea-address-mod-venue-owner" id="pArea-address-mod-venue-owner" placeholder="Nome sul citofono" required>
                         <p>
-                            <input type="text" name="pArea-address-mod-new-street" id="pArea-address-mod-new-street" placeholder="Via/Piazza" required>
-                            <input type="text" name="pArea-address-mod-new-civN" id="pArea-address-mod-new-civN" placeholder="Civico" required>
+                            <input type="text" name="pArea-address-mod-venue-street" id="pArea-address-mod-venue-street" placeholder="Via/Piazza" required>
+                            <input type="text" name="pArea-address-mod-venue-civN" id="pArea-address-mod-venue-civN" placeholder="Civico" required>
                         </p>
                         <p >
-                            <input type="text" name="pArea-address-mod-new-zip" id="pArea-address-mod-new-zip" pattern="[0-9]{5}" placeholder="CAP" required>
-                            <input type="text" name="pArea-address-mod-new-city" id="pArea-address-mod-new-city" placeholder="Città" required>
-                            <input type="text" name="pArea-address-mod-new-province" id="pArea-address-mod-new-province" pattern="[A-Z]{2}" placeholder ="Sigla della provincia es. MI" required>
+                            <input type="text" name="pArea-address-mod-venue-zip" id="pArea-address-mod-venue-zip" pattern="[0-9]{5}" placeholder="CAP" required>
+                            <input type="text" name="pArea-address-mod-venue-city" id="pArea-address-mod-venue-city" placeholder="Città" required>
+                            <input type="text" name="pArea-address-mod-venue-province" id="pArea-address-mod-venue-province" pattern="[A-Z]{2}" placeholder ="Sigla della provincia es. MI" required>
                         </p>
-                        <input type="text" name="pArea-address-mod-new-other" id="pArea-address-mod-new-other" placeholder="Dettagli per la consegna">
+                        <input type="text" name="pArea-address-mod-venue-other" id="pArea-address-mod-venue-other" placeholder="Dettagli per la consegna">
 
                         <button type="reset">
                             <i class="fas fa-eraser"></i>
@@ -151,7 +156,7 @@
                         </button>
                         <button type="submit">
                             <i class="fas fa-check"></i>
-                            Crea
+                            Applica modifiche
                         </button>
                 
                     </form>
@@ -161,7 +166,7 @@
             <!--ADS-->
             <li>
                 <div class="titlebox" id="pArea-ads">
-                    <i id="pArea-ads-down" class="fas fa-chevron-down" onclick="showAdsData();"></i>
+                    <i id="pArea-ads-down" class="fas fa-chevron-down" onclick="showData('ads');"></i>
                     <i id="pArea-ads-up" class="hidden fas fa-chevron-up" onclick="exitModify();hideData('ads');"></i>
                     <span>Preferenze e privacy:</span>
                 </div>

@@ -9,7 +9,9 @@ function detectUser(){
 
         }else{
             //restaurateur mode
-            document.getElementById("userIcon").href = "pages/personalAreaR.html";
+            document.getElementById("userArea-login").style.display = "none";
+            document.getElementById("userArea-logged").style.display = "inline";
+            document.getElementById("userArea-logged").href = "pages/personalAreaR.html";
 
         }
     }

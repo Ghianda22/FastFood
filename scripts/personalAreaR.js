@@ -21,6 +21,7 @@ function exitModify(){
     for (const div of mod) {
         div.style.display = "none";
     }
+    paymentOk();
 }
 function showData(data){
     document.getElementById("pArea-"+data+"-show").style.display = "block";
@@ -54,6 +55,11 @@ function hideData(data){
         document.getElementById("pArea-pData-show-phone-p").innerHTML = user.phone;
         document.getElementById("pArea-pData-show-email-p").innerHTML = user.email;
         document.getElementById("pArea-pData-show-vatNum-p").innerHTML = user.vatNum;
+        if(user.img != ""){
+            document.getElementById("pArea-pData-show-img-view").src = user.img;
+        }else{
+            document.getElementById("pArea-pData-show-img-view").src = "https://place-hold.it/300x200/C2BDBA/588C99.jpg?text=Inserisci+una+foto+di+presentazione&bold&italic";
+        }
         showData('pData');
     }
 
@@ -83,7 +89,19 @@ function hideData(data){
             updateUser();
         }
     }
-    
+
+    //img
+    function showImg(input){
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                document.getElementById("pArea-pData-show-img-view").src = e.target.result;
+                user.img = e.target.result;
+                updateUser();
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
 }
 
 

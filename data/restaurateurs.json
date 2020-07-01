@@ -16,7 +16,8 @@
         "therms":true,
         "rating":null,
         "orderNum":[],
-        "menu":[]
+        "menu":[],
+        "img":""
     },
     {
         "businessName":"Ristorante Pizzeria Amici Miei",
@@ -36,6 +37,7 @@
         "therms":true,
         "rating":null,
         "orderNum":[],
-        "menu":[]
+        "menu":[],
+        "img":""
     }
 ]

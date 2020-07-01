@@ -155,6 +155,7 @@ class Address{
                 this.rating = null;
                 this.orderNum = [];
                 this.menu = [];
+                this.img = "";
             }
         }
 

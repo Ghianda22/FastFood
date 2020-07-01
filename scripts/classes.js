@@ -9,6 +9,7 @@ class Restaurateur{
         this.therms = therms;
         this.rating = null;
         this.orderNum = [];
+        this.img = "";
     }
 }
 

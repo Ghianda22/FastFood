@@ -23,6 +23,45 @@
                 
                 <div class="drop hidden" id="pArea-pData-show">
                     
+                    <!--business name-->
+                    <span>Nome dell'attivit&aacute;: </span>
+                    <div class="data" id="pArea-pData-show-businessName">
+                        <p id="pArea-pData-show-businessName-p"></p>
+                        <i class="fas fa-edit" onclick="pDataModifier('businessName')"></i>
+                    </div>
+                    <div class="mod hidden" id="pArea-pData-mod-businessName">
+                        <input type="text" name="pArea-pData-mod-businessName-input" id="pArea-pData-mod-businessName-input">
+                        <i class="fas fa-check" onclick="pDataOk('businessName')"></i>
+                    </div>
+
+                    <!--img-->
+                    <div class="data" id="pArea-pData-show-img">
+                        <img id="pArea-pData-show-img-view" src="" alt="">
+                        <input type="file" name="pArea-pData-show-img-load" id="pArea-pData-show-img-load" onchange="showImg(this);">
+                    </div>
+
+                    <!--vat number-->
+                    <span>P.IVA: </span>
+                    <div class="data" id="pArea-pData-show-vatNum">
+                        <p id="pArea-pData-show-vatNum-p"></p>
+                        <i class="fas fa-edit" onclick="pDataModifier('vatNum')"></i>
+                    </div>
+                    <div class="mod hidden" id="pArea-pData-mod-vatNum">
+                        <input type="text" name="pArea-pData-mod-vatNum-input" id="pArea-pData-mod-vatNum-input">
+                        <i class="fas fa-check" onclick="pDataOk('vatNum')"></i>
+                    </div>
+                    
+                    <!--phone-->
+                    <span>Tel: </span>
+                    <div class="data" id="pArea-pData-show-phone">
+                        <p id="pArea-pData-show-phone-p"></p>
+                        <i class="fas fa-edit" onclick="pDataModifier('phone')"></i>
+                    </div>
+                    <div class="mod hidden" id="pArea-pData-mod-phone">
+                        <input type="tel" name="pArea-pData-mod-phone-input" id="pArea-pData-mod-phone-input" pattern="[0-9]{10}">
+                        <i class="fas fa-check" onclick="pDataOk('phone')"></i>
+                    </div>
+
                     <!--business email-->
                     <span class="dataDescription">Email: </span>
                     <div class="data" id="pArea-pData-show-email">
@@ -49,46 +88,13 @@
                         <input type="password" name="pArea-pData-mod-pswOk-input" id="pArea-pData-mod-pswOk-input" onchange="pswCheck()">
                         <i class="fas fa-check" onclick="pswOk('psw')"></i>
                     </div>
-
-                    <!--business name-->
-                    <span>Nome dell'attivit&aacute;: </span>
-                    <div class="data" id="pArea-pData-show-businessName">
-                        <p id="pArea-pData-show-businessName-p"></p>
-                        <i class="fas fa-edit" onclick="pDataModifier('businessName')"></i>
-                    </div>
-                    <div class="mod hidden" id="pArea-pData-mod-businessName">
-                        <input type="text" name="pArea-pData-mod-businessName-input" id="pArea-pData-mod-businessName-input">
-                        <i class="fas fa-check" onclick="pDataOk('businessName')"></i>
-                    </div>
-
-                    <!--vat number-->
-                    <span>P.IVA: </span>
-                    <div class="data" id="pArea-pData-show-vatNum">
-                        <p id="pArea-pData-show-vatNum-p"></p>
-                        <i class="fas fa-edit" onclick="pDataModifier('vatNum')"></i>
-                    </div>
-                    <div class="mod hidden" id="pArea-pData-mod-vatNum">
-                        <input type="text" name="pArea-pData-mod-vatNum-input" id="pArea-pData-mod-vatNum-input">
-                        <i class="fas fa-check" onclick="pDataOk('vatNum')"></i>
-                    </div>
-
-                    <!--phone-->
-                    <span>Tel: </span>
-                    <div class="data" id="pArea-pData-show-phone">
-                        <p id="pArea-pData-show-phone-p"></p>
-                        <i class="fas fa-edit" onclick="pDataModifier('phone')"></i>
-                    </div>
-                    <div class="mod hidden" id="pArea-pData-mod-phone">
-                        <input type="tel" name="pArea-pData-mod-phone-input" id="pArea-pData-mod-phone-input" pattern="[0-9]{10}">
-                        <i class="fas fa-check" onclick="pDataOk('phone')"></i>
-                    </div>
                 </div>
             </li>
             <!--PAYMENT-->
             <li>
                 <div class="titlebox" id="pArea-payment">
                     <i id="pArea-payment-down" class="fas fa-chevron-down" onclick="showPaymentData()"></i>
-                    <i id="pArea-payment-up" class="hidden fas fa-chevron-up" onclick="exitModify();hideData('payment')"></i>
+                    <i id="pArea-payment-up" class="hidden fas fa-chevron-up" onclick="paymentOk();hideData('payment')"></i>
                     <span>Metodi di pagamento</span>
                 </div>
 
@@ -115,8 +121,6 @@
                     <i id="pArea-payment-show-mod" class="fas fa-edit" onclick="paymentModifier()"></i>
                     <i id="pArea-payment-show-ok" class="hidden fas fa-check" onclick="paymentOk()"></i>
                     
-
-
                 </div>
                 
             </li>

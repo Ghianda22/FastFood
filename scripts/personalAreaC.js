@@ -22,7 +22,7 @@ function exitModify(){
         div.style.display = "none";
     }
     document.getElementById("pArea-address-show-add").style.display = "inline";
-
+    paymentOk();   
 }
 
 function showData(data){

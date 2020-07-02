@@ -1,0 +1,32 @@
+let dishes = [
+    {
+        "id":"1234",
+        "name":"Margherita",
+        "price": "4,50",
+        "img": "../images/dishes/margherita.jpg",
+        "ingredients":["pomodoro","mozzarella"],
+        "cuisine":"italiana",
+        "category":"pizza",
+        "owner":"public"
+    },
+    {
+        "id":"1123",
+        "name":"Cotto",
+        "price": "4,50",
+        "img": "../images/dishes/cotto.jpg",
+        "ingredients":["pomodoro","mozzarella","prosciutto cotto"],
+        "cuisine":"italiana",
+        "category":"pizza",
+        "owner":"public"
+    },
+    {
+        "id":"5678",
+        "name":"McChicken",
+        "price": "4,30",
+        "img": "../images/dishes/mcchicken.jpg",
+        "ingredients":["pane al sesamo","cotoletta","insalata iceberg","maionese"],
+        "cuisine":"McDonald's",
+        "category":"panino",
+        "owner":"public"
+    }
+];

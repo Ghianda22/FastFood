@@ -15,3 +15,9 @@ bidone    <i class="fas fa-trash-alt"></i>
 gomma    <i class="fas fa-eraser"></i>
 cuore spezzato    <i class="fas fa-heart-broken"></i>
 cuore    <i class="fas fa-heart"></i>
+x con cerchio    <i class="fas fa-times-circle"></i>
+<--    <i class="fas fa-arrow-left"></i>
+<-- con cerchio    <i class="fas fa-arrow-circle-left"></i>
+<=  con cerchio    <i class="fas fa-arrow-alt-circle-left"></i>
+menu libro    <i class="fas fa-book-open"></i>
+menu foglio    <i class="fas fa-scroll"></i>

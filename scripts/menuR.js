@@ -1,3 +1,4 @@
+/* -- USER -- */
 let user = JSON.parse(sessionStorage.getItem("logged"));
 let dishes = JSON.parse(localStorage.getItem("dishes"));
 let users = JSON.parse(localStorage.getItem("customers"));
@@ -14,45 +15,7 @@ function updateUser(){
 }
 
 
-function showMenu(){
-    let menu = user.menu;
-    for(let el of menu) {
-        for (let dish of dishes) {
-            if(el == dish.id){
-                let li = document.createElement("li");
-                li.id = "yourMenu-list-" + dish.id;
-                let img = document.createElement("img");
-                img.src = dish.img;
-                let pName = document.createElement("P");
-                pName.innerHTML = dish.name
-                let pPrice = document.createElement("P");
-                pPrice.innerHTML = dish.price;
-                let pIngredients = document.createElement("P");
-                let ingr = "";
-                for (let elem of dish.ingredients) {
-                    ingr += elem + ", ";
-                }
-                ingr = ingr.substring(0,ingr.length-2);
-                pIngredients.innerHTML = ingr;
-                let pCuisine = document.createElement("p");
-                pCuisine.innerHTML = dish.cuisine;
-                let pCategories = document.createElement("P");
-                pCategories.innerHTML = dish.category;
-                
-                let div = document.createElement("div");
-                div.id = "yourMenu-list-" + dish.id + "-data";
-                div.appendChild(pName);
-                div.appendChild(pPrice);
-                div.appendChild(pIngredients);
-                div.appendChild(pCuisine);
-                div.appendChild(pCategories);
-                li.appendChild(img);
-                li.appendChild(div);
-                document.getElementById("yourMenu-list").appendChild(li);
-            }
-        }
-    }
-}
+/* -- SHOW -- */
 function pForShowingData(dish, data, dataName){
     let p = document.createElement("p");
     let span = document.createElement("span");
@@ -71,6 +34,39 @@ function pForShowingData(dish, data, dataName){
     
     return p;
 }
+
+function showMenu(){
+    let menu = user.menu;
+    for(let el of menu) {
+        for (let dish of dishes) {
+            if(el == dish.id){
+                let li = document.createElement("li");
+                li.id = "yourMenu-list-" + dish.id;
+                let img = document.createElement("img");
+                img.src = dish.img;
+                
+                let pName = pForShowingData(dish, 'name', 'Nome');
+                let pPrice = pForShowingData(dish, 'price', 'Prezzo');
+                let pIngredients = pForShowingData(dish, 'ingredients', 'Ingredienti');
+                let pCuisine = pForShowingData(dish, 'cuisine', 'Tipo di cucina');
+                let pCategories = pForShowingData(dish, 'category', 'Categorie');
+        
+                
+                let div = document.createElement("div");
+                div.id = "yourMenu-list-" + dish.id + "-data";
+                div.appendChild(pName);
+                div.appendChild(pPrice);
+                div.appendChild(pIngredients);
+                div.appendChild(pCuisine);
+                div.appendChild(pCategories);
+                li.appendChild(img);
+                li.appendChild(div);
+                document.getElementById("yourMenu-list").appendChild(li);
+            }
+        }
+    }
+}
+
 function showDishes(){
     document.getElementById("yourMenu").style.display = "none";
     document.getElementById("setMenu").style.display = "block";
@@ -125,6 +121,8 @@ function showDishes(){
     }
 }
 
+
+/* -- CHANGE -- */
 function addDish(id){
     (user.menu).puscoh(id);
     document.getElementById("setMenu-list-" + id + "-minus").style.display = "inline";

@@ -1,4 +1,4 @@
-[
+let restaurateurs = [
     {"businessName":"Ristorante Pizzeria da Aldo",
         "email":"info@aldopizzeria.it",
         "phone":"0322243195",
@@ -40,4 +40,4 @@
         "menu":[],
         "img":""
     }
-]
+];

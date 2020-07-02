@@ -1,4 +1,4 @@
-[
+let customers = [
     {
         "name":"Giampaolo",
         "surname":"Lorè",
@@ -70,4 +70,4 @@
         "ads":false,
         "orderNum":[]
     }
-]
+];

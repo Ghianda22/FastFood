@@ -20,26 +20,12 @@ class Address{
 }
 
 // DEFAULT DATA CHECK
-    if(localStorage.getItem("customers")==null){
-        let request = new XMLHttpRequest();
-        request.open('GET', "../data/customers.json", true);
-        request.onreadystatechange = function(){
-            if(this.status == 200 && this.readyState == 4){
-                localStorage.setItem("customers", request.response);
-            }
-        }
-        request.send();
-    }
-    if(localStorage.getItem("restaurateurs")==null){
-        let request = new XMLHttpRequest();
-        request.open('GET', "../data/restaurateurs.json", true);
-        request.onreadystatechange = function(){
-            if(this.status == 200 && this.readyState == 4){
-                localStorage.setItem("restaurateurs", request.response);
-            }
-        }
-        request.send();
-    }
+if(localStorage.getItem("customers")==null){
+    localStorage.setItem("customers",JSON.stringify(customers));
+}
+if(localStorage.getItem("restaurateurs")==null){
+    localStorage.setItem("restaurateurs", JSON.stringify(restaurateurs));
+}
 
 
 

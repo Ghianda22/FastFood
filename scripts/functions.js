@@ -1,24 +1,10 @@
 // DEFAULT DATA CHECK
 {
     if(localStorage.getItem("customers")==null){
-        let request = new XMLHttpRequest();
-        request.open('GET', "../data/customers.json", true);
-        request.onreadystatechange = function(){
-            if(this.status == 200 && this.readyState == 4){
-                localStorage.setItem("customers", request.response);
-            }
-        }
-        request.send();
+        localStorage.setItem("customers",JSON.stringify(customers));
     }
     if(localStorage.getItem("restaurateurs")==null){
-        let request = new XMLHttpRequest();
-        request.open('GET', "../data/restaurateurs.json", true);
-        request.onreadystatechange = function(){
-            if(this.status == 200 && this.readyState == 4){
-                localStorage.setItem("restaurateurs", request.response);
-            }
-        }
-        request.send();
+        localStorage.setItem("restaurateurs", JSON.stringify(restaurateurs));
     }
 }
 //DETECT USER
@@ -77,4 +63,12 @@
             reader.readAsDataURL(input.files[0]);
         }
     }
+}
+
+//ELIMINATE ELEMENTS FROM ARRAY
+{
+    let temp = array[0];
+    array[0] = array[eliminate];
+    array[eliminate] = temp;
+    array.shift();
 }

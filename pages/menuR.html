@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+    <script src="..\scripts\loadData.js"></script>
     <script src="..\scripts\menuR.js"></script>
     <link rel="stylesheet" href="..\styles\style.css">
     <script src="https://kit.fontawesome.com/62ec85265f.js" crossorigin="anonymous"></script>
@@ -9,9 +10,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestione menu - FastFood</title>
 </head>
-<body ondblclick="exitModify()">
+<body ondblclick="exitModify()" onload="showMenu()">
 
-    <div></div>
+    <div id="yourMenu">
+        <ul id="yourMenu-list">
+
+        </ul>
+        <i class="fas fa-edit" onclick="showDishes()"></i>
+    </div>
+    <div class="hidden" id="setMenu">
+        <ul id="setMenu-list">
+            
+        </ul>
+        <button onclick="backMenu()">
+            <i class="fas fa-times-circle"></i>
+            Elimina modifiche
+        </button>
+        <button onclick="resetMenu()">
+            <i class="fas fa-trash-alt"></i>
+            Azzera men&uacute;
+        </button>
+        <button onclick="changeMenu()">
+            <i class="fas fa-check"></i>
+            Conferma men&uacute;
+        </button>
+    </div>
 
 </body>
 </html>

@@ -17,24 +17,20 @@ class Dish{
     constructor(name, img, ingredients, price, cuisine, owner, category){
         this.id = uuidv4();
         this.name = name;
+        this.price = price;
         this.img = img;
         this.ingredients = ingredients;
-        this.price = price;
         this.cuisine = cuisine;
-        this.owner = owner;
         this.category = category;
+        this.owner = owner;
     }
-}
-
-function newDish(type){
-    let dish = new Dish()
 }
 
 function showForm(type){
     let forms = document.getElementsByTagName("form");
     for (let form of forms) {
         form.style.display = "none";
-    }
+    }    
     document.getElementById("newDish").style.display = "block";
     document.getElementById("new"+type).style.display = "block";
 }
@@ -55,22 +51,26 @@ function listDisplay(type,id,list,displayed){
         document.getElementById(id).appendChild(p);
     }
 }
-/*function dishDataDisplay(type){
-    let p = document.createElement("p");
-    let input = document.createElement("input");
-    input.type = "text";
-    input.name = input.id = "new" + type + "data-name";
-}*/
 function showImg(input, id){
     if (input.files && input.files[0]) {
-        var reader = new FileReader();
+        let reader = new FileReader();
         reader.onload = function (e) {
             document.getElementById(id).src = e.target.result;
+            let imgCode = e.target.result;
         }
         reader.readAsDataURL(input.files[0]);
+        return imgCode;
     }
 }
+function newDish(form){
+        let type = form.id;
+        let name = document.getElementById(type+"-data-name").value;
+        let img = showImg()
+        let price = document.getElementById(type+"-data-price").value;
+        let dish = new Dish(name,)
+    }
 
+    
 /* -- PIZZA -- */
 {
     function pizzaIngredients(){
@@ -132,14 +132,6 @@ function showImg(input, id){
         listDisplay("checklist","newPizza-ingredients-dressing",dressing,dressingName);
     }
 
-    function readIngredients(){
-        let dishIngredient = [];
-
-        let dressing = document.getElementsByName("newPizza-ingredients-dressing-checklist");
-        dressing.forEach(ingredient => {
-            if(ingredient.checked == true){
-                dishIngredient.push(ingredient.value);
-            }
-        });
-    }
+    
 }
+//pizza cuisine = italiana, category = pizza

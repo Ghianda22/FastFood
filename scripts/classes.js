@@ -59,3 +59,16 @@ class Address{
         this.other = false;
     }
 }
+
+class Dish{
+    constructor(name, img, ingredients, price, cuisine, owner, category){
+        this.id = uuidv4();
+        this.name = name;
+        this.price = price;
+        this.img = img;
+        this.ingredients = ingredients;
+        this.cuisine = cuisine;
+        this.category = category;
+        this.owner = owner;
+    }
+}

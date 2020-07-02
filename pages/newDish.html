@@ -16,7 +16,7 @@
         <!--CATEGORY-->
         <span>Seleziona una categoria per avere delle linee guida o crea un piatto personalizzato</span>
         <p>
-            <input type="radio" name="newDish-category" id="newDish-category-pizza" onclick="showForm('Pizza');pizzaDisplay()">
+            <input type="radio" name="newDish-category" id="newDish-category-pizza" onclick="showForm('Pizza');pizzaIngredients();">
             <label for="newDish-category-pizza">Pizza</label>
         </p>
         <p>
@@ -39,7 +39,7 @@
 
     </form>
 
-    <form class="hidden" id="newPizza" action="" onsubmit="newDish('pizza')">
+    <form class="hidden" id="newPizza" action="" onsubmit="newDish(this)">
     
         <div id="newPizza-data">
             <p>
@@ -49,11 +49,12 @@
             <p>
                 <label for="newPizza-data-price">Prezzo:</label>
                 <input type="number" name="newPizza-data-price" id="newPizza-data-price" min="3" step="0.01">
+                <i class="fas fa-euro-sign"></i>
             </p>
             <p>
                 <label for="newPizza-data-img">Carica una foto del piatto:</label>
                 <img id="newPizza-data-img-show" src="https://place-hold.it/300x200/C2BDBA/588C99.jpg?text=Inserisci+una+foto+di+presentazione&bold&italic" alt="Foto del piatto">
-                <input type="file" name="newPizza-data-img" id="newPizza-data-img" onchange="showImg(this,'newPizza-data-img-show')">
+                <input type="file" name="newPizza-data-img" id="newPizza-data-img" onchange="showImg(this,x)">
             </p>
         </div>
         <div id="newPizza-ingredients">
@@ -73,8 +74,34 @@
             <input type="text" name="newPizza-ingredients-dressing-other" id="newPizza-ingredients-dressing-other" placeholder="tonno/olive/...">
         
         </div>
+        <div id="newPizza-extra">
+            <span>Extra:</span>
+            <p>
+                <span>Calzone:</span>
+                <input type="radio" name="newPizza-extra-calzone" id="newPizza-extra-calzone-y">
+                <label for="newPizza-extra-calzone-y">Si</label>
+                <input type="radio" name="newPizza-extra-calzone" id="newPizza-extra-calzone-n" checked>
+                <label for="newPizza-extra-calzone-n">No</label>
+            </p>
+            <p>
+                <span>Cornicione ripieno:</span>
+                <input type="radio" name="newPizza-extra-cornice" id="newPizza-extra-cornice-y">
+                <label for="newPizza-extra-cornice-y">Si</label>
+                <input type="radio" name="newPizza-extra-cornice" id="newPizza-extra-cornice-n" checked>
+                <label for="newPizza-extra-cornice-n">No</label>
+            </p>
+            <p>
+                <span>Altro:</span>
+                <textarea name="newPizza-extra-other" id="newPizza-extra-other" cols="20" rows="2"></textarea>
+            </p>
+        </div>
+        <input type="reset" name="newCustom-submit" id="newCustom-submit" value="Cancella">
+        <input type="submit" name="newCustom-submit" id="newCustom-submit" value="Crea piatto">
 
     </form>
+    <form action="" id="newHamburger"></form>
+    <form action="" id="newSushi"></form>
+    <form action="" id="newPoke"></form>
     <form id="newCustom" action="" onsubmit="newDish('custom')">
         
         <div id="newCustom-data">
@@ -155,9 +182,6 @@
 
     </form>
 
-    <form action="" id="newHamburger"></form>
-    <form action="" id="newSushi"></form>
-    <form action="" id="newPoke"></form>
  
     
 </body>

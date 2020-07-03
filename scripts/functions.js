@@ -72,3 +72,26 @@
     array[eliminate] = temp;
     array.shift();
 }
+
+//HTML CREATION
+{
+    function pForShowingData(obj, data, dataName){
+        let p = document.createElement("p");
+        let span = document.createElement("span");
+        span.innerHTML = dataName + ": ";
+        p.appendChild(span);
+        if(typeof(obj[data]) == "object"){
+            let list = "";
+            for (let elem of obj[data]) {
+                list += elem + ", ";
+            }
+            list = list.substring(0,list.length-2);
+            p.innerHTML += list;
+        }else{
+            p.innerHTML += obj[data];
+        }
+        
+        return p;
+    }
+    
+}

@@ -1,6 +1,6 @@
 let dishes = [
     {
-        "id":"1234",
+        "id":1,
         "name":"Margherita",
         "price": "4,50",
         "img": "../images/dishes/margherita.jpg",
@@ -10,7 +10,7 @@ let dishes = [
         "owner":"public"
     },
     {
-        "id":"1123",
+        "id":2,
         "name":"Cotto",
         "price": "4,50",
         "img": "../images/dishes/cotto.jpg",
@@ -20,7 +20,7 @@ let dishes = [
         "owner":"public"
     },
     {
-        "id":"5678",
+        "id":3,
         "name":"McChicken",
         "price": "4,30",
         "img": "../images/dishes/mcchicken.jpg",

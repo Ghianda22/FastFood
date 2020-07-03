@@ -1,11 +1,3 @@
-function back(){
-            if(document.referrer.indexOf("login.html") == -1 ){     //la pagina precedente non è login
-                window.history.goBack(-2);
-            }else{
-                window.history.back();
-            }
-}
-
 class Address{
     constructor(name, street, civN, zip, city, province){
         this.owner = name;
@@ -106,7 +98,7 @@ if(localStorage.getItem("restaurateurs")==null){
         function checksC(){
             if(pswCheckC()==true && noDoubleC()==true){
                 accountCreationC();
-                back();
+                document.getElementById("newAcc-c-form").action = "../index.html";
                 alert("Registrazione avvenuta con successo!");
             }else{
                 console.log("Si sono verificati degli errori");
@@ -197,7 +189,7 @@ if(localStorage.getItem("restaurateurs")==null){
         function checksR(){
             if(pswCheckR()==true && noDoubleR()==true){
                 accountCreationR();
-                back();
+                document.getElementById("newAcc-r-form").action = "../index.html";
                 alert("Registrazione avvenuta con successo!");
             }else{
                 console.log("Si sono verificati degli errori");

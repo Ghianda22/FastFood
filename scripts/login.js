@@ -1,4 +1,3 @@
-// DEFAULT DATA CHECK
 if(localStorage.getItem("customers")==null){
     localStorage.setItem("customers",JSON.stringify(customers));
 }
@@ -6,10 +5,6 @@ if(localStorage.getItem("restaurateurs")==null){
     localStorage.setItem("restaurateurs", JSON.stringify(restaurateurs));
 }
 
-//saves the previous page
-if(document.referrer.indexOf("login.html") == -1 ){
-    sessionStorage.setItem("temp", document.referrer);
-}
 
 function login(){
     let type;
@@ -25,10 +20,10 @@ function login(){
                 if(sessionStorage.getItem("cart")==null){
                     sessionStorage.setItem("cart","[]");
                 }
-                document.getElementById("logPage-form").action = sessionStorage.getItem("temp");
+                document.getElementById("logPage-form").action = "../index.html";
                 break;
             }else{
-                console.log("password sbagliata");
+                alert("password sbagliata");
                 //warning: la password non è corretta
             }
         }
@@ -39,10 +34,10 @@ function login(){
             if(psw == r.psw){
                 sessionStorage.setItem("logged",JSON.stringify(r));
                 //caricare qui gli ordini in corso/passati)
-                document.getElementById("logPage-form").action = sessionStorage.getItem("temp");
+                document.getElementById("logPage-form").action = "../index.html";
                 break;
             }else{
-                console.log("password sbagliata");
+                alert("password sbagliata");
                 //warning: la password non è corretta
             }
         }
@@ -50,5 +45,5 @@ function login(){
     if(type != "c" && type!="r"){
         alert("Non c'� nessun account registrato con questa email");
     }
-
+    return false;
 }

@@ -16,6 +16,7 @@ let restaurateurs = [
         "therms":true,
         "rating":null,
         "orderNum":[],
+        "averagePrice":"",
         "menu":[],
         "img":""
     },
@@ -37,6 +38,7 @@ let restaurateurs = [
         "therms":true,
         "rating":null,
         "orderNum":[],
+        "averagePrice":"",
         "menu":[1,2],
         "img":""
     }

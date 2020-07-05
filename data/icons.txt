@@ -21,3 +21,5 @@ x con cerchio    <i class="fas fa-times-circle"></i>
 <=  con cerchio    <i class="fas fa-arrow-alt-circle-left"></i>
 menu libro    <i class="fas fa-book-open"></i>
 menu foglio    <i class="fas fa-scroll"></i>
+imbuto/filtro    <i class="fas fa-filter"></i>
+ordinamento    <i class="fas fa-sort-amount-down"></i>

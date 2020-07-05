@@ -8,10 +8,22 @@ for (let j = 0; j < users.length; j++) {
         corresp = j;
     }
 }
+//update
 function updateUser(){
     sessionStorage.setItem("logged",JSON.stringify(user));
     users[corresp] = user;
     localStorage.setItem("restaurateurs",JSON.stringify(users));
+}
+function updateAveragePrice(){
+    let tot = 0;
+    for(let el of user.menu){
+        for(let dish of dishes){
+            if(el == dish.id){
+                tot += dish.price;
+            }
+        }
+    }
+    user.averagePrice = (tot / user.menu.length).toFixed(2);
 }
 
 
@@ -40,11 +52,14 @@ function updateUser(){
     function showMenu(){
         resetShowDishes();
         let menu = user.menu;
+        document.getElementById("yourMenu-averagePrice").innerHTML += user.averagePrice;
         for(let el of menu) {
             for (let dish of dishes) {
                 if(el == dish.id){
                     let li = document.createElement("li");
                     li.id = "yourMenu-list-" + dish.id;
+                    let a = document.createElement("a");
+                    a.href = ""
                     let img = document.createElement("img");
                     img.src = dish.img;
 
@@ -167,6 +182,7 @@ function updateUser(){
 
     //buttons
     function changeMenu(){
+        updateAveragePrice();
         showMenu();
         document.getElementById("yourMenu").style.display = "block";
         document.getElementById("setMenu").style.display = "none";

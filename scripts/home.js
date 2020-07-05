@@ -1,4 +1,3 @@
-// DEFAULT DATA CHECK
 if(localStorage.getItem("customers")==null){
     localStorage.setItem("customers",JSON.stringify(customers));
 }
@@ -8,7 +7,8 @@ if(localStorage.getItem("restaurateurs")==null){
 if(localStorage.getItem("dishes")==null){
     localStorage.setItem("dishes", JSON.stringify(dishes));
 }
-
+let rList = JSON.parse(localStorage.getItem("restaurateurs"));
+//window.onload = detectUser();
 function detectUser(){
     if(sessionStorage.getItem("logged") != null){
         let user = JSON.parse(sessionStorage.getItem("logged"));
@@ -19,7 +19,6 @@ function detectUser(){
             document.getElementById("userArea-logged-pArea").href = "pages/personalAreaC.html";
             document.getElementById("menuIcon").style.display = "none";
             document.getElementById("cartIcon").style.display = "inline";
-            
         }else{
             //restaurateur mode
             document.getElementById("userArea-login").style.display = "none";
@@ -42,4 +41,40 @@ function logout(){
 }
 function stay(){
     document.getElementById("userArea-logged-logout").style.display = "none";
+}
+
+function pForShowingData(obj, data){
+    let p = document.createElement("p");
+        p.innerHTML = obj[data];
+    return p;
+}
+
+function showRestaurants(){
+    for(let res of rList){
+        let div = document.createElement("div");
+        let image = new Image();
+        image.src = res.img;
+        let name = pForShowingData(res,'businessName');
+        let price = pForShowingData(res, 'averagePrice');
+        let rating = document.createElement("p");
+        
+        for(let i = res.rating; i > 0; i--){
+            let fullStar = document.createElement("i");
+            fullStar.className = "fas fa-star";
+            rating.appendChild(fullStar);
+        }
+        for(let i = 5 - res.rating; i > 0; i--){
+            let emptyStar = document.createElement("i");
+            emptyStar.className = "far fa-star";
+            rating.appendChild(emptyStar);
+        }
+        rating.innerHTML += res.rating;
+
+        div.appendChild(image);
+        div.appendChild(name);
+        div.appendChild(price);
+        div.appendChild(rating);
+
+        document.getElementById("main").appendChild(div);
+    }
 }

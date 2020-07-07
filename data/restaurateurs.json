@@ -1,5 +1,6 @@
 let restaurateurs = [
-    {"businessName":"Ristorante Pizzeria da Aldo",
+    {
+        "businessName":"Ristorante Pizzeria da Aldo",
         "email":"info@aldopizzeria.it",
         "phone":"0322243195",
         "psw":"aldo2020",
@@ -16,7 +17,7 @@ let restaurateurs = [
         "therms":true,
         "rating":null,
         "orderNum":[],
-        "averagePrice":"",
+        "averagePrice": 0,
         "menu":[],
         "img":""
     },
@@ -38,8 +39,8 @@ let restaurateurs = [
         "therms":true,
         "rating":null,
         "orderNum":[],
-        "averagePrice":"",
-        "menu":[1,2],
+        "averagePrice": 0,
+        "menu":[],
         "img":""
     }
 ];

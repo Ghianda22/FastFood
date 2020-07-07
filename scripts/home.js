@@ -8,7 +8,7 @@ if(localStorage.getItem("dishes")==null){
     localStorage.setItem("dishes", JSON.stringify(dishes));
 }
 let rList = JSON.parse(localStorage.getItem("restaurateurs"));
-//window.onload = detectUser();
+
 function detectUser(){
     if(sessionStorage.getItem("logged") != null){
         let user = JSON.parse(sessionStorage.getItem("logged"));
@@ -30,11 +30,9 @@ function detectUser(){
         }
     }
 }
-
 function areYouSure(){
     document.getElementById("userArea-logged-logout").style.display = "block";
 }
-
 function logout(){
     sessionStorage.clear();
     location.reload();
@@ -43,15 +41,21 @@ function stay(){
     document.getElementById("userArea-logged-logout").style.display = "none";
 }
 
+
 function pForShowingData(obj, data){
     let p = document.createElement("p");
         p.innerHTML = obj[data];
     return p;
 }
-
 function showRestaurants(){
     for(let res of rList){
         let div = document.createElement("div");
+        div.id = "main-list-" + res.email;
+        let a = document.createElement("a");
+        a.id ="main-list-" + res.email + "link";
+        a.onclick = sessionStorage.setItem("res", JSON.stringify(res));
+        a.onclick = a.setAttribute("href","pages/restaurant.html");
+        
         let image = new Image();
         image.src = res.img;
         let name = pForShowingData(res,'businessName');
@@ -70,11 +74,14 @@ function showRestaurants(){
         }
         rating.innerHTML += res.rating;
 
-        div.appendChild(image);
-        div.appendChild(name);
+        a.appendChild(image);
+        a.appendChild(name);
+        div.appendChild(a)
         div.appendChild(price);
         div.appendChild(rating);
-
-        document.getElementById("main").appendChild(div);
+        
+        document.getElementById("main-list").appendChild(div);
     }
 }
+
+//filters

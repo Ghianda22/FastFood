@@ -132,6 +132,7 @@ if(localStorage.getItem("restaurateurs")==null){
                 this.therms = true;
                 this.rating = null;
                 this.orderNum = [];
+                this.averagePrice = 0;
                 this.menu = [];
                 this.img = "";
             }

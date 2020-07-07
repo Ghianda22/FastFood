@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <script type="text/javascript" src="../data\customers.json"></script>
+    <script type="text/javascript" src="../data\restaurateurs.json"></script>
+    <script type="text/javascript" src="../data\dishes.json"></script>
+    <script src="../scripts/restaurant.js"></script>
+    <script src="https://kit.fontawesome.com/62ec85265f.js" crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" href="../styles/style.css">
+    
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">       
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body onload="detectUser();loadPage();">
+    <header>
+        <!--LOGO-->
+        <img id="logo" src="../images/FastfoodLogo.png" alt="fastFood-logo-bluprofile" id="logo">
+        <!--PRIVATE AREA-->
+        <div id="userArea">
+            <p id="userArea-login">
+                <a href="login.html">Accedi</a> / <a href="newAccount.html">Registrati</a>
+            </p>
+            <div class="hidden" id="userArea-logged">
+
+                <p onclick="areYouSure()">Esci</p>
+                <div class="hidden" id="userArea-logged-logout">
+                    Sei sicuro di voler uscire?
+                    <button type="button" id="userArea-logged-logout-y" onclick="logout();">
+                        Si, devo andare
+                    </button>
+                    <button type="button" id="userArea-logged-logout-n" onclick="stay()">
+                        No, rimango ancora un po'
+                    </button>
+                </div>
+                <a id="userArea-logged-info" href="                  Area personale
+                    <i class="fas fa-user-circle"></i>
+                </a>
+            </div>
+                
+            
+        </div>
+        
+        <!--OPTION-->
+        
+        <!--customer-->
+        <a class="hidden" id="cartIcon" href="pages\cart.html">
+            Carrello
+            <i class="fas fa-shopping-cart"></i>
+        </a>
+        <!--restaurateur-->
+        <a class="hidden" id="menuIcon" href="pages\menuR.html">
+            Il tuo men&uacute;
+            <i class="fas fa-book-open"></i>
+        </a>
+    </header>
+    
+    <!--BANNER-->
+    <div id="banner">
+        foto ristorante
+        <div id="banner-data">
+            <h2 id="banner-data-name"></h2>
+            <p id="banner-data-rating"></p>
+        </div>
+    </div>
+
+    <nav id="navbar">
+        <ul id="navbar-el">
+            <li id="navbar-el-menu" onclick="toMenu()">
+                Men&uacute;
+            </li>
+            <ul id="navbar-el-filter">
+
+            </ul>
+            <li id="navbar-el-info" onclick="toInfo()">
+                Informazioni
+            </li>
+        </ul>
+    </nav>
+
+    <main id="main">
+        <div id="allMenu">
+            <ul id="allMenu-list"></ul>
+        </div>
+        <div id="info">
+            <div id="info-business">
+                <p id="info-business-name"></p>
+                <p id="info-business-phone"></p>
+                <p id="info-business-email"></p>
+            </div>
+            <div id="info-address">
+                <p id="info-address-line0"></p>
+                <p id="info-address-line1"></p>
+                <p id="info-address-line2"></p>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

@@ -48,6 +48,7 @@ function updateAveragePrice(){
     return p;
     }
 
+
     //show
     function showMenu(){
         resetShowDishes();
@@ -58,8 +59,6 @@ function updateAveragePrice(){
                 if(el == dish.id){
                     let li = document.createElement("li");
                     li.id = "yourMenu-list-" + dish.id;
-                    let a = document.createElement("a");
-                    a.href = ""
                     let img = document.createElement("img");
                     img.src = dish.img;
 

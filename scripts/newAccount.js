@@ -37,7 +37,7 @@ if(localStorage.getItem("restaurateurs")==null){
                 this.therms = true;
                 this.privacy = true;
                 this.ads = ads;
-                this.orderNum = [];
+                this.orders = [];
             }
         }
         
@@ -98,10 +98,8 @@ if(localStorage.getItem("restaurateurs")==null){
         function checksC(){
             if(pswCheckC()==true && noDoubleC()==true){
                 accountCreationC();
-                document.getElementById("newAcc-c-form").action = "../index.html";
+                document.getElementById("newAcc-c-form").action = sessionStorage.getItem("prev");
                 alert("Registrazione avvenuta con successo!");
-            }else{
-                console.log("Si sono verificati degli errori");
             }
         }
 
@@ -131,7 +129,7 @@ if(localStorage.getItem("restaurateurs")==null){
                 this.payment = payment;
                 this.therms = true;
                 this.rating = null;
-                this.orderNum = [];
+                this.orders = [];
                 this.averagePrice = 0;
                 this.menu = [];
                 this.img = "";
@@ -190,10 +188,8 @@ if(localStorage.getItem("restaurateurs")==null){
         function checksR(){
             if(pswCheckR()==true && noDoubleR()==true){
                 accountCreationR();
-                document.getElementById("newAcc-r-form").action = "../index.html";
+                document.getElementById("newAcc-r-form").action = sessionStorage.getItem("prev");
                 alert("Registrazione avvenuta con successo!");
-            }else{
-                console.log("Si sono verificati degli errori");
             }
         }
 

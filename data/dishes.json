@@ -3,7 +3,7 @@ let dishes = [
         "id":1,
         "name":"Margherita",
         "price": 4.50,
-        "img": "../images/dishes/margherita.jpg",
+        "img": "../images/dishes/pizze/margherita.jpg",
         "ingredients":["pomodoro","mozzarella"],
         "cuisine":"italiana",
         "category":"pizza",
@@ -13,7 +13,7 @@ let dishes = [
         "id":2,
         "name":"Cotto",
         "price": 6.50,
-        "img": "../images/dishes/cotto.jpg",
+        "img": "../images/dishes/pizze/cotto.jpg",
         "ingredients":["pomodoro","mozzarella","prosciutto cotto"],
         "cuisine":"italiana",
         "category":"pizza",
@@ -21,12 +21,252 @@ let dishes = [
     },
     {
         "id":3,
-        "name":"McChicken",
-        "price": 4.30,
-        "img": "../images/dishes/mcchicken.jpg",
-        "ingredients":["pane al sesamo","cotoletta","insalata iceberg","maionese"],
-        "cuisine":"McDonald's",
-        "category":"panino",
+        "name":"Marinara",
+        "price": 4.00,
+        "img": "../images/dishes/pizze/marinara.jpg",
+        "ingredients":["pomodoro","aglio","olio","origano"],
+        "cuisine":"italiana",
+        "category":"pizza",
         "owner":"public"
-    }
+    },
+    {
+        "id":4,
+        "name":"Napoli",
+        "price": 6.00,
+        "img": "../images/dishes/pizze/napoli.jpg",
+        "ingredients":["pomodoro","mozzarella","acciughe"],
+        "cuisine":"italiana",
+        "category":"pizza",
+        "owner":"public"
+    },
+    {
+        "id":5,
+        "name":"Capricciosa",
+        "price": 8.00,
+        "img": "../images/dishes/pizze/capricciosa.jpg",
+        "ingredients":["pomodoro","mozzarella","prosciutto cotto","funghi","carciofi","olive"],
+        "cuisine":"italiana",
+        "category":"pizza",
+        "owner":"public"
+    },
+    {
+        "id":6,
+        "name":"Americana",
+        "price": 8.50,
+        "img": "../images/dishes/pizze/americana.jpg",
+        "ingredients":["pomodoro","mozzarella","wurstel","patatine"],
+        "cuisine":"italiana",
+        "category":"pizza",
+        "owner":"public"
+    },
+    {
+        "id":7,
+        "name":"Mari e monti",
+        "price": 9.50,
+        "img": "../images/dishes/pizze/mariemonti.jpg",
+        "ingredients":["pomodoro","mozzarella","funghi porcini","frutti di mare"],
+        "cuisine":"italiana",
+        "category":"pizza",
+        "owner":"public"
+    },
+    {
+        "id":8,
+        "name":"Salamino piccante",
+        "price": 7.00,
+        "img": "../images/dishes/pizze/salame.jpg",
+        "ingredients":["pomodoro","mozzarella","salame piccante"],
+        "cuisine":"italiana",
+        "category":"pizza",
+        "owner":"public"
+    },
+    {
+        "id":9,
+        "name":"Vegetariana",
+        "price": 8.00,
+        "img": "../images/dishes/pizze/veggie.jpg",
+        "ingredients":["pomodorini","mozzarella","zucchine","melanzane","peperoni"],
+        "cuisine":"italiana",
+        "category":"pizza",
+        "owner":"public"
+    },
+    {
+        "id":10,
+        "name":"Patatine",
+        "price": 7.50,
+        "img": "../images/dishes/pizze/patatine.jpg",
+        "ingredients":["pomodoro","mozzarella","patatine"],
+        "cuisine":"italiana",
+        "category":"pizza",
+        "owner":"public"
+    },
+    {
+        "id":11,
+        "name":"Kebab classico",
+        "price": 3.50,
+        "img": "../images/dishes/kebab/manzo.jpg",
+        "ingredients":["piadina","carne di manzo","harissa","salsa tzatziki","verdure miste","cipolla"],
+        "cuisine":"turca",
+        "category":"kebab",
+        "owner":"public"
+    },
+    {
+        "id":12,
+        "name":"Kebab pollo",
+        "price": 3.00,
+        "img": "../images/dishes/kebab/pollo.jpg",
+        "ingredients":["piadina","carne di pollo","harissa","salsa tzatziki","verdure miste","cipolla"],
+        "cuisine":"turca",
+        "category":"kebab",
+        "owner":"public"
+    },
+    {
+        "id":13,
+        "name":"Umi (carpaccio di salmone)",
+        "price": 8.00,
+        "img": "../images/dishes/sushi/carpaccio.jpg",
+        "ingredients":["salmone","mango","yogurt"],
+        "cuisine":"giapponese",
+        "category":"sushi",
+        "owner":"public"
+    },
+    {
+        "id":14,
+        "name":"Sake tartare",
+        "price": 10.00,
+        "img": "../images/dishes/sushi/tartare.jpg",
+        "ingredients":["salmone","avocado","yogurt"],
+        "cuisine":"giapponese",
+        "category":"sushi",
+        "owner":"public"
+    },
+    {
+        "id":15,
+        "name":"Shao mai (ravioli) 4 pz",
+        "price": 5.00,
+        "img": "../images/dishes/cinese/shaomai.jpg",
+        "ingredients":["carne di maiale","gamberi"],
+        "cuisine":"cinese",
+        "category":"primi",
+        "owner":"public"
+    },
+    {
+        "id":16,
+        "name":"Poke",
+        "price": 3.50,
+        "img": "../images/dishes/sushi/poke.jpg",
+        "ingredients":["riso","edamame","salmone","avocado","pomodorini"],
+        "cuisine":"giapponese",
+        "category":"primi",
+        "owner":"public"
+    },
+    {
+        "id":17,
+        "name":"Harumaki (involtini) 2 pz",
+        "price": 8.00,
+        "img": "../images/dishes/antipasti/harumaki.jpg",
+        "ingredients":["pasta sfoglia","gamberi","carne di maiale"],
+        "cuisine":"cinese",
+        "category":"antipasti",
+        "owner":"public"
+    },
+    {
+        "id":18,
+        "name":"Chele di granchio 2 pz",
+        "price": 5.00,
+        "img": "../images/dishes/antipasti/chele.jpg",
+        "ingredients":["granchio", "panatura"],
+        "cuisine":"cinese",
+        "category":"antipasti",
+        "owner":"public"
+    },
+    {   
+        "id":19,
+        "name":"Patatine",
+        "price": 3.50,
+        "img": "../images/dishes/antipasti/patatine.jpg",
+        "ingredients":["patate","sale"],
+        "cuisine":"italiana",
+        "category":"antipasti",
+        "owner":"public"
+    },
+    {
+        "id":20,
+        "name":"Olive all'ascolana 4 pz",
+        "price": 4.00,
+        "img": "../images/dishes/antipasti/olive.jpg",
+        "ingredients":["olive","carne di manzo","carne di pollo","carne di maiale","uova","panatura"],
+        "cuisine":"italiana",
+        "category":"antipasti",
+        "owner":"public"
+    },
+    {
+        "id":21,
+        "name":"Edamame",
+        "price": 4.00,
+        "img": "../images/dishes/antipasti/edamame.jpg",
+        "ingredients":["soia"],
+        "cuisine":"cinese",
+        "category":"antipasti",
+        "owner":"public"
+    },
+    {
+        "id":22,
+        "name":"Sashimi sake 5 pz",
+        "price": 6.00,
+        "img": "../images/dishes/sushi/sashimi.jpg",
+        "ingredients":["salmone"],
+        "cuisine":"giapponese",
+        "category":"sushi",
+        "owner":"public"
+    },
+    {
+        "id":23,
+        "name":"Hosomaki sake 6 pz",
+        "price": 5.00,
+        "img": "../images/dishes/sushi/hosomaki.jpg",
+        "ingredients":["salmone","riso","alga nori"],
+        "cuisine":"giapponese",
+        "category":"sushi",
+        "owner":"public"
+    },
+    {
+        "id":24,
+        "name":"Nigiri sake 4 pz",
+        "price": 4.00,
+        "img": "../images/dishes/sushi/nigiri.jpg",
+        "ingredients":["riso","salmone"],
+        "cuisine":"giapponese",
+        "category":"sushi",
+        "owner":"public"
+    },
+    {
+        "id":25,
+        "name":"Riso alla cantonese",
+        "price": 4.50,
+        "img": "../images/dishes/cinese/cantonese.jpg",
+        "ingredients":["riso","uova","prosciutto","piselli"],
+        "cuisine":"cinese",
+        "category":"primi",
+        "owner":"public"
+    },
+    {
+        "id":26,
+        "name":"Spaghetti di soia",
+        "price": 6.00,
+        "img": "../images/dishes/cinese/spaghetti.jpg",
+        "ingredients":["spaghetti di soia","gamberetti","germogli di soia","verdure miste"],
+        "cuisine":"cinese",
+        "category":"primi",
+        "owner":"public"
+    },
+    {
+        "id":27,
+        "name":"Kebab di manzo",
+        "price": 3.30,
+        "img": "../images/dishes/kebab/kebab.jpg",
+        "ingredients":["pane arabo","carne di manzo","harissa","salsa tzatziki","verdure miste"],
+        "cuisine":"turca",
+        "category":"kebab",
+        "owner":"public"
+    },
 ];

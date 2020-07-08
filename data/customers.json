@@ -18,7 +18,7 @@ let customers = [
         "therms":true,
         "privacy":true,
         "ads":false,
-        "orderNum":[]
+        "orders":[]
     },
     {
         "name":"Alessio",
@@ -47,7 +47,7 @@ let customers = [
         "therms":true,
         "privacy":true,
         "ads":false,
-        "orderNum":[]
+        "orders":[]
     },
     {
         "name":"Aurora",
@@ -68,6 +68,6 @@ let customers = [
         "therms":true,
         "privacy":true,
         "ads":false,
-        "orderNum":[]
+        "orders":[]
     }
 ];

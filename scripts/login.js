@@ -20,7 +20,7 @@ function login(){
                 if(sessionStorage.getItem("cart")==null){
                     sessionStorage.setItem("cart","[]");
                 }
-                document.getElementById("logPage-form").action = "../index.html";
+                document.getElementById("logPage-form").action = sessionStorage.getItem("prev");
                 break;
             }else{
                 alert("password sbagliata");
@@ -34,7 +34,7 @@ function login(){
             if(psw == r.psw){
                 sessionStorage.setItem("logged",JSON.stringify(r));
                 //caricare qui gli ordini in corso/passati)
-                document.getElementById("logPage-form").action = "../index.html";
+                document.getElementById("logPage-form").action = sessionStorage.getItem("prev");
                 break;
             }else{
                 alert("password sbagliata");

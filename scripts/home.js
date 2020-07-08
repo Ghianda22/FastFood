@@ -8,6 +8,7 @@ if(localStorage.getItem("dishes")==null){
     localStorage.setItem("dishes", JSON.stringify(dishes));
 }
 let rList = JSON.parse(localStorage.getItem("restaurateurs"));
+window.onbeforeunload = sessionStorage.setItem("prev", document.URL);
 
 function detectUser(){
     if(sessionStorage.getItem("logged") != null){
@@ -34,7 +35,8 @@ function areYouSure(){
     document.getElementById("userArea-logged-logout").style.display = "block";
 }
 function logout(){
-    sessionStorage.clear();
+    sessionStorage.removeItem("logged");
+    sessionStorage.removeItem("cart");
     location.reload();
 }
 function stay(){
@@ -53,13 +55,15 @@ function showRestaurants(){
         div.id = "main-list-" + res.email;
         let a = document.createElement("a");
         a.id ="main-list-" + res.email + "link";
-        a.onclick = sessionStorage.setItem("res", JSON.stringify(res));
+        a.setAttribute("onclick",'sessionStorage.setItem("res", JSON.stringify(res))');
         a.onclick = a.setAttribute("href","pages/restaurant.html");
         
         let image = new Image();
         image.src = res.img;
         let name = pForShowingData(res,'businessName');
         let price = pForShowingData(res, 'averagePrice');
+        price.innerHTML += " €";
+
         let rating = document.createElement("p");
         
         for(let i = res.rating; i > 0; i--){

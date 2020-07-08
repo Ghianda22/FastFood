@@ -8,7 +8,7 @@ class Restaurateur{
         this.payment = payment;
         this.therms = therms;
         this.rating = null;
-        this.orderNum = [];
+        this.orders = [];
         this.img = "";
     }
 }
@@ -24,7 +24,7 @@ class Customer{
         this.therms = true;
         this.privacy = true;
         this.ad = ad;
-        this.orderNum = [];
+        this.orders = [];
     }
 
     defaultAddress(addressIndex) {

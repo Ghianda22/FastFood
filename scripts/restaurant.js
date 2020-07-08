@@ -8,6 +8,8 @@ if(localStorage.getItem("restaurateurs")==null){
 if(localStorage.getItem("dishes")==null){
     localStorage.setItem("dishes", JSON.stringify(dishes));
 }
+window.onbeforeunload = sessionStorage.setItem("prev", document.URL);
+
 function detectUser(){
     if(sessionStorage.getItem("logged") != null){
         let user = JSON.parse(sessionStorage.getItem("logged"));
@@ -32,7 +34,8 @@ function areYouSure(){
     document.getElementById("userArea-logged-logout").style.display = "block";
 }
 function logout(){
-    sessionStorage.clear();
+    sessionStorage.removeItem("logged");
+    sessionStorage.removeItem("cart");
     location.reload();
 }
 function stay(){
@@ -63,11 +66,8 @@ function loadPage(){
 /* -- SHOW -- */
 {
     //create dishes
-    function pForShowingData(dish, data, dataName){
+    function pForShowingData(dish, data){
         let p = document.createElement("p");
-        let span = document.createElement("span");
-        span.innerHTML = dataName + ": ";
-        p.appendChild(span);
         if(typeof(dish[data]) == "object"){
             let list = "";
             for (let elem of dish[data]) {
@@ -92,9 +92,10 @@ function loadPage(){
         let img = document.createElement("img");
         img.src = dish.img;
         
-        let pName = pForShowingData(dish, 'name', 'Nome');
-        let pPrice = pForShowingData(dish, 'price', 'Prezzo');
-        let pIngredients = pForShowingData(dish, 'ingredients', 'Ingredienti');
+        let pName = pForShowingData(dish, 'name');
+        let pPrice = pForShowingData(dish, 'price');
+        pPrice.innerHTML += " €";
+        let pIngredients = pForShowingData(dish, 'ingredients');
         
         let div = document.createElement("div");
         div.id = id + "-" + dish.id + "-data";
@@ -210,8 +211,15 @@ function loadPage(){
             alert("Devi essere loggato per poter aggiungere elementi al carrello");
         }else{
             let cart = JSON.parse(sessionStorage.getItem("cart"));
-            cart.push(dishId);
-            sessionStorage.setItem("cart", JSON.stringify(cart));
+            if(cart[0] == null || cart[0] == res.email){
+                cart[0] = res.email;
+                cart.push(dishId);
+                sessionStorage.setItem("cart", JSON.stringify(cart));
+                alert("L'elemento è stato aggiunto al carrello");
+            }else{
+                alert("Puoi ordinare da un solo ristorante per volta.\nCompleta l'ordine o svuota il carrello per acquistare da questo ristorante");
+            }
+            
         }
     }
 }

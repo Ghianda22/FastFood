@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <script type="text/javascript" src="../data\customers.json"></script>
-    <script type="text/javascript" src="../data\restaurateurs.json"></script>
-    <script type="text/javascript" src="../data\dishes.json"></script>
+    <script type="text/javascript" src="../data/customers.json"></script>
+    <script type="text/javascript" src="../data/restaurateurs.json"></script>
+    <script type="text/javascript" src="../data/dishes.json"></script>
     <script src="../scripts/restaurant.js"></script>
     <script src="https://kit.fontawesome.com/62ec85265f.js" crossorigin="anonymous"></script>
     
@@ -15,10 +15,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body onload="detectUser();loadPage();">
+<body onload="loadPage(); detectUser()">
     <header>
         <!--LOGO-->
-        <img id="logo" src="../images/FastfoodLogo.png" alt="fastFood-logo-bluprofile" id="logo">
+        <a href="../index.html">
+            <img id="logo" src="../images/FastfoodLogo.png" alt="fastFood-logo-bluprofile" id="logo">
+         </a>
         <!--PRIVATE AREA-->
         <div id="userArea">
             <p id="userArea-login">
@@ -36,7 +38,8 @@
                         No, rimango ancora un po'
                     </button>
                 </div>
-                <a id="userArea-logged-info" href="                  Area personale
+                <a id="userArea-logged-pArea" href="">
+                    Area personale
                     <i class="fas fa-user-circle"></i>
                 </a>
             </div>
@@ -47,12 +50,12 @@
         <!--OPTION-->
         
         <!--customer-->
-        <a class="hidden" id="cartIcon" href="pages\cart.html">
+        <a class="hidden" id="cartIcon" href="cart.html">
             Carrello
             <i class="fas fa-shopping-cart"></i>
         </a>
         <!--restaurateur-->
-        <a class="hidden" id="menuIcon" href="pages\menuR.html">
+        <a class="hidden" id="menuIcon" href="menuR.html">
             Il tuo men&uacute;
             <i class="fas fa-book-open"></i>
         </a>
@@ -85,7 +88,7 @@
         <div id="allMenu">
             <ul id="allMenu-list"></ul>
         </div>
-        <div id="info">
+        <div id="info" class="hidden">
             <div id="info-business">
                 <p id="info-business-name"></p>
                 <p id="info-business-phone"></p>
@@ -98,5 +101,10 @@
             </div>
         </div>
     </main>
+    <footer>
+        <p>Created by <br> Valentina Lor&eacute;</p>
+    </footer>
+
+
 </body>
 </html>

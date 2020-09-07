@@ -8,6 +8,7 @@ if(localStorage.getItem("restaurateurs")==null){
 
 function login(){
     let type;
+    let prev = sessionStorage.getItem("prev");
     let email = document.getElementById("logPage-form-email").value;
     let psw = document.getElementById("logPage-form-psw").value;
     let cArray = JSON.parse(localStorage.getItem("customers"));
@@ -20,7 +21,11 @@ function login(){
                 if(sessionStorage.getItem("cart")==null){
                     sessionStorage.setItem("cart","[]");
                 }
-                document.getElementById("logPage-form").action = sessionStorage.getItem("prev");
+                if(prev != null){
+                    document.getElementById("logPage-form").action = prev;
+                }else{
+                    document.getElementById("logPage-form").action = '../index.html';
+                }
                 break;
             }else{
                 alert("password sbagliata");
@@ -34,7 +39,11 @@ function login(){
             if(psw == r.psw){
                 sessionStorage.setItem("logged",JSON.stringify(r));
                 //caricare qui gli ordini in corso/passati)
-                document.getElementById("logPage-form").action = sessionStorage.getItem("prev");
+                if(prev != null){
+                    document.getElementById("logPage-form").action = prev;
+                }else{
+                    document.getElementById("logPage-form").action = '../index.html';
+                }
                 break;
             }else{
                 alert("password sbagliata");

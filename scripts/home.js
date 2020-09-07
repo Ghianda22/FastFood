@@ -43,6 +43,10 @@ function stay(){
     document.getElementById("userArea-logged-logout").style.display = "none";
 }
 
+function resPage(res, tagId){
+    sessionStorage.setItem("res", JSON.stringify(res));
+    document.getElementById(tagId).href = "pages/restaurant.html";
+}
 
 function pForShowingData(obj, data){
     let p = document.createElement("p");
@@ -55,8 +59,7 @@ function showRestaurants(){
         div.id = "main-list-" + res.email;
         let a = document.createElement("a");
         a.id ="main-list-" + res.email + "link";
-        a.setAttribute("onclick",'sessionStorage.setItem("res", JSON.stringify(res))');
-        a.onclick = a.setAttribute("href","pages/restaurant.html");
+        a.setAttribute("onclick", "resPage('" + res.email + "', '" + a.id + "')");
         
         let image = new Image();
         image.src = res.img;

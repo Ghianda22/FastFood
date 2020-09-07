@@ -44,7 +44,16 @@ function stay(){
 
 
 /* -- INITIALIZATION -- */
-let res = JSON.parse(sessionStorage.getItem("res"));
+let resEmail = JSON.parse(sessionStorage.getItem("res"));
+let rList = JSON.parse(localStorage.getItem("restaurateurs"));
+let correspR;
+let res = {};
+for(let j = 0; j < rList.length; j++) {
+    if(rList[j].email == resEmail){
+        correspR = j;
+        res = rList[j];
+    }
+}
 let menu = [];
 for(let el of res.menu) {
     for (let dish of dishes){

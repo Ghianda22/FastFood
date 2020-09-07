@@ -24,3 +24,15 @@ p{
 div{
     margin: 20px auto;
 }
+
+
+/* Ale CSS */
+.navbar-nav > li > a {padding-top:5px !important; padding-bottom:5px !important;}
+.navbar {max-height:50px !important}
+nav{ background-color: #FED66D;}
+.nav{border: 0cm;}
+/* MOBILE */
+
+/* TABLET */
+
+/* DESKTOP */

@@ -1,4 +1,5 @@
 /* -- DATA e USER -- */
+//check&recharge data
 if(localStorage.getItem("customers")==null){
     localStorage.setItem("customers",JSON.stringify(customers));
 }
@@ -8,6 +9,7 @@ if(localStorage.getItem("restaurateurs")==null){
 if(localStorage.getItem("dishes")==null){
     localStorage.setItem("dishes", JSON.stringify(dishes));
 }
+//logout options
 function areYouSure(){
     document.getElementById("userArea-logged-logout").style.display = "block";
 }
@@ -19,6 +21,7 @@ function logout(){
 function stay(){
     document.getElementById("userArea-logged-logout").style.display = "none";
 }
+//find&update user
 let user = JSON.parse(sessionStorage.getItem("logged"));
 let users = JSON.parse(localStorage.getItem("customers"));
 let correspC;
@@ -33,6 +36,7 @@ function updateUserC(){
     localStorage.setItem("customers",JSON.stringify(users));
 }
 
+//identify res  
 let cart = JSON.parse(sessionStorage.getItem("cart"));
 let rList = JSON.parse(localStorage.getItem("restaurateurs"));
 let correspR;
@@ -48,7 +52,6 @@ function updateUserR(){
     localStorage.setItem("restaurateurs",JSON.stringify(rList));
 }
 
-
 let order = [];
 cart.shift();
 for(let el of cart) {
@@ -59,10 +62,27 @@ for(let el of cart) {
     }
 }
 
+function updateCart(){
+    cart = [];
+    for (let item of order){
+        cart.push(item.id);
+    }
+    if(order.length != 0){
+        cart.unshift(res.email);
+    }
+    sessionStorage.setItem("cart", JSON.stringify(cart));
+    console.log(cart);
+}
+
 function loadPage(){
-    showOrder();
-    showPayment();
-    totOrder();
+    if(cart.length == 0){
+        document.getElementById("fullCart").style.display = "none";
+        document.getElementById("emptyCart").style.display = "block";
+    }else{
+        showOrder();
+        showPayment();
+        totOrder();
+    }
 }
 
 /* -- SHOW -- */
@@ -178,26 +198,57 @@ function loadPage(){
         let c = document.getElementById(id + "-quantity-counter").innerHTML;
         c++;
         document.getElementById(id + "-quantity-counter").innerHTML = c;
+        let dishId = id.slice(21);
+        for(let dish of dishes){
+            if(dishId == dish.id){
+                order.push(dish);
+            }
+        }
+        totOrder();
+        updateCart();
     }   
     function dishRemove(id){
         let c = document.getElementById(id + "-quantity-counter").innerHTML;
         if(c > 1){
             c--;
-        }
-        document.getElementById(id + "-quantity-counter").innerHTML = c;
-    }
-    function removeFromCart(id){
-        document.getElementById(id).remove();
-        let dishId = id.substring(id.lastIndexOf("-")+1,id.length);
-        for(let i = 0; i < order.length; i++){
-            if(order[i].id == dishId){
-                let temp = order[0];
-                order[0] = order[i];
-                order[i] = temp;
-                order.shift();
+            let dishId = id.slice(21);
+            for(let i = 0; i < order.length; i++){
+                if(order[i].id == dishId){
+                    let temp = order[0];
+                    order[0] = order[i];
+                    order[i] = temp;
+                    order.shift();
+                    break;
+                }
             }
         }
+        document.getElementById(id + "-quantity-counter").innerHTML = c;
         totOrder();
+        updateCart();
+        loadPage();
+    }
+
+    
+
+    function removeFromCart(id){
+        let dishId = id.slice(21);
+        function cleanOrder(id){
+            for(let i = 0; i < order.length; i++){
+                if(order[i].id == id){
+                    delete order[i];
+                    let temp = order[0];
+                    order[0] = order[i];
+                    order[i] = temp;
+                    order.shift();
+                    cleanOrder(id);
+                }
+            }
+        }
+        cleanOrder(dishId);
+        document.getElementById(id).remove();
+        totOrder();
+        updateCart();
+        showOrder();
     }
     /*function emptyCart(){
         let items = document.getElementById("orderView-items-list").children;
@@ -209,7 +260,6 @@ function loadPage(){
 
     function orderOk(){
         let orderContent = [];
-        let time = 0;
         let orderItems = document.getElementById("orderView-items-list").children;
         for (const item of orderItems) {
             let id = (item.id).substring((item.id).lastIndexOf("-")+1,(item.id).length);
@@ -217,14 +267,8 @@ function loadPage(){
             let price = document.getElementById("orderView-items-list-" + id + "-data-price").innerHTML;
             price = price.substring(0,price.length-1);
             let dish = {dishId:id, quantity:num, price: price};
-            time += num * 5;
             orderContent.push(dish);
         }
-        let tot = 0;
-        for (const d of order) {
-            tot += d.price;
-        }
-        let finalOrder = {dishes: orderContent, tot: tot, time: time, state: "In progress"};
 
         (res.orders).push(finalOrder);
         (user.orders).push(finalOrder);
@@ -233,4 +277,4 @@ function loadPage(){
         alert("Il tuo ordine è stato inviato, lo puoi trovare nella sezione 'Ordini' dell'area personale.\nVerrai reindirizzato alla home");
         document.getElementById("orderView-payment-mode-form").action = "../index.html";
     }
-}
+} 

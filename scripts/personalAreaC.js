@@ -52,6 +52,14 @@ class Address{
         }
 }
 
+/* -- ORDERS -- */
+{
+    function showOrders(){
+        showData('orders');
+        
+    }
+}
+
 
 /* -- PERSONAL DATA -- */
 {

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.1.0/uuidv4.min.js"></script>
     <script type="text/javascript" src="../data/customers.json"></script>
     <script type="text/javascript" src="../data/restaurateurs.json"></script>
     <script type="text/javascript" src="../data/dishes.json"></script>
@@ -20,7 +21,9 @@
 <body onload="loadPage();">
     <header>
         <!--LOGO-->
-        <img id="logo" src="../images/FastfoodLogo.png" alt="fastFood-logo-bluprofile" id="logo">
+        <a href="../index.html">
+            <img id="logo" src="../images/FastfoodLogo.png" alt="fastFood-logo-bluprofile" id="logo">
+        </a>
         <!--PRIVATE AREA-->
         <div id="userArea">
             <div id="userArea-logged">
@@ -49,11 +52,12 @@
     </header>
 
     <main id="orderView">
-        <div id="orderView-resName"></div>
-        <div id="orderView-items">
+        <div id="fullCart">
+            <div id="orderView-resName"></div>
+            <div id="orderView-items">
             <ul id="orderView-items-list"></ul>
-        </div>
-        <div id="orderView-payment">
+            </div>
+            <div id="orderView-payment">
             <div id="orderView-payment-tot"></div>
             <span>Metodo di pagamento:</span>
             <p id="orderView-payment-mode-default"></p>
@@ -75,20 +79,26 @@
                     <label for="orderView-payment-mode-3-r">Contanti</label>
                 </p>
             </form>
-        </div>
-        <div id="orderView-confirm">
+            </div>
+            <div id="orderView-confirm">
             <!--<button onclick="emptyCart()">
                 Svuota carrello
             </button>-->
             <button form="orderView-payment-mode-form" type="submit">
                 Ordina!
             </button>
+            </div>
         </div>
+        <div id="emptyCart" class="hidden">
+            Il tuo carrello è vuoto! <br>
+            Scegli un <a href="../index.html">ristorante</a> da cui ordinare
+        </div>
+        
     </main>
 
     <footer>
         <p>Created by <br> Valentina Lor&eacute;</p>
-    </footer>
+    </footer> 
 
 
 </body>

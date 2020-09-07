@@ -72,3 +72,15 @@ class Dish{
         this.owner = owner;
     }
 }
+
+class Order{
+    constructor(resEmail, dishIds, cost, address){
+        this.id = uuidv4();
+        this.res = resEmail;
+        this.dishIds = dishIds;
+        this.cost = cost;
+        this.prepTime = 5 * dishIds.length();
+        this.address = address;
+        this.state = "In attesa";
+    }
+}

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="data/customers.json"></script>
+    <script type="text/javascript" src="data/restaurateurs.json"></script>
+    <script type="text/javascript" src="data/dishes.json"></script>
+    <script src="scripts/home.js"></script>
+    <script src="https://kit.fontawesome.com/62ec85265f.js" crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" href="styles/style.css">
+    
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">       
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Home - FastFood</title>
+</head>
+<body onload="detectUser();showRestaurants();">
+    <div class="container">
+        <!--LOGO-->
+        <div class = "row">
+            <a href="index.html">
+                <img id="logo" src="images/FastfoodLogo.png" alt="fastFood-logo-bluprofile" id="logo" class="img-fluid mx-auto d-block">
+            </a>
+       </div>
+
+        <!-- Row menu-->
+
+        <nav class="navbar navbar-expand-lg navbar-light rounded">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+              <ul class="navbar-nav">
+                <li class="nav-item active">
+                  <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Ordina
+                  </a>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Più popolare</a>
+                    <a class="dropdown-item" href="#">Più economico</a>
+                    <a class="dropdown-item" href="#">A-Z</a>
+                    <a class="dropdown-item" href="#">Z-A</a>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Filtra
+                    </a>
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" href="#">Italiano</a>
+                      <a class="dropdown-item" href="#">Giapponese</a>
+                      <a class="dropdown-item" href="#">Cinese</a>
+                      <a class="dropdown-item" href="#">Greco</a>
+                      </div>
+                  </li>
+              </ul>
+            </div>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Cerca" aria-label="Search">
+                <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Cerca</button>
+              </form>
+          </nav>
+    
+            <!-- Menù Login DX-->
+            <div class="col ">
+                <ul class = "nav nav-tabs .justify-content-end">
+                    <div id="userArea" class="nav-item .justify-content-end">
+                        <ul id="userArea-login" class="nav nav-tabs .justify-content-end">
+                            <li class="nav-item">
+                                <a href="pages/login.html" class="nav-link">Accedi</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="pages/newAccount.html" class="nav-link">Registrati</a>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="hidden " id="userArea-logged">
+                        <p onclick="areYouSure()">Esci</p>
+                        <div class="hidden" id="userArea-logged-logout">Sei sicuro di voler uscire?
+                            <button type="button" id="userArea-logged-logout-y" onclick="logout();">
+                                Si, devo andare
+                            </button>
+                            <button type="button" id="userArea-logged-logout-n" onclick="stay()">
+                                No, rimango ancora un po'
+                            </button>
+                        </div>
+                        <li class="nav-item">
+                            <a id="userArea-logged-pArea" href="#" class="nav-link">Area personale<i class="fas fa-user-circle"></i></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="hidden nav-link" id="cartIcon" href="pages/cart.html">Carrello<i class="fas fa-shopping-cart"></i></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="hidden nav-link"  id="menuIcon" href="pages/menuR.html">Il tuo men&uacute;<i class="fas fa-book-open"></i></a>
+                        </li>
+                    </div>
+                </ul>
+            </div>
+
+        
+
+
+    <!--SLIDE SHOW-->
+    <div id="banner">
+        
+    </div>
+
+
+
+    <main id="main" class="row">  
+        <ul id="main-list" class = "nav nav-tabs justify-content-center ">
+
+        </ul>
+    </main>
+
+    <div class="row justify-content-center">
+    <footer>
+        <p>Created by Valentina Lor&eacute;</p>
+    </footer>
+</div>
+</div>
+</div>
+</body>
+</html>

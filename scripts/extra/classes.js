@@ -74,7 +74,7 @@ class Dish{
 }
 
 class Order{
-    constructor(resEmail, dishIds, cost, address){
+    constructor(resEmail, dishIds, cost, address, payment){
         this.id = uuidv4();
         this.res = resEmail;
         this.dishIds = dishIds;
@@ -82,5 +82,6 @@ class Order{
         this.prepTime = 5 * dishIds.length();
         this.address = address;
         this.state = "In attesa";
+        this.payment = payment;
     }
 }

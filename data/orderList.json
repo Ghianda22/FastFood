@@ -1,0 +1,20 @@
+let orderList = [
+    {
+        "id":1,
+        "res":"info@aldopizzeria.it",
+        "dishIds":[1, 2, 3],
+        "cost":50,
+        "prepTime":15,
+        "address":{"owner":"Ristorante Pizzeria da Aldo",
+            "street":"Piazza del Popolo",
+            "civN":"26",
+            "zip":"28041",
+            "city":"Arona",
+            "province":"NO",
+            "default":true,
+            "other":false},
+        "state":"completed",
+        "payment":"paypal",
+    }
+];
+

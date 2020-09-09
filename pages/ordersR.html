@@ -1,0 +1,75 @@
+<html lang="en">
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.1.0/uuidv4.min.js"></script>
+    <script type="text/javascript" src="../data/customers.json"></script>
+    <script type="text/javascript" src="../data/restaurateurs.json"></script>
+    <script type="text/javascript" src="../data/dishes.json"></script>
+    <script src="../scripts/cart.js"></script>
+    <script src="https://kit.fontawesome.com/62ec85265f.js" crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" href="../styles/style.css">
+    
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">       
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ordini - Fastfood</title>
+</head>
+<body>
+    <header>
+        <!--LOGO-->
+        <a href="../index.html">
+            <img id="logo" src="../images/FastfoodLogo.png" alt="fastFood-logo-bluprofile" id="logo">
+        </a>
+        <!--PRIVATE AREA-->
+        <div id="userArea">
+            <div id="userArea-logged">
+                <p onclick="areYouSure()">Esci</p>
+                <div class="hidden" id="userArea-logged-logout">
+                    Sei sicuro di voler uscire?
+                    <button type="button" id="userArea-logged-logout-y" onclick="logout();">
+                        Si, devo andare
+                    </button>
+                    <button type="button" id="userArea-logged-logout-n" onclick="stay()">
+                        No, rimango ancora un po'
+                    </button>
+                </div>
+                <a id="userArea-logged-pArea" href="personalAreaC.html">
+                    Area personale
+                    <i class="fas fa-user-circle"></i>
+                </a>
+            </div>
+            <a class="hidden" id="cartIcon" href="cart.html">
+                Carrello
+                <i class="fas fa-shopping-cart"></i>
+            </a>
+        </div>
+
+    </header>
+    <nav>
+        <ul>
+            <li>
+                <a href="#">Ordina per:</a>
+                <div>
+                    <a href="#">Più recente</a>
+                    <a href="#">Meno recente</a>
+                </div>
+            </li>
+            <li>
+                <a href="#">Filtra</a>
+                <div>
+                    <a href="#">Da accettare</a>
+                    <a href="#">In preparazione</a>
+                    <a href="#">Pronti per il ritiro</a>
+                    <a href="#">Completati</a>
+                </div>
+               
+            </li>
+
+        </ul>
+    </nav>
+    
+</body>
+</html>

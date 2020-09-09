@@ -7,6 +7,9 @@ if(localStorage.getItem("restaurateurs")==null){
 if(localStorage.getItem("dishes")==null){
     localStorage.setItem("dishes", JSON.stringify(dishes));
 }
+if(localStorage.getItem("orderList")==null){
+    localStorage.setItem("orderList", JSON.stringify(orderList));
+}
 let rList = JSON.parse(localStorage.getItem("restaurateurs"));
 window.onbeforeunload = sessionStorage.setItem("prev", document.URL);
 

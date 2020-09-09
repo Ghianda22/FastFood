@@ -9,6 +9,9 @@ if(localStorage.getItem("restaurateurs")==null){
 if(localStorage.getItem("dishes")==null){
     localStorage.setItem("dishes", JSON.stringify(dishes));
 }
+if(localStorage.getItem("orderList")==null){
+    localStorage.setItem("orderList", JSON.stringify(orderList));
+}
 //logout options
 function areYouSure(){
     document.getElementById("userArea-logged-logout").style.display = "block";
@@ -71,11 +74,10 @@ function updateCart(){
         cart.unshift(res.email);
     }
     sessionStorage.setItem("cart", JSON.stringify(cart));
-    console.log(cart);
 }
 
 function loadPage(){
-    if(cart.length == 0){
+    if((JSON.parse(sessionStorage.getItem("cart"))).length == 0){
         document.getElementById("fullCart").style.display = "none";
         document.getElementById("emptyCart").style.display = "block";
     }else{
@@ -154,6 +156,11 @@ function loadPage(){
         li.appendChild(p);
         document.getElementById(id).appendChild(li);
     }
+    function resetShowOrder(){
+        while(document.getElementById("orderView-items-list").childElementCount != 0){
+            document.getElementById("orderView-items-list").firstChild.remove();
+        }
+    }
 
     function showOrder(){
         for (const item of order) {
@@ -193,7 +200,10 @@ function loadPage(){
         }
         document.getElementById("orderView-payment-tot").innerHTML = "Totale ordine: " + tot + " €";
     }
+}
 
+/* -- FUNCTIONS -- */
+{
     function dishAdd(id){
         let c = document.getElementById(id + "-quantity-counter").innerHTML;
         c++;
@@ -204,8 +214,9 @@ function loadPage(){
                 order.push(dish);
             }
         }
-        totOrder();
         updateCart();
+        resetShowOrder();
+        loadPage();
     }   
     function dishRemove(id){
         let c = document.getElementById(id + "-quantity-counter").innerHTML;
@@ -223,13 +234,10 @@ function loadPage(){
             }
         }
         document.getElementById(id + "-quantity-counter").innerHTML = c;
-        totOrder();
         updateCart();
+        resetShowOrder();
         loadPage();
     }
-
-    
-
     function removeFromCart(id){
         let dishId = id.slice(21);
         function cleanOrder(id){
@@ -246,9 +254,9 @@ function loadPage(){
         }
         cleanOrder(dishId);
         document.getElementById(id).remove();
-        totOrder();
         updateCart();
-        showOrder();
+        resetShowOrder()
+        loadPage();
     }
     /*function emptyCart(){
         let items = document.getElementById("orderView-items-list").children;
@@ -257,24 +265,44 @@ function loadPage(){
             removeFromCart(id);
         }
     }*/
-
-    function orderOk(){
-        let orderContent = [];
-        let orderItems = document.getElementById("orderView-items-list").children;
-        for (const item of orderItems) {
-            let id = (item.id).substring((item.id).lastIndexOf("-")+1,(item.id).length);
-            let num = document.getElementById("orderView-items-list-" + id + "-quantity-counter").innerHTML;
-            let price = document.getElementById("orderView-items-list-" + id + "-data-price").innerHTML;
-            price = price.substring(0,price.length-1);
-            let dish = {dishId:id, quantity:num, price: price};
-            orderContent.push(dish);
+    
+    //order confirmation
+    class Order{
+        constructor(resEmail, dishIds, cost, address){
+            this.id = uuidv4();
+            this.res = resEmail;
+            this.dishIds = dishIds;
+            this.cost = cost;
+            this.prepTime = 5 * dishIds.length;
+            this.address = address;
+            this.state = "In attesa";
         }
-
-        (res.orders).push(finalOrder);
-        (user.orders).push(finalOrder);
+    }
+    
+    function orderOk(){
+        let payment = ["Paypal", "Prepagata", "Carta di credito", "Contanti"];
+        console.log("Carrello: " + cart);
+        updateCart();
+        let tot = 0;
+        for (const d of order) {
+            tot += d.price;
+        }
+        for(let i = 0; i < 4; i++){
+            if(document.getElementById("orderView-payment-mode-" + i + "-r").checked){
+                payment = payment[i];
+            }
+        }
+        let finalOrder = new Order(cart[0], cart.slice(1), tot, user.address, payment);
+        (res.orders).push(finalOrder.id);
+        (user.orders).push(finalOrder.id);
         updateUserC();
         updateUserR();
-        alert("Il tuo ordine è stato inviato, lo puoi trovare nella sezione 'Ordini' dell'area personale.\nVerrai reindirizzato alla home");
-        document.getElementById("orderView-payment-mode-form").action = "../index.html";
+        let orderList = JSON.parse(localStorage.getItem("orderList"));
+        orderList.push(finalOrder);
+        localStorage.setItem("orderList",JSON.stringify(orderList));
+        console.log("Ordine: " + finalOrder);
+        console.log("Lista ordini: " + orderList);
+        alert("Il tuo ordine � stato effettuato correttamente\nPuoi monitorare lo stato dell'ordine nella sezione ordini");
     }
 } 
+

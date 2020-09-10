@@ -23,3 +23,4 @@ menu libro    <i class="fas fa-book-open"></i>
 menu foglio    <i class="fas fa-scroll"></i>
 imbuto/filtro    <i class="fas fa-filter"></i>
 ordinamento    <i class="fas fa-sort-amount-down"></i>
+euro <i class="fas fa-euro-sign"></i>

@@ -79,9 +79,11 @@ class Order{
         this.res = resEmail;
         this.dishIds = dishIds;
         this.cost = cost;
-        this.prepTime = 5 * dishIds.length();
+        this.prepTime = 3 * dishIds.length;
         this.address = address;
-        this.state = "In attesa";
+        this.status = "In attesa";
         this.payment = payment;
+        this.date = new Date();
+        this.rating = null;
     }
 }

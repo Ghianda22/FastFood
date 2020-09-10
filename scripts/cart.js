@@ -12,6 +12,7 @@ if(localStorage.getItem("dishes")==null){
 if(localStorage.getItem("orderList")==null){
     localStorage.setItem("orderList", JSON.stringify(orderList));
 }
+
 //logout options
 function areYouSure(){
     document.getElementById("userArea-logged-logout").style.display = "block";
@@ -24,7 +25,8 @@ function logout(){
 function stay(){
     document.getElementById("userArea-logged-logout").style.display = "none";
 }
-//find&update user
+
+//find&update user (c)
 let user = JSON.parse(sessionStorage.getItem("logged"));
 let users = JSON.parse(localStorage.getItem("customers"));
 let correspC;
@@ -34,13 +36,13 @@ for (let j = 0; j < users.length; j++) {
     }
 }
 function updateUserC(){
-    sessionStorage.setItem("logged",JSON.stringify(user));
-    users[correspC] = user;
-    localStorage.setItem("customers",JSON.stringify(users));
+        sessionStorage.setItem("logged",JSON.stringify(user));
+        users[correspC] = user;
+        localStorage.setItem("customers",JSON.stringify(users));
 }
 
-//identify res  
 let cart = JSON.parse(sessionStorage.getItem("cart"));
+//find&update user (r)
 let rList = JSON.parse(localStorage.getItem("restaurateurs"));
 let correspR;
 let res = {};
@@ -55,6 +57,8 @@ function updateUserR(){
     localStorage.setItem("restaurateurs",JSON.stringify(rList));
 }
 
+
+//order initialization
 let order = [];
 cart.shift();
 for(let el of cart) {
@@ -64,6 +68,7 @@ for(let el of cart) {
         }
     }
 }
+
 
 function updateCart(){
     cart = [];
@@ -258,24 +263,25 @@ function loadPage(){
         resetShowOrder()
         loadPage();
     }
-    /*function emptyCart(){
-        let items = document.getElementById("orderView-items-list").children;
-        for(let i of items) {
-            let id = i.id;
-            removeFromCart(id);
-        }
-    }*/
+    function emptyCart(){
+        order = [];
+        updateCart();
+        loadPage();
+    }
     
     //order confirmation
     class Order{
-        constructor(resEmail, dishIds, cost, address){
+        constructor(resEmail, dishIds, cost, address, payment){
             this.id = uuidv4();
             this.res = resEmail;
             this.dishIds = dishIds;
             this.cost = cost;
-            this.prepTime = 5 * dishIds.length;
+            this.prepTime = 3 * dishIds.length;
             this.address = address;
-            this.state = "In attesa";
+            this.status = "In attesa";
+            this.payment = payment;
+            this.date = new Date();
+            this.rating = null;
         }
     }
     
@@ -292,7 +298,8 @@ function loadPage(){
                 payment = payment[i];
             }
         }
-        let finalOrder = new Order(cart[0], cart.slice(1), tot, user.address, payment);
+        
+        let finalOrder = new Order(cart[0], cart.slice(1), tot, defAddress, payment);
         (res.orders).push(finalOrder.id);
         (user.orders).push(finalOrder.id);
         updateUserC();
@@ -302,7 +309,11 @@ function loadPage(){
         localStorage.setItem("orderList",JSON.stringify(orderList));
         console.log("Ordine: " + finalOrder);
         console.log("Lista ordini: " + orderList);
-        alert("Il tuo ordine è stato effettuato correttamente\nPuoi monitorare lo stato dell'ordine nella sezione ordini");
+        alert("Il tuo ordine è stato effettuato correttamente\nPuoi monitorare lo stato dell'ordine nella sezione 'I tuoi ordini' ");
+        document.getElementById("orderView-payment-mode-form").action = "ordersC.html";
     }
 } 
 
+/* NOTES:
+cart has only dishes ids, order has all dishes details
+*/

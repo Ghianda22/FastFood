@@ -1,20 +1,22 @@
 let orderList = [
     {
-        "id":1,
+        "id":"845172bc-5784-458f-81f5-043c3fc340bc",
         "res":"info@aldopizzeria.it",
-        "dishIds":[1, 2, 3],
-        "cost":50,
-        "prepTime":15,
-        "address":{"owner":"Ristorante Pizzeria da Aldo",
-            "street":"Piazza del Popolo",
-            "civN":"26",
-            "zip":"28041",
-            "city":"Arona",
-            "province":"NO",
+        "dishIds":[6,8],
+        "cost":15.5,
+        "prepTime":6,
+        "address":{"owner":"Alessio Franceschi",
+            "street":"Giorgio Ambrosoli",
+            "civN":"17",
+            "zip":"20822",
+            "city":"Seveso",
+            "province":"MB",
             "default":true,
             "other":false},
-        "state":"completed",
-        "payment":"paypal",
+        "status":"In attesa",
+        "payment":"Carta di credito",
+        "date":"2020-09-10T17:50:01.636Z",
+        "rating":null
     }
 ];
 

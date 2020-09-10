@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="it">
-<head>  
+<head>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.1.0/uuidv4.min.js"></script>
     <script type="text/javascript" src="../data/customers.json"></script>
     <script type="text/javascript" src="../data/restaurateurs.json"></script>
     <script type="text/javascript" src="../data/dishes.json"></script>
-    <script type="text/javascript" src="../scripts/ordersR.js"></script>
+    <script type="text/javascript" src="../data/orderList.json"></script>
+    <script type="text/javascript" src="../scripts/ordersC.js"></script>
     <script src="https://kit.fontawesome.com/62ec85265f.js" crossorigin="anonymous"></script>
     
     <link rel="stylesheet" href="../styles/style.css">
@@ -18,13 +19,16 @@
 
     <title>Ordini - Fastfood</title>
 </head>
-<body>
+<body onload="showOrders();">
     <header>
         <!--LOGO-->
-        <a href="../index.html">
-            <img id="logo" src="../images/FastfoodLogo.png" alt="fastFood-logo-bluprofile" id="logo">
-        </a>
-        <!--PRIVATE AREA-->
+        <div id="logo">
+            <a href="../index.html">
+                <img id="logo-img" src="../images/FastfoodLogo.png" alt="fastFood-logo-bluprofile" id="logo">
+            </a>
+        </div>
+        
+        <!--USER AREA-->
         <div id="userArea">
             <div id="userArea-logged">
                 <p onclick="areYouSure()">Esci</p>
@@ -42,9 +46,9 @@
                     <i class="fas fa-user-circle"></i>
                 </a>
             </div>
-            <a class="hidden" id="menuIcon" href="menuR.html">
-                Il tuo men&uacute;
-                <i class="fas fa-book-open"></i>
+            <a class="hidden" id="cartIcon" href="cart.html">
+                Carrello
+                <i class="fas fa-shopping-cart"></i>
             </a>
         </div>
 
@@ -61,7 +65,7 @@
             <li>
                 <a href="#">Filtra</a>
                 <div>
-                    <a href="#">Da accettare</a>
+                    <a href="#">Accettati</a>
                     <a href="#">In preparazione</a>
                     <a href="#">Pronti per il ritiro</a>
                     <a href="#">Completati</a>
@@ -71,6 +75,13 @@
 
         </ul>
     </nav>
+    <main id="orderList">
+        <div id="orderList-container">
+            <ul id="orderList-container-ul">
+                <!--LISTS OF ORDERS-->
+            </ul>
+        </div>
+    </main>
     
 </body>
 </html>

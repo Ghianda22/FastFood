@@ -87,9 +87,9 @@
 /* -- HTML ELEMENTS IN JS -- */
 //resetting/eliminate a part of html code
 {
-    function resetShowOrder(){
-        while(document.getElementById(/*id*/).childElementCount != 0){
-            document.getElementById("orderView-items-list").firstChild.remove();
+    function resetTag(tag){
+        while(tag.childElementCount != 0){
+            tag.firstChild.remove();
         }
     }
 }

@@ -89,11 +89,13 @@ function loadPage(){
         showOrder();
         showPayment();
         totOrder();
+        //showAddress();
     }
 }
 
 /* -- SHOW -- */
 {
+    //order elements
     function pForShowingData(id, dish, data){
         let p = document.createElement("p");
         p.id = id + "-" + data;
@@ -109,11 +111,6 @@ function loadPage(){
         }
         
         return p;
-    }
-    function pForInfo(data){
-        let p = document.createElement("p");
-        p.id = "info-" + data;
-        p.innerHTML = res[data];
     }
     function showDish(id, dish){
         let li = document.createElement("li");
@@ -166,7 +163,6 @@ function loadPage(){
             document.getElementById("orderView-items-list").firstChild.remove();
         }
     }
-
     function showOrder(){
         for (const item of order) {
             if(document.getElementById("orderView-items-list-" + item.id) == null){
@@ -178,6 +174,8 @@ function loadPage(){
             }
         }
     }
+
+    //form elements
     function showPayment(){
         let def = document.getElementById("orderView-payment-mode-default");
         def.innerHTML = res.businessName + " accetta pagamenti con: ";
@@ -205,6 +203,54 @@ function loadPage(){
         }
         document.getElementById("orderView-payment-tot").innerHTML = "Totale ordine: " + tot + " â‚¬";
     }
+    /*function showAddress(){
+        for(let i = 0; i<user.address.length; i++){
+            //radio button
+            let radio = document.createElement("input");
+            radio.name = "orderView-address-options-radio";
+            radio.id = "orderView-address-options-radio-" + i;
+            radio.type = "radio";
+            radio.value = i;
+            radio.required = true;
+            if(user.address[i].default == true){
+                radio.checked = true;
+            }
+            let radioDiv = document.createElement("div");
+            radioDiv.appendChild(radio);
+
+            //address related
+            let line0 = document.createElement("p");
+            let content0 = document.createTextNode(user.address[i].owner);
+            line0.id = "orderView-address-options" + i + "-owner";
+            line0.appendChild(content0);
+            //class name for css
+            let line1 = document.createElement("p");
+            let content1 = document.createTextNode(user.address[i].street +" "+ user.address[i].civN);
+            line1.id = "orderView-address-options" + i + "-line1";
+            line1.appendChild(content1);
+            //class name
+            let line2 = document.createElement("p");
+            let content2 = document.createTextNode(user.address[i].zip + ", " + user.address[i].city + " (" + user.address[i].province + ")");
+            line2.id = "orderView-address-options" + i + "-line2";
+            line2.appendChild(content2);
+            //class name
+            let container = document.createElement("div");
+            container.id = "orderView-address-options" + i;
+            container.appendChild(line0);
+            container.appendChild(line1);
+            container.appendChild(line2);
+            if(user.address[i].other != false){
+                let line3 = document.createElement("p");
+                let content3 = document.createTextNode(user.address[i].other);
+                line3.id = "orderView-address-options" + i + "-line3";
+                line3.appendChild(content3);
+                //class name
+                container.appendChild(line3);
+            }
+            document.getElementById("orderView-address-options").appendChild(radioDiv);
+            document.getElementById("orderView-address-options").appendChild(container);
+        }
+    }*/
 }
 
 /* -- FUNCTIONS -- */
@@ -271,13 +317,13 @@ function loadPage(){
     
     //order confirmation
     class Order{
-        constructor(resEmail, dishIds, cost, address, payment){
+        constructor(resEmail, dishIds, cost, payment){ // + address
             this.id = uuidv4();
             this.res = resEmail;
             this.dishIds = dishIds;
             this.cost = cost;
             this.prepTime = 3 * dishIds.length;
-            this.address = address;
+            //this.address = address;
             this.status = "In attesa";
             this.payment = payment;
             this.date = new Date();
@@ -287,7 +333,6 @@ function loadPage(){
     
     function orderOk(){
         let payment = ["Paypal", "Prepagata", "Carta di credito", "Contanti"];
-        console.log("Carrello: " + cart);
         updateCart();
         let tot = 0;
         for (const d of order) {
@@ -298,19 +343,23 @@ function loadPage(){
                 payment = payment[i];
             }
         }
-        
-        let finalOrder = new Order(cart[0], cart.slice(1), tot, defAddress, payment);
+        /*for(let i = 0; i < user.address.length; i++){
+            if(document.getElementById("orderView-address-options-radio-" + i).checked){
+                let dAddress = user.address[i];
+            }
+        }*/
+        let finalOrder = new Order(cart[0], cart.slice(1), tot, payment);
         (res.orders).push(finalOrder.id);
         (user.orders).push(finalOrder.id);
         updateUserC();
         updateUserR();
+        order = [];
+        updateCart();
         let orderList = JSON.parse(localStorage.getItem("orderList"));
         orderList.push(finalOrder);
         localStorage.setItem("orderList",JSON.stringify(orderList));
-        console.log("Ordine: " + finalOrder);
-        console.log("Lista ordini: " + orderList);
         alert("Il tuo ordine è stato effettuato correttamente\nPuoi monitorare lo stato dell'ordine nella sezione 'I tuoi ordini' ");
-        document.getElementById("orderView-payment-mode-form").action = "ordersC.html";
+        document.getElementById("orderView-form").action = "ordersC.html";
     }
 } 
 

@@ -74,13 +74,13 @@ class Dish{
 }
 
 class Order{
-    constructor(resEmail, dishIds, cost, address, payment){
+    constructor(resEmail, dishIds, cost, payment){ // + address
         this.id = uuidv4();
         this.res = resEmail;
         this.dishIds = dishIds;
         this.cost = cost;
         this.prepTime = 3 * dishIds.length;
-        this.address = address;
+        //this.address = address;
         this.status = "In attesa";
         this.payment = payment;
         this.date = new Date();

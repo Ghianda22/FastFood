@@ -5,6 +5,8 @@
     <script type="text/javascript" src="../data/customers.json"></script>
     <script type="text/javascript" src="../data/restaurateurs.json"></script>
     <script type="text/javascript" src="../data/dishes.json"></script>
+    <script type="text/javascript" src="../data/orderList.json"></script>
+
     <script src="../scripts/cart.js"></script>
     <script src="https://kit.fontawesome.com/62ec85265f.js" crossorigin="anonymous"></script>
     
@@ -59,32 +61,42 @@
                 <ul id="orderView-items-list"></ul>
             </div>
 
-            <div id="orderView-payment">
-                <div id="orderView-payment-tot"></div>
-
-                <span>Metodo di pagamento:</span>
-                <p id="orderView-payment-mode-default"></p>
-                <form id="orderView-payment-mode-form" action="" onsubmit="orderOk()">
-                    <p class="hidden" id="orderView-payment-mode-0">
-                        <input type="radio" name="orderView-payment-mode" id="orderView-payment-mode-0-r" value="0" required>
-                        <label for="orderView-payment-mode-0-r">Paypal</label>
-                    </p>
-                    <p class="hidden" id="orderView-payment-mode-1">
-                        <input type="radio" name="orderView-payment-mode" id="orderView-payment-mode-1-r" value="1">
-                        <label for="orderView-payment-mode-1-r">Prepagata</label>
-                    </p>
-                    <p class="hidden" id="orderView-payment-mode-2">
-                        <input type="radio" name="orderView-payment-mode" id="orderView-payment-mode-2-r" value="2">
-                        <label for="orderView-payment-mode-2-r">Carta di credito</label>
-                    </p>
-                    <p class="hidden" id="orderView-payment-mode-3">
-                        <input type="radio" name="orderView-payment-mode" id="orderView-payment-mode-3-r" value="3">
-                        <label for="orderView-payment-mode-3-r">Contanti</label>
-                    </p>
-                </form>
-            </div>
+            <form id="orderView-form" action="" onsubmit="orderOk()">
+                <div id="orderView-payment">
+                    <div id="orderView-payment-tot"></div>
+                        <span>Metodo di pagamento:</span>
+                        <div>
+                            <p id="orderView-payment-mode-default"></p>
+                            <p class="hidden" id="orderView-payment-mode-0">
+                                <input type="radio" name="orderView-payment-mode" id="orderView-payment-mode-0-r" value="0" required>
+                                <label for="orderView-payment-mode-0-r">Paypal</label>
+                            </p>
+                            <p class="hidden" id="orderView-payment-mode-1">
+                                <input type="radio" name="orderView-payment-mode" id="orderView-payment-mode-1-r" value="1">
+                                <label for="orderView-payment-mode-1-r">Prepagata</label>
+                            </p>
+                            <p class="hidden" id="orderView-payment-mode-2">
+                                <input type="radio" name="orderView-payment-mode" id="orderView-payment-mode-2-r" value="2">
+                                <label for="orderView-payment-mode-2-r">Carta di credito</label>
+                            </p>
+                            <p class="hidden" id="orderView-payment-mode-3">
+                                <input type="radio" name="orderView-payment-mode" id="orderView-payment-mode-3-r" value="3">
+                                <label for="orderView-payment-mode-3-r">Contanti</label>
+                            </p>
+                        </div>
+                    
+                </div>
+                <div id="orderView-address">
+                    <span>Indirizzo di consegna:</span>
+                    <div id="orderView-address-options">
+                        <!--ADDRESS OPTIONS-->
+                    </div>
+                    
+                </div>
+            </form>
+            
             <div id="orderView-confirm">
-                <button form="orderView-payment-mode-form" type="submit">
+                <button form="orderView-form" type="submit">
                     Ordina!
                 </button>
             </div>

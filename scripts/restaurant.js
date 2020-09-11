@@ -97,11 +97,6 @@ function loadPage(){
         
         return p;
     }
-    function pForInfo(data){
-        let p = document.createElement("p");
-        p.id = "info-" + data;
-        p.innerHTML = res[data];
-    }
     function showDish(id, dish){
         let li = document.createElement("li");
         li.id = id + "-" + dish.id;
@@ -190,7 +185,6 @@ function loadPage(){
         document.getElementById("info-business-phone").innerHTML = res.phone;
         document.getElementById("info-business-email").innerHTML = res.email;
 
-        document.getElementById("info-address-line0").innerHTML = res.address.owner;
         document.getElementById("info-address-line1").innerHTML = res.address.street +" "+ res.address.civN;
         document.getElementById("info-address-line2").innerHTML = res.address.zip + ", " + res.address.city + " (" + res.address.province + ")";
 

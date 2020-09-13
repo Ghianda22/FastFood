@@ -11,6 +11,10 @@ function updateUser(){
     users[corresp] = user;
     localStorage.setItem("customers",JSON.stringify(users));
 }
+function toPArea(data){
+    sessionStorage.setItem("pArea-data", JSON.stringify(data));
+    document.getElementById("userArea-logged-pArea-" + data).href = "personalAreaC.html";
+}
 
 function exitModify(){
     let data = document.getElementsByClassName("data");

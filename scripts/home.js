@@ -95,7 +95,7 @@ function showRestaurants(){
     }
 }
 
-function showData(data){
+function toPArea(data){
     sessionStorage.setItem("pArea-data", JSON.stringify(data));
     document.getElementById("userArea-logged-pArea-" + data).href = "pages/personalAreaC.html";
 }

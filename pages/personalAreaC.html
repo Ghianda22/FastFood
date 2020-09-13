@@ -30,30 +30,20 @@
     <!-- NAV AREA-->
     <div class="container">
         <header>
-            <nav class="navbar navbar-expand-lg navbar-light fixed-top " style="background-color: #FFFFFF">
+            <nav class="navbar navbar-expand-sm navbar-light fixed-top " style="background-color: #FFFFFF">
                 <div class="collapse navbar-collapse flex-grow-1 text-right" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto flex-nowrap">
-                        <div id="userArea-login">
-                            <ul class="navbar-nav ml-auto flex-nowrap">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="../pages/login.html">Accedi</a>
-                                </li>
-                                <li  class="nav-item">
-                                    <a class="nav-link" href="../pages/newAccount.html">Registrati</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div id="userArea-logged" class="hidden">
+                        <div id="userArea-logged">
                             <ul class="navbar-nav ml-auto flex-nowrap">
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="userArea-logged-pArea" href="">
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="userArea-logged-pArea">
                                         Area personale
                                         <i class="fas fa-user-circle"></i>
                                     </a>
                                     <div class="dropdown-menu">
-                                        <a id="userArea-logged-pArea-pdata" class="dropdown-item" onclick="showData('pdata')" href="#">Dati personali</a>
-                                        <a id="userArea-logged-pArea-payment" class="dropdown-item" onclick="showData('payment')" href="#">Metodi di pagamento</a>
-                                        <a id="userArea-logged-pArea-privacy" class="dropdown-item" onclick="showData('privacy')" href="#">Preferenze e privacy</a>
+                                        <a id="userArea-logged-pArea-pdata" class="dropdown-item" onclick="toPArea('pdata')" href="#">Dati personali</a>
+                                        <a id="userArea-logged-pArea-payment" class="dropdown-item" onclick="toPArea('payment')" href="#">Metodi di pagamento</a>
+                                        <a id="userArea-logged-pArea-privacy" class="dropdown-item" onclick="toPArea('privacy')" href="#">Preferenze e privacy</a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" onclick="logout()" href="">Esci</a>
                                     </div>
@@ -65,16 +55,10 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="hidden nav-link" id="cartIcon" href="../pages/cart.html">
+                                    <a class="nav-link" id="cartIcon" href="../pages/cart.html">
                                         Carrello
                                         <i class="fas fa-shopping-cart"></i>
                                     </a>    
-                                </li>
-                                <li class="nav-item">
-                                    <a class="hidden nav-link"  id="menuIcon" href="../pages/menuR.html">
-                                        Il tuo men&uacute;
-                                        <i class="fas fa-book-open"></i>
-                                    </a>
                                 </li>
                             </ul>
                         </div>
@@ -85,7 +69,7 @@
 
             <!-- LOGO -->
             <div class="text-center" >
-                <a href="index.html">
+                <a href="../index.html">
                     <img id="logo" src="../images/FastfoodLogov2.png" alt="fastFood-logo-bluprofile" id="logo" class="img-fluid">
                 </a>
             </div>
@@ -93,7 +77,7 @@
         </header>
     </div>
     
-    <main id="pArea">
+    <main class="container" id="pArea">
         <ul id="pArea-dropdown">
             <!--PERSONAL AREA-->
             <li>

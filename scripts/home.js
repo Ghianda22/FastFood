@@ -40,16 +40,10 @@ function detectUser(){
         }
     }
 }
-function areYouSure(){
-    document.getElementById("userArea-logged-logout").style.display = "block";
-}
 function logout(){
     sessionStorage.removeItem("logged");
     sessionStorage.removeItem("cart");
     location.reload();
-}
-function stay(){
-    document.getElementById("userArea-logged-logout").style.display = "none";
 }
 
 function resPage(res, tagId){
@@ -64,11 +58,12 @@ function pForShowingData(obj, data){
 }
 function showRestaurants(){
     for(let res of rList){
-        let div = document.createElement("div");
-        div.id = "main-list-" + res.email;
+        let liRes = document.createElement("li");
+        liRes.id = "main-list-" + res.email;
         let a = document.createElement("a");
         a.id ="main-list-" + res.email + "link";
         a.setAttribute("onclick", "resPage('" + res.email + "', '" + a.id + "')");
+        liRes.className = "list-group-item";
         
         let image = new Image();
         image.src = res.img;
@@ -92,12 +87,15 @@ function showRestaurants(){
 
         a.appendChild(image);
         a.appendChild(name);
-        div.appendChild(a)
-        div.appendChild(price);
-        div.appendChild(rating);
+        liRes.appendChild(a)
+        liRes.appendChild(price);
+        liRes.appendChild(rating);
         
-        document.getElementById("main-list").appendChild(div);
+        document.getElementById("main-list").appendChild(liRes);
     }
 }
 
-//filters
+function showData(data){
+    sessionStorage.setItem("pArea-data", JSON.stringify(data));
+    document.getElementById("userArea-logged-pArea-" + data).href = "pages/personalAreaC.html";
+}

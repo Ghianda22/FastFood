@@ -21,8 +21,20 @@ function exitModify(){
     for (const div of mod) {
         div.style.display = "none";
     }
-    document.getElementById("pArea-address-show-add").style.display = "inline";
+    //document.getElementById("pArea-address-show-add").style.display = "inline";
     paymentOk();   
+}
+
+function checkShowData(){
+    let data = JSON.parse(sessionStorage.getItem("pArea-data"));
+    if(data == "pdata"){
+        showPersonalData();
+    }else if(data == "payment"){
+        showPaymentData();
+    }else if(data == "privacy"){
+        showAdsData();
+    }
+    sessionStorage.removeItem("pArea-data");
 }
 
 function showData(data){
@@ -39,7 +51,7 @@ function hideData(data){
 }
 
 
-class Address{
+/*class Address{
         constructor(name, street, civN, zip, city, province){
             this.owner = name;
             this.street = street;
@@ -50,7 +62,7 @@ class Address{
             this.default = false;
             this.other = false;
         }
-}
+}*/
 
 
 /* -- PERSONAL DATA -- */
@@ -170,7 +182,7 @@ class Address{
 
 
 /* -- ADDRESS -- */
-{
+/*{
     function address(){
         for(let i = 0; i<user.address.length; i++){
             if(document.getElementById("pArea-address-show-"+i) == null){
@@ -377,7 +389,7 @@ class Address{
             alert("Non puoi cancellare l'unico indirizzo presente. Creane prima un altro con cui sostituirlo");
         }
     }
-}
+}*/
 
 
 /* -- ADS -- */

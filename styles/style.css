@@ -6,7 +6,10 @@
     display: none;
 }
 #logo{
+    max-width: 100%;
+    height: auto;
     width: 50%;
+    margin-top: 60p;
 }
 /* icons */
 i.hidden{
@@ -17,10 +20,36 @@ img{
     width: 300px;
     height: 200px;
 }
-p{
-    margin: 0;
-    padding: 0;
+
+.img-carosello{
+    height: auto;
+    width: 100%;
 }
-div{
-    margin: 20px auto;
+
+.login-area{
+    text-align: right;
+}
+
+.list-group-item{
+    border: none;
+}
+.nav-tabs{
+    border: none;
+}
+footer{
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.risto-home{
+    text-align: left;
+}
+
+.nav-link{
+    padding: 0px;
+}
+
+.fixed-top{
+    max-height: 60px;
 }

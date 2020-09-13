@@ -26,3 +26,4 @@ ordinamento    <i class="fas fa-sort-amount-down"></i>
 euro    <i class="fas fa-euro-sign"></i>
 ricarica doppia freccia    <i class="fas fa-sync"></i>
 ricarica freccia singola    <i class="fas fa-redo"></i>
+shopping bag    <i class="fas fa-shopping-bag"></i>

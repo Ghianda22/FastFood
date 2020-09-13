@@ -1,19 +1,99 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <script type="text/javascript" src="..\scripts\personalAreaC.js"></script>
+    <!--STYLE-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/62ec85265f.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../styles/style.css">
+
+    <!--DATA-->
+    <script type="text/javascript" src="../data/customers.json"></script>
+    <script type="text/javascript" src="../data/restaurateurs.json"></script>
+    <script type="text/javascript" src="../data/dishes.json"></script>
     <script type="text/javascript" src="../data/orderList.json"></script>
 
-    <link rel="stylesheet" href="..\styles\style.css">
-    <script src="https://kit.fontawesome.com/62ec85265f.js" crossorigin="anonymous"></script>
-
+    <script src="../scripts/personalAreaC.js"></script>
+    
+    
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">       
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>Area Personale - FastFood</title>
 </head>
-<body ondblclick="exitModify()">
+<body ondblclick="exitModify()" onload="checkShowData()">
+    <!-- NAV AREA-->
+    <div class="container">
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-light fixed-top " style="background-color: #FFFFFF">
+                <div class="collapse navbar-collapse flex-grow-1 text-right" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto flex-nowrap">
+                        <div id="userArea-login">
+                            <ul class="navbar-nav ml-auto flex-nowrap">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="../pages/login.html">Accedi</a>
+                                </li>
+                                <li  class="nav-item">
+                                    <a class="nav-link" href="../pages/newAccount.html">Registrati</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="userArea-logged" class="hidden">
+                            <ul class="navbar-nav ml-auto flex-nowrap">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="userArea-logged-pArea" href="">
+                                        Area personale
+                                        <i class="fas fa-user-circle"></i>
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <a id="userArea-logged-pArea-pdata" class="dropdown-item" onclick="showData('pdata')" href="#">Dati personali</a>
+                                        <a id="userArea-logged-pArea-payment" class="dropdown-item" onclick="showData('payment')" href="#">Metodi di pagamento</a>
+                                        <a id="userArea-logged-pArea-privacy" class="dropdown-item" onclick="showData('privacy')" href="#">Preferenze e privacy</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" onclick="logout()" href="">Esci</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item">
+                                    <a id="userArea-logged-orders" href="" class="nav-link">
+                                        I tuoi ordini
+                                        <i class="fas fa-shopping-bag"></i>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="hidden nav-link" id="cartIcon" href="../pages/cart.html">
+                                        Carrello
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </a>    
+                                </li>
+                                <li class="nav-item">
+                                    <a class="hidden nav-link"  id="menuIcon" href="../pages/menuR.html">
+                                        Il tuo men&uacute;
+                                        <i class="fas fa-book-open"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </ul>
+                </div>
+            </nav>
+            <!-- END NAV AREA-->
+
+            <!-- LOGO -->
+            <div class="text-center" >
+                <a href="index.html">
+                    <img id="logo" src="../images/FastfoodLogov2.png" alt="fastFood-logo-bluprofile" id="logo" class="img-fluid">
+                </a>
+            </div>
+            <!-- END LOGO -->
+        </header>
+    </div>
     
-    <div id="pArea">
+    <main id="pArea">
         <ul id="pArea-dropdown">
             <!--PERSONAL AREA-->
             <li>
@@ -123,7 +203,7 @@
                 </div>
                 
             </li>
-            <!--ADDRESS-->
+            <!--ADDRESS
             <li>
                 <div class="titlebox" id="pArea-address">
                     <i id="pArea-address-down" class="fas fa-chevron-down" onclick="showAddressData();"></i>
@@ -159,7 +239,7 @@
                     </form>
 
                 </div>
-            </li>
+            </li>-->
             <!--ADS-->
             <li>
                 <div class="titlebox" id="pArea-ads">
@@ -256,7 +336,7 @@
             </button>
         </div>
 
-    </div>
+    </main>
     
 </body>
 </html>

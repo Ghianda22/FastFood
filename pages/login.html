@@ -1,33 +1,54 @@
 <!DOCTYPE html>
 <html lang="it">
-<head>
-    <script type="text/javascript" src="..\data\customers.json"></script>
-    <script type="text/javascript" src="..\data\restaurateurs.json"></script>
-    <script type="text/javascript" src="..\data\dishes.json"></script>
-    <script type="text/javascript" src="../data/orderList.json"></script>
-
-    <script type="text/javascript" src="..\scripts\login.js"></script>
-    <link rel="stylesheet" href="..\styles\style.css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Fastfood</title>
-</head>
+    <head>
+        <!--STYLE-->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/62ec85265f.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/login.css">
+    
+        <!--DATA-->
+        <script type="text/javascript" src="../data/customers.json"></script>
+        <script type="text/javascript" src="../data/restaurateurs.json"></script>
+        <script type="text/javascript" src="../data/dishes.json"></script>
+        <script type="text/javascript" src="../data/orderList.json"></script>
+    
+        <script src="../scripts/login.js"></script>
+        
+        
+        <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+        <link rel="icon" href="../favicon.ico" type="image/x-icon">       
+        
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <title>ogin - FastFood</title>
+    </head>
 <body>
 
-        <main id="logPage">
+        <main class="container-fluid justify-content-center" id="logPage">
 
             <form onsubmit="login();" id="logPage-form">
-                <label for="logPage-form-email">Email:</label>
-                <input type="text" name="logPage-form-email" id="logPage-form-email">
-                <br>
-                <label for="logPage-form-psw">Password:</label>
-                <input type="password" name="logPage-form-psw" id="logPage-form-psw">
-                <br><br>
-                <input type="submit" name="logPage-form-submit" id="logPage-form-submit" value="Accedi">
+                <div class="container">
+                    <div class="row">
+                        
+                        <label for="logPage-form-email">Email:</label>
+                        
+                        <input type="text" name="logPage-form-email" id="logPage-form-email">
+                    </div>
+                </div>
+                <div class="container">
+                    <label for="logPage-form-psw">Password:</label>
+                    <input type="password" name="logPage-form-psw" id="logPage-form-psw">
+                </div>
+                <div class="container">
+                    <input type="submit" name="logPage-form-submit" id="logPage-form-submit" value="Accedi">
+                </div>
             </form>
 
-            <span>Hai dimenticato la password? <a href="">Clicca qui</a> per recuperarla</span>
-            <br>
             <span id="logPage-registration">Non sei ancora iscritto? 
                 <a href="newAccount.html">Registrati!</a>
             </span>
@@ -35,7 +56,7 @@
         </main>
         
         <footer>
-            <p>Created by <br> Valentina Lor&eacute;</p>
+            <p>Created by Valentina Lor&eacute;</p>
         </footer>
         
 </body>

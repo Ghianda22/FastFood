@@ -27,10 +27,10 @@
     <title>Home - FastFood</title>
 </head>
 <body onload="detectUser();showRestaurants();">
-    <!-- NAV AREA-->
     <div class="container">
         <header>
-            <nav class="navbar navbar-expand-sm navbar-light fixed-top " style="background-color: #FFFFFF">
+            <!-- NAV AREA-->
+            <nav id="desktopNav" class="navbar navbar-expand-sm navbar-light fixed-top">
                 <div class="collapse navbar-collapse flex-grow-1 text-right" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto flex-nowrap">
                         <div id="userArea-login">
@@ -65,14 +65,14 @@
                                         <i class="fas fa-shopping-bag"></i>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="hidden nav-link" id="cartIcon" href="pages/cart.html">
+                                <li class="hidden nav-item" id="cartIcon">
+                                    <a class="nav-link"  href="pages/cart.html">
                                         Carrello
                                         <i class="fas fa-shopping-cart"></i>
                                     </a>    
                                 </li>
-                                <li class="nav-item">
-                                    <a class="hidden nav-link"  id="menuIcon" href="pages/menuR.html">
+                                <li class="hidden nav-item" id="menuIcon">
+                                    <a class="nav-link"   href="pages/menuR.html">
                                         Il tuo men&uacute;
                                         <i class="fas fa-book-open"></i>
                                     </a>
@@ -82,40 +82,99 @@
                     </ul>
                 </div>
             </nav>
+
+            
+            <nav id="mobileNav" class="hidden navbar fixed-top">
+                <div class="text-right">
+                    <nav class="navbar navbar-dark fixed-top justify-content-end">
+                      <button id="hambmenu-button" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobileNavElements" aria-controls="mobileNavElements" aria-expanded="false" aria-label="Toggle navigation">
+                        <span id="hambmenu" class="navbar-toggler-icon"></span>
+                      </button>
+                    </nav>
+                    <div class="nav flex-column collapse" id="mobileNavElements">
+                        <div id="mobile-userArea-login">
+                            <ul class="navbar-nav ml-auto flex-nowrap">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pages/login.html">Accedi</a>
+                                </li>
+                                <li  class="nav-item">
+                                    <a class="nav-link" href="pages/newAccount.html">Registrati</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="mobile-userArea-logged" class="hidden">
+                            <ul  class="navbar-nav ml-auto flex-nowrap">
+                                <li class="hidden nav-item" id="mobile-cartIcon">
+                                    <a class="nav-link"  href="pages/cart.html">
+                                        Carrello
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </a>    
+                                </li>
+                                <li class="hidden nav-item" id="mobile-menuIcon">
+                                    <a class="nav-link"   href="pages/menuR.html">
+                                        Il tuo men&uacute;
+                                        <i class="fas fa-book-open"></i>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a id="mobile-userArea-logged-orders" href="" class="nav-link">
+                                        I tuoi ordini
+                                        <i class="fas fa-shopping-bag"></i>
+                                    </a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="mobile-userArea-logged-pArea" href="">
+                                        Area personale
+                                        <i class="fas fa-user-circle"></i>
+                                    </a>
+                                    <div id="mobile-dropdown" class="dropdown-menu text-right">
+                                        <a id="mobile-userArea-logged-pArea-pdata" class="dropdown-item" onclick="toPArea('pdata')" href="#">Dati personali</a>
+                                        <a id="mobile-userArea-logged-pArea-payment" class="dropdown-item" onclick="toPArea('payment')" href="#">Metodi di pagamento</a>
+                                    <a id="mobile-userArea-logged-pArea-privacy" class="dropdown-item" onclick="toPArea('privacy')" href="#">Preferenze e privacy</a>
+                                    <a class="dropdown-item" onclick="logout()" href="">Esci</a>
+                                </div>
+                        
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
             <!-- END NAV AREA-->
 
             <!-- LOGO -->
             <div class="text-center" >
                 <a href="index.html">
-                    <img id="logo" src="images/FastfoodLogov2.png" alt="fastFood-logo-bluprofile" id="logo" class="img-fluid">
+                    <img id="logo" src="images/FastfoodLogov2.png" alt="fastFood-logo-bluprofile" class="img-fluid">
                 </a>
             </div>
             <!-- END LOGO -->
         </header>
     </div>
     <!-- SLIDE SHOW -->
-    <div id="carosello" class="carousel slide" data-ride="carousel">
+    <div id="carousel" class="carousel slide my-3" data-ride="carousel">
         <ol class="carousel-indicators">
-          <li data-target="#carosello" data-slide-to="0" class="active"></li>
-          <li data-target="#carosello" data-slide-to="1"></li>
-          <li data-target="#carosello" data-slide-to="2"></li>
+          <li data-target="carousel" data-slide-to="0" class="active"></li>
+          <li data-target="carousel" data-slide-to="1"></li>
+          <li data-target="carousel" data-slide-to="2"></li>
         </ol>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="images\slideshow\img1.jpeg" class="img-carosello" alt="Roadhouse">
+            <img src="images\slideshow\img1.jpeg" class="img-carousel" alt="Roadhouse">
           </div>
           <div class="carousel-item">
-            <img src="images\slideshow\img2.jpeg" class="img-carosello" alt="...">
+            <img src="images\slideshow\img2.jpeg" class="img-carousel" alt="...">
           </div>
           <div class="carousel-item">
-            <img src="images\slideshow\img3.jpeg" class="img-carosello" alt="...">
+            <img src="images\slideshow\img3.jpeg" class="img-carousel" alt="...">
           </div>
         </div>
-        <a class="carousel-control-prev" href="#carosello" role="button" data-slide="prev">
+        <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="sr-only">Precedente</span>
         </a>
-        <a class="carousel-control-next" href="#carosello" role="button" data-slide="next">
+        <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="sr-only">Successivo</span>
         </a>

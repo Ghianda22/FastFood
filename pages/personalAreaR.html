@@ -28,7 +28,134 @@
     </head>
 <body ondblclick="exitModify()">
     
-    <div id="pArea">
+    <div class="container">
+        <header>
+            <!-- NAV AREA-->
+            <nav id="desktopNav" class="navbar navbar-expand-sm navbar-light fixed-top">
+                <div class="collapse navbar-collapse flex-grow-1 text-right" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto flex-nowrap">
+                        <div id="userArea-login">
+                            <ul class="navbar-nav ml-auto flex-nowrap">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="../pages/login.html">Accedi</a>
+                                </li>
+                                <li  class="nav-item">
+                                    <a class="nav-link" href="../pages/newAccount.html">Registrati</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="userArea-logged" class="hidden">
+                            <ul class="navbar-nav ml-auto flex-nowrap">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="userArea-logged-pArea" href="">
+                                        Area personale
+                                        <i class="fas fa-user-circle"></i>
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <a id="userArea-logged-pArea-pdata" class="dropdown-item" onclick="toPArea('pdata')" href="#">Dati personali</a>
+                                        <a id="userArea-logged-pArea-payment" class="dropdown-item" onclick="toPArea('payment')" href="#">Metodi di pagamento</a>
+                                    <a id="userArea-logged-pArea-privacy" class="dropdown-item" onclick="toPArea('privacy')" href="#">Preferenze e privacy</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" onclick="logout()" href="">Esci</a>
+                                </div>
+    
+                                </li>
+                                <li class="nav-item">
+                                    <a id="userArea-logged-orders" href="" class="nav-link">
+                                        I tuoi ordini
+                                        <i class="fas fa-shopping-bag"></i>
+                                    </a>
+                                </li>
+                                <li class="hidden nav-item" id="cartIcon">
+                                    <a class="nav-link"  href="../pages/cart.html">
+                                        Carrello
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </a>    
+                                </li>
+                                <li class="hidden nav-item" id="menuIcon">
+                                    <a class="nav-link"   href="../pages/menuR.html">
+                                        Il tuo men&uacute;
+                                        <i class="fas fa-book-open"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </ul>
+                </div>
+            </nav>
+    
+            
+            <nav id="mobileNav" class="hidden navbar fixed-top">
+                <div class="text-right">
+                    <nav class="navbar navbar-dark fixed-top justify-content-end">
+                      <button id="hambmenu-button" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobileNavElements" aria-controls="mobileNavElements" aria-expanded="false" aria-label="Toggle navigation">
+                        <span id="hambmenu" class="navbar-toggler-icon"></span>
+                      </button>
+                    </nav>
+                    <div class="nav flex-column collapse" id="mobileNavElements">
+                        <div id="mobile-userArea-login">
+                            <ul class="navbar-nav ml-auto flex-nowrap">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="../pages/login.html">Accedi</a>
+                                </li>
+                                <li  class="nav-item">
+                                    <a class="nav-link" href="../pages/newAccount.html">Registrati</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="mobile-userArea-logged" class="hidden">
+                            <ul  class="navbar-nav ml-auto flex-nowrap">
+                                <li class="hidden nav-item" id="mobile-cartIcon">
+                                    <a class="nav-link"  href="../pages/cart.html">
+                                        Carrello
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </a>    
+                                </li>
+                                <li class="hidden nav-item" id="mobile-menuIcon">
+                                    <a class="nav-link"   href="../pages/menuR.html">
+                                        Il tuo men&uacute;
+                                        <i class="fas fa-book-open"></i>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a id="mobile-userArea-logged-orders" href="" class="nav-link">
+                                        I tuoi ordini
+                                        <i class="fas fa-shopping-bag"></i>
+                                    </a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="mobile-userArea-logged-pArea" href="">
+                                        Area personale
+                                        <i class="fas fa-user-circle"></i>
+                                    </a>
+                                    <div id="mobile-dropdown" class="dropdown-menu text-right">
+                                        <a id="mobile-userArea-logged-pArea-pdata" class="dropdown-item" onclick="toPArea('pdata')" href="#">Dati personali</a>
+                                        <a id="mobile-userArea-logged-pArea-payment" class="dropdown-item" onclick="toPArea('payment')" href="#">Metodi di pagamento</a>
+                                    <a id="mobile-userArea-logged-pArea-privacy" class="dropdown-item" onclick="toPArea('privacy')" href="#">Preferenze e privacy</a>
+                                    <a class="dropdown-item" onclick="logout()" href="">Esci</a>
+                                </div>
+                        
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <!-- END NAV AREA-->
+    
+            <!-- LOGO -->
+            <div class="text-center" >
+                <a href="index.html">
+                    <img id="logo" src="../images/FastfoodLogov2.png" alt="fastFood-logo-bluprofile" class="img-fluid">
+                </a>
+            </div>
+            <!-- END LOGO -->
+        </header>
+    </div>
+
+
+    <main class="container" id="pArea">
         <ul id="pArea-dropdown">
             <!--PERSONAL AREA-->
             <li>
@@ -276,7 +403,7 @@
             </button>
         </div>
 
-    </div>
+    </main>
     
 </body>
 </html>

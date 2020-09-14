@@ -19,7 +19,7 @@ let restaurateurs = [
         "orders":[],
         "averagePrice": 0,
         "menu":[1,2,3,5,6,8,9,10],
-        "img":""
+        "img":"../images/restaurant/aldoArona-logo.png"
     },
 
     {
@@ -42,7 +42,7 @@ let restaurateurs = [
         "orders":[],
         "averagePrice": 0,
         "menu":[1,2,3,4,5,7,8,10],
-        "img":""
+        "img":"../images/restaurant/amicimiei-logo.png"
     },
 
     
@@ -87,7 +87,7 @@ let restaurateurs = [
         "rating":null,
         "orders":[],
         "menu":[13,14,16,17,22,24],
-        "img":""
+        "img":"../images/restaurant/amy-sushi1.jpg"
     },
 
     {
@@ -109,7 +109,7 @@ let restaurateurs = [
         "rating":null,
         "orders":[],
         "menu":[26,24,23,22,19,18,17],
-        "img":""
+        "img":"../images/restaurant/miyo-sushi.jpg"
     },
 
     {
@@ -131,15 +131,15 @@ let restaurateurs = [
         "rating":null,
         "orders":[],
         "menu":[11,27,19,10,1,6],
-        "img":""
+        "img":"../images/restaurant/el-sharm.jpg"
     },
     {
-        "businessName":"Tukish Anatolia Doner Kebab",
+        "businessName":"Turkish Anatolia Doner Kebab",
         "email":"kebabarona@yahoo.it",
         "phone":"3892334984",
         "psw":"kebabarona",
-        "address":{"owner":"Tukish Anatolia Doner Kebab",
-            "street":"via Torino",
+        "address":{"owner":"Turkish Anatolia Doner Kebab",
+            "street":"via Torini",
             "civN":"8",
             "zip":"28041",
             "city":"Arona",
@@ -153,7 +153,7 @@ let restaurateurs = [
         "orders":[],
         "averagePrice":0,
         "menu":[11,12,19,10,1],
-        "img":""
+        "img":"../images/restaurant/turkish-anatolia.jpg"
     },
     {
         "businessName":"Sushi Green",
@@ -175,7 +175,7 @@ let restaurateurs = [
         "orders":[],
         "averagePrice":0,
         "menu":[26,25,24,23,21,19,17,15],
-        "img":""
+        "img":"../images/restaurant/sushi-green.jpg"
     }
 
 ];

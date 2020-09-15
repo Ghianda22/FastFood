@@ -47,7 +47,7 @@ let customers = [
         "therms":true,
         "privacy":true,
         "ads":false,
-        "orders":[]
+        "orders":["567d1de5-cfe4-4fdd-b8a9-1977f2122a44"]
     },
     {
         "name":"Aurora",

@@ -14,20 +14,20 @@ class Restaurateur{
 }
 
 class Customer{
-    constructor(name, surname, phone, email, psw, address, ad){
+    constructor(name, surname, phone, email, psw, ad){  //+address
         this.name = name;
         this.surname = surname;
         this.phone = phone;
         this.email = email;
         this.psw = psw;
-        this.address = [address];
+        //this.address = [address];
         this.therms = true;
         this.privacy = true;
         this.ad = ad;
         this.orders = [];
     }
 
-    defaultAddress(addressIndex) {
+    /*defaultAddress(addressIndex) {
         let def = 0;
         for (let x in this.address) {
             if (x.default == true) {
@@ -44,10 +44,10 @@ class Customer{
             }
             this.address[addressIndex].default = true;
         }
-    }
+    }*/
 }
 
-class Address{
+/*class Address{
     constructor(name, street, civN, zip, city, province){
         this.owner = name;
         this.street = street;
@@ -58,7 +58,7 @@ class Address{
         this.default = false;
         this.other = false;
     }
-}
+}*/
 
 class Dish{
     constructor(name, img, ingredients, price, cuisine, owner, category){
@@ -74,12 +74,13 @@ class Dish{
 }
 
 class Order{
-    constructor(resEmail, dishIds, cost, payment){ // + address
+    constructor(resEmail, cusEmail, dishIds, cost, queueLength, payment){ // + address
         this.id = uuidv4();
         this.res = resEmail;
+        this.cus = cusEmail;
         this.dishIds = dishIds;
         this.cost = cost;
-        this.prepTime = 3 * dishIds.length;
+        this.prepTime = 3 * dishIds.length + 6 * queueLength;
         //this.address = address;
         this.status = "In attesa";
         this.payment = payment;

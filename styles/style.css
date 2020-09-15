@@ -11,6 +11,10 @@ i.hidden{
 
 /* -- STYLE -- */
 
+[onclick]:hover{
+    cursor: pointer;
+}
+
 footer{
     text-align: center;
     margin-top: 20px;
@@ -72,10 +76,7 @@ nav{
 }
 
 /* mobile nav */
-#mobileNavElements{
-    margin-top: 56px;
-}
-#mobile-dropdown{
+.mobile-dropdown{
     background-color:  #F4AC0C;
     position: inherit !important;
     transform: none !important;
@@ -85,24 +86,14 @@ nav{
     float: right;
     margin-right: 10px;
 }
-#mobile-dropdown .dropdown-item{
+.mobile-dropdown .dropdown-item{
     padding: 0;
     padding-right: 10px;
 }
-#mobile-dropdown .dropdown-item:hover{
+.mobile-dropdown .dropdown-item:hover{
     background-color:  rgba(255, 226, 163, 0.2);
 }
 
-#hambmenu-button{
-    border-color: rgba(0, 0, 0, 0.6);
-    color: rgba(0, 0, 0, 0.6);
-}
-#hambmenu-button:focus{
-    outline: 1px auto rgba(0, 0, 0, 0.6);
-}
-#hambmenu{
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280, 0, 0, 0.6%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-}
 
 
 /* list item details */
@@ -115,7 +106,15 @@ nav{
 
 
 /* -- MEDIA -- */
-
+@media screen and (max-width: 576px){
+    #mobile-dropdown{
+        display: block;
+    }
+    #desktop-dropdown{
+        display: none;
+    }
+}
+/*
 @media screen and (max-width: 576px){
     #desktopNav{
         display: none;
@@ -123,4 +122,4 @@ nav{
     #mobileNav{
         display: block;
     }
-}
+}*/

@@ -1,16 +1,18 @@
 /* -- DATA e USER -- */
 //check&recharge data
-if(localStorage.getItem("customers")==null){
-    localStorage.setItem("customers",JSON.stringify(customers));
-}
-if(localStorage.getItem("restaurateurs")==null){
-    localStorage.setItem("restaurateurs", JSON.stringify(restaurateurs));
-}
-if(localStorage.getItem("dishes")==null){
-    localStorage.setItem("dishes", JSON.stringify(dishes));
-}
-if(localStorage.getItem("orderList")==null){
-    localStorage.setItem("orderList", JSON.stringify(orderList));
+{
+    if(localStorage.getItem("customers")==null){
+        localStorage.setItem("customers",JSON.stringify(customers));
+    }
+    if(localStorage.getItem("restaurateurs")==null){
+        localStorage.setItem("restaurateurs", JSON.stringify(restaurateurs));
+    }
+    if(localStorage.getItem("dishes")==null){
+        localStorage.setItem("dishes", JSON.stringify(dishes));
+    }
+    if(localStorage.getItem("orderList")==null){
+        localStorage.setItem("orderList", JSON.stringify(orderList));
+    }
 }
 
 //logout options
@@ -317,12 +319,13 @@ function loadPage(){
     
     //order confirmation
     class Order{
-        constructor(resEmail, dishIds, cost, payment){ // + address
+        constructor(resEmail, cusEmail, dishIds, cost, queueLength, payment){ // + address
             this.id = uuidv4();
             this.res = resEmail;
+            this.cus = cusEmail;
             this.dishIds = dishIds;
             this.cost = cost;
-            this.prepTime = 3 * dishIds.length;
+            this.prepTime = 3 * dishIds.length + 6 * queueLength;
             //this.address = address;
             this.status = "In attesa";
             this.payment = payment;
@@ -332,6 +335,7 @@ function loadPage(){
     }
     
     function orderOk(){
+        let orderList = JSON.parse(localStorage.getItem("orderList"));
         let payment = ["Paypal", "Prepagata", "Carta di credito", "Contanti"];
         updateCart();
         let tot = 0;
@@ -348,15 +352,24 @@ function loadPage(){
                 let dAddress = user.address[i];
             }
         }*/
-        let finalOrder = new Order(cart[0], cart.slice(1), tot, payment);
-        (res.orders).push(finalOrder.id);
-        (user.orders).push(finalOrder.id);
+        let queueLength = 0;
+        for(let resOrder in res.orders){
+            for (let order of orderList) {
+                if(resOrder == order.id){
+                    if(order.status == "In preparazione" || order.status == "In attesa"){
+                        queueLength++;
+                    }
+                }
+            }
+        }
+        let finalOrder = new Order(cart[0], user.email, cart.slice(1), tot, queueLength, payment);
+        (res.orders).unshift(finalOrder.id);
+        (user.orders).unshift(finalOrder.id);
         updateUserC();
         updateUserR();
         order = [];
         updateCart();
-        let orderList = JSON.parse(localStorage.getItem("orderList"));
-        orderList.push(finalOrder);
+        orderList.unshift(finalOrder);
         localStorage.setItem("orderList",JSON.stringify(orderList));
         alert("Il tuo ordine è stato effettuato correttamente\nPuoi monitorare lo stato dell'ordine nella sezione 'I tuoi ordini' ");
         document.getElementById("orderView-form").action = "ordersC.html";

@@ -1,22 +1,4 @@
 let orderList = [
-    {
-        "id":"845172bc-5784-458f-81f5-043c3fc340bc",
-        "res":"info@aldopizzeria.it",
-        "dishIds":[6,8],
-        "cost":15.5,
-        "prepTime":6,
-        "address":{"owner":"Alessio Franceschi",
-            "street":"Giorgio Ambrosoli",
-            "civN":"17",
-            "zip":"20822",
-            "city":"Seveso",
-            "province":"MB",
-            "default":true,
-            "other":false},
-        "status":"In attesa",
-        "payment":"Carta di credito",
-        "date":"2020-09-10T17:50:01.636Z",
-        "rating":null
-    }
+    {"id":"567d1de5-cfe4-4fdd-b8a9-1977f2122a44","res":"info@aldopizzeria.it","cus":"alessiofranceschi2@gmail.com","dishIds":[6,8],"cost":15.5,"prepTime":6,"status":"Completato","payment":"Carta di credito","date":"2020-09-15T15:08:19.701Z","rating":null}
 ];
 

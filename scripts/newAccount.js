@@ -8,7 +8,7 @@ class Address{
         this.province = province;
         this.default = false;
         this.other = false;
-    }
+    }s
 }
 
 // DEFAULT DATA CHECK
@@ -25,14 +25,14 @@ if(localStorage.getItem("restaurateurs")==null){
 {   
     // CLASS
         class Customer{
-            constructor(name, surname, phone, email, psw, address, payment, ads){
+            constructor(name, surname, phone, email, psw, payment, ads){ //+address,
                 this.name = name;
                 this.surname = surname;
                 this.phone = phone;
                 this.email = email;
                 this.psw = psw;
-                address.default = true;
-                this.address = [address];
+                //address.default = true;
+                //this.address = [address];
                 this.payment = payment;
                 this.therms = true;
                 this.privacy = true;
@@ -76,19 +76,19 @@ if(localStorage.getItem("restaurateurs")==null){
             let phone = document.getElementById("newAcc-c-phone").value;
             let email = document.getElementById("newAcc-c-email").value;
             let psw = document.getElementById("newAcc-c-psw").value;
-            let address = new Address ((name+" "+surname),
+            /*let address = new Address ((name+" "+surname),
                 document.getElementById("newAcc-c-address-street").value,
                 document.getElementById("newAcc-c-address-civN").value,
                 document.getElementById("newAcc-c-address-zip").value,
                 document.getElementById("newAcc-c-address-city").value,
-                document.getElementById("newAcc-c-address-province").value);
+                document.getElementById("newAcc-c-address-province").value);*/
             let payment = [document.getElementById("newAcc-c-payment-paypal").checked,
                 document.getElementById("newAcc-c-payment-prepaid").checked,
                 document.getElementById("newAcc-c-payment-card").checked,
                 document.getElementById("newAcc-c-payment-cash").checked];
             let ads = document.getElementById("newAcc-c-ads").checked;
 
-            let customer = new Customer (name, surname, phone, email, psw, address, payment, ads);
+            let customer = new Customer (name, surname, phone, email, psw, payment, ads); //+address
 
             let cArray = JSON.parse(localStorage.getItem("customers"));
             cArray.push(customer);

@@ -1,109 +1,207 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <script type="text/javascript" src="../data/customers.json"></script>
-    <script type="text/javascript" src="../data/restaurateurs.json"></script>
-    <script type="text/javascript" src="../data/dishes.json"></script>
-    <script type="text/javascript" src="../data/orderList.json"></script>
-
-    <script src="../scripts/restaurant.js"></script>
-    <script src="https://kit.fontawesome.com/62ec85265f.js" crossorigin="anonymous"></script>
+        <!--STYLE-->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/62ec85265f.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="../styles/style.css">
     
-    <link rel="stylesheet" href="../styles/style.css">
+        <!--DATA-->
+        <script type="text/javascript" src="../data/customers.json"></script>
+        <script type="text/javascript" src="../data/restaurateurs.json"></script>
+        <script type="text/javascript" src="../data/dishes.json"></script>
+        <script type="text/javascript" src="../data/orderList.json"></script>
     
-    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
-    <link rel="icon" href="../favicon.ico" type="image/x-icon">       
-    
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="../scripts/restaurant.js"></script>
+        
+        
+        <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+        <link rel="icon" href="../favicon.ico" type="image/x-icon">       
+        
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <title></title>
 </head>
 <body onload="loadPage(); detectUser()">
-    <header>
-        <!--LOGO-->
-        <a href="../index.html">
-            <img id="logo" src="../images/FastfoodLogo.png" alt="fastFood-logo-bluprofile" id="logo">
-         </a>
-        <!--PRIVATE AREA-->
-        <div id="userArea">
-            <p id="userArea-login">
-                <a href="login.html">Accedi</a> / <a href="newAccount.html">Registrati</a>
-            </p>
-            <div class="hidden" id="userArea-logged">
 
-                <p onclick="areYouSure()">Esci</p>
-                <div class="hidden" id="userArea-logged-logout">
-                    Sei sicuro di voler uscire?
-                    <button type="button" id="userArea-logged-logout-y" onclick="logout();">
-                        Si, devo andare
-                    </button>
-                    <button type="button" id="userArea-logged-logout-n" onclick="stay()">
-                        No, rimango ancora un po'
-                    </button>
+    <div class="container">
+        <header>
+            <!-- NAV AREA-->
+            <nav id="mainNav" class="navbar navbar-expand-sm navbar-light fixed-top justify-content-end bg-yellow">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse flex-grow-1 text-right" id="navbarMain">
+                    <ul class="navbar-nav ml-auto flex-nowrap">
+                        <div id="userArea-login">
+                            <ul class="navbar-nav ml-auto flex-nowrap">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="../pages/login.html">Accedi</a>
+                                </li>
+                                <li  class="nav-item">
+                                    <a class="nav-link" href="../pages/newAccount.html">Registrati</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="userArea-logged" class="hidden">
+                            <ul class="navbar-nav ml-auto flex-nowrap">
+                                <!--desktop dropdown-->
+                                <li id="desktop-dropdown" class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="userArea-logged-pArea" href="">
+                                        Area personale
+                                        <i class="fas fa-user-circle"></i>
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <a id="userArea-logged-pArea-pdata" class="dropdown-item" onclick="toPArea('pdata','')" href="#">Dati personali</a>
+                                        <a id="userArea-logged-pArea-payment" class="dropdown-item" onclick="toPArea('payment','')" href="#">Metodi di pagamento</a>
+                                        <a id="userArea-logged-pArea-privacy" class="dropdown-item" onclick="toPArea('privacy','')" href="#">Preferenze e privacy</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a id="logout" class="dropdown-item" onclick="logout()" href="">Esci</a>
+                                    </div>
+                                </li>
+                                <!-- end desktop dropdown-->
+                                
+                                <!-- mobile dropdown-->
+                                <li id="mobile-dropdown" class="hidden nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="userArea-logged-pArea" href="">
+                                        Area personale
+                                        <i class="fas fa-user-circle"></i>
+                                    </a>
+                                    <div class="hidden dropdown-menu text-right mobile-dropdown">
+                                        <a id="mobile-userArea-logged-pArea-pdata" class="dropdown-item" onclick="toPArea('pdata','mobile-')" href="#">Dati personali</a>
+                                        <a id="mobile-userArea-logged-pArea-payment" class="dropdown-item" onclick="toPArea('payment','mobile-')" href="#">Metodi di pagamento</a>
+                                        <a id="mobile-userArea-logged-pArea-privacy" class="dropdown-item" onclick="toPArea('privacy','mobile-')" href="#">Preferenze e privacy</a>
+                                        <a id="logout-mob" class="dropdown-item" onclick="logout()" href="">Esci</a>
+                                    </div>
+                                </li>
+                                <!-- end mobile dropdown-->
+                                <li class="nav-item">
+                                    <a id="userArea-logged-orders" href="" class="nav-link">
+                                        I tuoi ordini
+                                        <i class="fas fa-shopping-bag"></i>
+                                    </a>
+                                </li>
+                                <li class="hidden nav-item" id="cartIcon">
+                                    <a class="nav-link"  href="../pages/cart.html">
+                                        Carrello
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </a>    
+                                </li>
+                                <li class="hidden nav-item" id="menuIcon">
+                                    <a class="nav-link"   href="../pages/menuR.html">
+                                        Il tuo men&uacute;
+                                        <i class="fas fa-book-open"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </ul>
                 </div>
-                <a id="userArea-logged-pArea" href="">
-                    Area personale
-                    <i class="fas fa-user-circle"></i>
+            </nav>
+
+            <!-- LOGO -->
+            <div class="text-center" >
+                <a href="../index.html">
+                    <img id="logo" src="../images/FastfoodLogov2.png" alt="fastFood-logo-bluprofile" class="img-fluid">
                 </a>
             </div>
-                
-            
-        </div>
-        
-        <!--OPTION-->
-        
-        <!--customer-->
-        <a class="hidden" id="cartIcon" href="cart.html">
-            Carrello
-            <i class="fas fa-shopping-cart"></i>
-        </a>
-        <!--restaurateur-->
-        <a class="hidden" id="menuIcon" href="menuR.html">
-            Il tuo men&uacute;
-            <i class="fas fa-book-open"></i>
-        </a>
-    </header>
+            <!-- END LOGO -->
+        </header>
+    </div>
     
-    <!--BANNER-->
-    <div id="banner">
-        foto ristorante
-        <div id="banner-data">
-            <h2 id="banner-data-name"></h2>
-            <p id="banner-data-rating"></p>
+    <!-- BANNER -->
+    <div id="carousel" class="w-100">
+        <img id="img-banner" src="" class="w-100" alt="...">
+    </div>    
+      <!-- BANNER -->
+
+
+    <!-- FILTER NAV -->
+    <div>
+        <nav id="desktopFilterNav" class="navbar navbar-expand-sm navbar-light bg-yellow">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarFilterNav" aria-controls="navbarFilterNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse flex-grow-1 row row-cols-1 row-cols-sm-3 align-items-center" id="navbarFilterNav">
+                <div id="desktopFilterNav-dropdownFilters" class="col">
+                    <p class="my-auto">
+                        <i class="fas fa-filter"></i>
+                        Filtra
+                        <i id="dropdownFilters-down" class="fas fa-chevron-down" onclick="showFilterMenu()"></i>
+                        <i id="dropdownFilters-up" class="hidden fas fa-chevron-up" onclick="hideFilterMenu()"></i>
+                    </p>
+                </div>
+                <div id="desktopFilterNav-appliedFilters" class="col">
+                    <ul id="desktopFilterNav-appliedFilters-ul" class="nav nav-pills nav-fill align-items-center">
+                        <li class="nav-item fit-content mx-1 my-auto">
+                            <p class="p-2 px-3 my-auto bold">Filtri attivi:</p>
+                        </li>
+                    </ul>
+                </div>
+                <div id="desktopFilterNav-search" class="col">
+                    <form class="form-inline my-2 my-lg-0 justify-content-end">
+                        <input id="desktopFilterNav-search-input" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="button" onclick="searchBar()">Search</button>
+                      </form>
+                </div>
+            </div>
+        </nav>
+        
+        <div id="dropdownFilters-menu" class="hidden bg-yellow fit-content text-left">
+            <div class="dropdown dropdown-item">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="userArea-logged-pArea" href="">
+                    Cucina
+                </a>
+                <div id="dropdownFilters-menu-cuisine" class="dropdown-menu mobile-dropdown">
+                </div>
+            </div>
+            <div class="dropdown dropdown-item">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="userArea-logged-pArea" href="">
+                    Categorie
+                </a>
+                <div id="dropdownFilters-menu-category" class="dropdown-menu mobile-dropdown">
+                </div>
+            </div>
+            <div class="dropdown-item">
+                <p class="py-2" onclick="removeFilters()">
+                    Elimina filtri
+                    <i class="fas fa-times"></i>
+                </p>
+            </div>
         </div>
     </div>
+    <!-- END FILTER NAV -->
 
-    <nav id="navbar">
-        <ul id="navbar-el">
-            <li id="navbar-el-menu" onclick="toMenu()">
-                Men&uacute;
-            </li>
-            <ul id="navbar-el-filter">
 
-            </ul>
-            <li id="navbar-el-info" onclick="toInfo()">
-                Informazioni
-            </li>
-        </ul>
-    </nav>
-
-    <main id="main">
+    <main id="main" class="container-fluid">
         <div id="allMenu">
-            <ul id="allMenu-list"></ul>
+            <p id="info-business-name" class="pTitle w-100 text-center mx-auto my-2"></p>
+            <ul id="allMenu-list" class="nav nav-tabs justify-content-center"></ul>
         </div>
-        <div id="info" class="hidden">
-            <div id="info-business">
-                <p id="info-business-name"></p>
-                <p id="info-business-phone"></p>
-                <p id="info-business-email"></p>
-            </div>
-            <div id="info-address">
-                <p id="info-address-line1"></p>
-                <p id="info-address-line2"></p>
+        <div id="info" class="container rounded shadow p-3 mx-auto">
+            <div class="row row-cols-1 row-cols-sm-2">
+                <div id="info-business" class="col text-center">
+                    <p id="info-business-phone" class="my-1">
+                        <span class="font-weight-bold">Tel:</span>
+                    </p>
+                    <p id="info-business-email" class="my-1">
+                        <span class="font-weight-bold">Email:</span>
+                    </p>
+                </div>
+                <div id="info-address" class="col text-center">
+                    <span class="font-weight-bold">Indirizzo:</span>
+                    <p id="info-address-line1" class="address"></p>
+                    <p id="info-address-line2" class="address"></p>
+                </div>
             </div>
         </div>
     </main>
     <footer>
-        <p>Created by <br> Valentina Lor&eacute;</p>
+        <p>Created by Valentina Lor&eacute;</p>
     </footer>
 
 

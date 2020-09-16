@@ -15,19 +15,22 @@
     }
 }
 
-//logout options
-function areYouSure(){
-    document.getElementById("userArea-logged-logout").style.display = "block";
-}
 function logout(){
     sessionStorage.removeItem("logged");
     sessionStorage.removeItem("cart");
-    location.href = "../index.html";
+    document.getElementById("logout").href = "../index.html";
+    document.getElementById("logout-mob").href = "../index.html";
 }
-function stay(){
-    document.getElementById("userArea-logged-logout").style.display = "none";
+function toPArea(data,option){
+    sessionStorage.setItem("pArea-data", JSON.stringify(data));
+    let user = JSON.parse(sessionStorage.getItem("logged"));
+    if(user.vatNum == null){
+        document.getElementById(option + "userArea-logged-pArea-" + data).href = "personalAreaC.html";
+    }
+    else{
+        document.getElementById(option + "userArea-logged-pArea-" + data).href = "personalAreaR.html";
+    }
 }
-
 //find&update user (c)
 let user = JSON.parse(sessionStorage.getItem("logged"));
 let users = JSON.parse(localStorage.getItem("customers"));
@@ -111,24 +114,27 @@ function loadPage(){
         }else{
             p.innerHTML += dish[data];
         }
+        p.className = "my-2 text-center";
         
         return p;
     }
     function showDish(id, dish){
         let li = document.createElement("li");
         li.id = id + "-" + dish.id;
-        let img = document.createElement("img");
-        img.src = dish.img;
+        li.className = "list-group-item my-4 mx-3 p-2 shadow";
         
         let div = document.createElement("div");
         div.id = id + "-" + dish.id + "-data";
+        div.className = "container fit-content my-auto";
+
         let pName = pForShowingData(div.id,dish, 'name');
+        pName.className ="pTitle";
         let pPrice = pForShowingData(div.id,dish, 'price');
         pPrice.innerHTML += " €";
         let pIngredients = pForShowingData(div.id,dish, 'ingredients');
         div.appendChild(pName);
-        div.appendChild(pPrice);
         div.appendChild(pIngredients);
+        div.appendChild(pPrice);
 
         let plus = document.createElement("i");
         plus.className = "fas fa-plus";
@@ -141,6 +147,7 @@ function loadPage(){
         minus.setAttribute("onclick", "dishRemove('" + li.id + "')");
         let pNum = document.createElement("p");
         pNum.id = li.id + "-quantity";
+        pNum.className = "my-3 text-center";
         pNum.appendChild(minus);
         pNum.appendChild(counter);
         pNum.appendChild(plus);
@@ -150,11 +157,11 @@ function loadPage(){
         let xIcon = document.createElement("i");
         xIcon.className = "fas fa-times";
         let p = document.createElement("p");
+        p.className = "my-3 text-center";
         p.setAttribute("onclick","removeFromCart('" + li.id + "')");
         p.appendChild(span);
         p.appendChild(xIcon);
 
-        li.appendChild(img);
         li.appendChild(div);
         li.appendChild(pNum);
         li.appendChild(p);
@@ -175,6 +182,7 @@ function loadPage(){
                 document.getElementById("orderView-items-list-" + item.id + "-quantity-counter").innerHTML = c;
             }
         }
+        document.getElementById("orderView-resName").innerHTML = res.businessName;
     }
 
     //form elements

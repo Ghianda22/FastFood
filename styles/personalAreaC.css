@@ -1,0 +1,55 @@
+.areaTitoli{
+    text-align: center;
+}
+
+.cancella{
+    text-align: center;
+}
+
+h2{
+    text-align: center;
+}
+
+.card{
+    border: 1px solid #F4AC0C;
+}
+
+.contenuti{
+    margin-bottom: 100px;
+    margin-top: 50px;
+}
+.btn-warning{
+    background-color: #F4AC0C;
+    border-radius: 50px;
+    font-weight: bold;
+    width: fit-content;
+}
+.btn-confirm{
+    border-radius: 50px;
+    border: 2px solid #F4AC0C;
+    width: fit-content;
+}
+.custom-checkbox .custom-control-input:checked~.custom-control-label::before{
+    background-color:#F4AC0C;
+    border: black;
+}
+.custom-control-input:checked ~ .custom-control-label::before {
+    background-color:#F4AC0C;
+    border: black;
+}
+label a{
+    text-decoration: none;
+    color: #F4AC0C;
+}
+label a:hover{
+    text-decoration: none;
+    color: #f8cd6d;
+}
+
+.imageUpload{
+    overflow: hidden;
+}
+
+.privacy{
+    text-align: center;
+}

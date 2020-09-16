@@ -53,6 +53,7 @@ function updateOrder(order){
 function infoLiElements(id, content, contentValue){
     let li = document.createElement("li");
     li.id = id + "-" + contentValue;
+    
     let descr = document.createElement("span");
     descr.innerHTML = content;
     let value = document.createElement("span");
@@ -82,7 +83,7 @@ function pForShowingData(id, dish, data){
 function showDish(id, dish){
     let liDish = document.createElement("li");
     liDish.id = id + "-" + dish.id;
-
+    liDish.className = "list-group-item";
     let divImg = document.createElement("div");
     divImg.id = liDish.id + "-img";
     let img = document.createElement("img");
@@ -132,14 +133,16 @@ function showOrders(){
           
             let li = document.createElement("li");
             li.id = "orderList-container-ul-" + order.id;
-            li.style.border = "1px solid black";
+            li.className="list-group-item";
             let divOrder = document.createElement("div");
             divOrder.id = li.id + "-orderInfo";
+            divOrder.className="divOrder";
             let divDishes = document.createElement("div");
             divDishes.id = li.id + "-orderDishes";
             divDishes.className = "hidden";
             let dishUl = document.createElement("ul");
             dishUl.id = divDishes.id + "-ul";
+            dishUl.className="list-group list-group-flush";
             /* ORDER INFO */
             {   
                 //find restaurateur
@@ -292,8 +295,8 @@ function showOrders(){
                 divOrder.appendChild(divFooter);
 
                 divDishes.appendChild(dishUl);
+                divOrder.appendChild(divDishes);
                 li.appendChild(divOrder);
-                li.appendChild(divDishes);
                 document.getElementById("orderList-container-ul").appendChild(li);    
             }
             /* DISHES INFO */

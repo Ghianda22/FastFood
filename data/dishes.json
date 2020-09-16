@@ -181,7 +181,7 @@ let dishes = [
     },
     {   
         "id":19,
-        "name":"Patatine",
+        "name":"Patatine fritte",
         "price": 3.50,
         "img": "../images/dishes/antipasti/patatine.jpg",
         "ingredients":["patate","sale"],

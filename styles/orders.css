@@ -1,0 +1,10 @@
+.divOrder{
+    border: 1px solid #F4AC0C;
+    border-radius: 10px;
+    width: 500px;
+    padding: 30px;
+}
+
+#orderList-container-ul img{
+    display: none;
+}

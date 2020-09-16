@@ -59,8 +59,12 @@ function updateAveragePrice(){
                 if(el == dish.id){
                     let li = document.createElement("li");
                     li.id = "yourMenu-list-" + dish.id;
+                    li.className ="list-group-item my-4 mx-3 shadow";
                     let img = document.createElement("img");
                     img.src = dish.img;
+                    let divImg = document.createElement("div");
+                    divImg.appendChild(img);
+                    divImg.className="divImg";
 
                     let pName = pForShowingData(dish, 'name', 'Nome');
                     let pPrice = pForShowingData(dish, 'price', 'Prezzo');
@@ -76,7 +80,8 @@ function updateAveragePrice(){
                     div.appendChild(pIngredients);
                     div.appendChild(pCuisine);
                     div.appendChild(pCategories);
-                    li.appendChild(img);
+                    div.className = "";
+                    li.appendChild(divImg);
                     li.appendChild(div);
                     document.getElementById("yourMenu-list").appendChild(li);
                 }
@@ -92,6 +97,10 @@ function updateAveragePrice(){
             li.id = "setMenu-list-" + dish.id;
             let img = document.createElement("img");
             img.src = dish.img;
+            li.className ="list-group-item my-4 mx-3 shadow";
+            let divImg = document.createElement("div");
+            divImg.appendChild(img);
+            divImg.className="divImg";
 
             let pName = pForShowingData(dish, 'name', 'Nome');
             let pPrice = pForShowingData(dish, 'price', 'Prezzo');
@@ -116,7 +125,7 @@ function updateAveragePrice(){
             plus.id = "setMenu-list-" + dish.id + "-plus";
             plus.setAttribute("onclick","addDish(" + dish.id + ")");
             
-            li.appendChild(img);
+            li.appendChild(divImg);
             li.appendChild(div);
             li.appendChild(minus);
             li.appendChild(plus);

@@ -15,40 +15,47 @@
     }
 }
 
-window.onbeforeunload = sessionStorage.setItem("prev", document.URL);
+function logout(){
+    sessionStorage.removeItem("logged");
+    sessionStorage.removeItem("cart");
+    document.getElementById("logout").href = "../index.html";
+    document.getElementById("logout-mob").href = "../index.html";
+}
+function toPArea(data,option){
+    sessionStorage.setItem("pArea-data", JSON.stringify(data));
+    let user = JSON.parse(sessionStorage.getItem("logged"));
+    if(user.vatNum == null){
+        document.getElementById(option + "userArea-logged-pArea-" + data).href = "personalAreaC.html";
+    }
+    else{
+        document.getElementById(option + "userArea-logged-pArea-" + data).href = "personalAreaR.html";
+    }
+}
 
 function detectUser(){
     if(sessionStorage.getItem("logged") != null){
+        document.getElementById("userArea-login").style.display = "none";
+        document.getElementById("userArea-logged").style.display = "block";
+        
         let user = JSON.parse(sessionStorage.getItem("logged"));
+        //customer mode
         if(user.vatNum == null){
-            //customer mode
-            document.getElementById("userArea-login").style.display = "none";
-            document.getElementById("userArea-logged").style.display = "inline";
             document.getElementById("userArea-logged-pArea").href = "personalAreaC.html";
+            document.getElementById("userArea-logged-orders").href = "ordersC.html";
             document.getElementById("menuIcon").style.display = "none";
             document.getElementById("cartIcon").style.display = "inline";
         }else{
             //restaurateur mode
-            document.getElementById("userArea-login").style.display = "none";
-            document.getElementById("userArea-logged").style.display = "block";
             document.getElementById("userArea-logged-pArea").href = "personalAreaR.html";
+            document.getElementById("userArea-logged-orders").href = "ordersR.html";
             document.getElementById("menuIcon").style.display = "inline";
             document.getElementById("cartIcon").style.display = "none";
+
         }
     }
 }
-function areYouSure(){
-    document.getElementById("userArea-logged-logout").style.display = "block";
-}
-function logout(){
-    sessionStorage.removeItem("logged");
-    sessionStorage.removeItem("cart");
-    location.reload();
-}
-function stay(){
-    document.getElementById("userArea-logged-logout").style.display = "none";
-}
 
+window.onbeforeunload = sessionStorage.setItem("prev", document.URL);
 
 /* -- INITIALIZATION -- */
 let resEmail = JSON.parse(sessionStorage.getItem("res"));
@@ -72,9 +79,10 @@ for(let el of res.menu) {
 document.title = res.businessName + " - FastFood";
 
 function loadPage(){
-    showFilters();
-    createFilterResult();
-    showMain();
+    document.getElementById("img-banner").src = res.banner;
+    document.getElementById("img-banner").style.maxHeight = ((window.innerHeight)*0.6) + "px";
+    showFilterTags();
+    showAllDishes();
     showInfo();
 }
 
@@ -94,125 +102,205 @@ function loadPage(){
         }else{
             p.innerHTML += dish[data];
         }
+        p.className = "my-2 text-center";
         
         return p;
     }
-    function showDish(id, dish){
+    function showDish(dish){
         let li = document.createElement("li");
-        li.id = id + "-" + dish.id;
+        li.id = "allMenu-list-" + dish.id;
+        li.className = "list-group-item my-4 mx-3 p-0 shadow";
         let img = document.createElement("img");
         img.src = dish.img;
+        img.className = "master-Card";
         
         let pName = pForShowingData(dish, 'name');
+        pName.className = "pTitle my-2 text-center";
         let pPrice = pForShowingData(dish, 'price');
         pPrice.innerHTML += " €";
         let pIngredients = pForShowingData(dish, 'ingredients');
         
-        let div = document.createElement("div");
-        div.id = id + "-" + dish.id + "-data";
-        div.appendChild(pName);
-        div.appendChild(pPrice);
-        div.appendChild(pIngredients);
+        let infoDiv = document.createElement("div");
+        infoDiv.id = li.id + "-data";
+        infoDiv.className = "container fit-content my-auto";
+
+        infoDiv.appendChild(pName);
+        infoDiv.appendChild(pIngredients);
+        infoDiv.appendChild(pPrice);
 
         let cartIcon = document.createElement("i");
         cartIcon.className = "fas fa-cart-arrow-down";
-        let span = document.createElement("span");
-        span.innerHTML = "Aggiungi al carrello";
-        let p = document.createElement("p");
-        p.setAttribute("onclick","addToCart(" + dish.id + ")");
-        p.appendChild(span);
-        p.appendChild(cartIcon);
+        let pAdd = document.createElement("span");
+        pAdd.innerHTML = "Aggiungi al carrello";
+        pAdd.className = "my-3 text-center";
+        let divAdd = document.createElement("div");
+        divAdd.className = "container fit-content my-2";
+        divAdd.setAttribute("onclick","addToCart(" + dish.id + ")");
+        divAdd.appendChild(pAdd);
+        divAdd.appendChild(cartIcon);
 
         li.appendChild(img);
-        li.appendChild(div);
-        li.appendChild(p);
-        document.getElementById(id).appendChild(li);
+        li.appendChild(infoDiv);
+        li.appendChild(divAdd);
+        document.getElementById("allMenu-list").appendChild(li);
     }
-    
-    //create lists
-    function showMain(){
+    function showAllDishes(){
         for (const dish of menu) {
-            showDish("allMenu-list", dish);
-        }
-        document.getElementById("banner-data-name").innerHTML = res.businessName;
-        let rating = document.getElementById("banner-data-rating");
-        rating.innerHTML += res.rating;
-        for(let i = res.rating; i > 0; i--){
-            let fullStar = document.createElement("i");
-            fullStar.className = "fas fa-star";
-            rating.appendChild(fullStar);
-        }
-        for(let i = 5 - res.rating; i > 0; i--){
-            let emptyStar = document.createElement("i");
-            emptyStar.className = "far fa-star";
-            rating.appendChild(emptyStar);
+            showDish(dish);
         }
     }
-    function createFilterResult(){
-        let filter = document.getElementsByClassName("filter");
-        for (const f of filter) {
-            for (const dish of menu) {
-                if(dish.category == f.innerHTML){
-                    showDish(("filter-" + dish.category + "-list"), dish);
-                }
-            }
+    function resetDishes(){
+        while(document.getElementById("allMenu-list").childElementCount != 0){
+            document.getElementById("allMenu-list").firstChild.remove();
         }
     }
-    function showFilters(){
-        for (const dish of menu) {
-            if(document.getElementById("filter-" + dish.category) == null){
-                //nav button
-                let li = document.createElement("li");
-                li.id = "navbar-el-filter-" + dish.category;
-                li.className = "filter"
-                li.setAttribute("onclick", "filter('" + dish.category + "')");
-                li.innerHTML = dish.category;
-                document.getElementById("navbar-el-filter").appendChild(li);
 
-                //main div
-                let div = document.createElement("div");
-                div.id = "filter-" + dish.category;
-                div.className = "hidden";
-                let ul = document.createElement("ul");
-                ul.id = div.id + "-list";
-                div.appendChild(ul);
-                document.getElementById("main").appendChild(div);
-            }
-        }
-    }
+   
     function showInfo(){
-        document.getElementById("info-business-name").innerHTML = res.businessName;
-        document.getElementById("info-business-phone").innerHTML = res.phone;
-        document.getElementById("info-business-email").innerHTML = res.email;
+        document.getElementById("info-business-name").innerHTML += (res.businessName).toUpperCase();
+        document.getElementById("info-business-phone").innerHTML += res.phone;
+        document.getElementById("info-business-email").innerHTML += res.email;
 
         document.getElementById("info-address-line1").innerHTML = res.address.street +" "+ res.address.civN;
         document.getElementById("info-address-line2").innerHTML = res.address.zip + ", " + res.address.city + " (" + res.address.province + ")";
-
-    }
-
-    //switch filter
-    function filter(category){
-        let views = document.getElementById("main").children;
-        for (const v of views) {
-            v.style.display = "none";
-        }
-        document.getElementById("filter-" + category).style.display = "block";
-    }
-    function toMenu(){
-        let views = document.getElementById("main").children;
-        for (const v of views) {
-            v.style.display = "none";
-        }
-        document.getElementById("allMenu").style.display = "block";
-    }
-    function toInfo(){
-        let views = document.getElementById("main").children;
-        for (const v of views) {
-            v.style.display = "none";
-        }
-        document.getElementById("info").style.display = "block";
     }
 }
+
+/* -- FILTERS -- */
+{
+    function showFilterMenu(){
+        document.getElementById("dropdownFilters-down").style.display = "none";
+        document.getElementById("dropdownFilters-up").style.display = "inline";
+        document.getElementById("dropdownFilters-menu").style.display = "block";
+    }
+    function hideFilterMenu(){
+        document.getElementById("dropdownFilters-down").style.display = "inline";
+        document.getElementById("dropdownFilters-up").style.display = "none";
+        document.getElementById("dropdownFilters-menu").style.display = "none";
+    }
+    function showFilterTags(){
+        let dishList = JSON.parse(localStorage.getItem("dishes"));
+        for(const dish of dishList){
+            //dish cuisine
+            if(document.getElementById("dropdownFilters-menu-cuisine-" + dish.cuisine) == null){
+                let a = document.createElement("a");
+                a.id = "dropdownFilters-menu-cuisine-" + dish.cuisine;
+                a.className = "dropdown-item";
+                a.innerHTML = dish.cuisine;
+                a.setAttribute("onclick", "applyFilter('cuisine','" + dish.cuisine + "')");
+                (document.getElementById("dropdownFilters-menu-cuisine")).appendChild(a);
+            }
+            //dish category
+            if(document.getElementById("dropdownFilters-menu-category-" + dish.category) == null){
+                let a = document.createElement("a");
+                a.id = "dropdownFilters-menu-category-" + dish.category ;
+                a.className = "dropdown-item";
+                a.innerHTML = dish.category;
+                a.setAttribute("onclick", "applyFilter('category','" + dish.category + "')");
+                (document.getElementById("dropdownFilters-menu-category")).appendChild(a);
+            }
+        }
+    }
+    function showAppliedFilters(filter){
+        if(document.getElementById("desktopFilterNav-appliedFilters-" + filter) == null){
+            if(window.screen.width > 576){
+                let li = document.createElement("li");
+                li.id = "desktopFilterNav-appliedFilters-" + filter;
+                li.className = "nav-item fit-content mx-1 my-auto";
+    
+                let p = document.createElement("p");
+                p.innerHTML = filter;
+                p.className = "filter-button p-2 px-3 my-1";
+                li.appendChild(p);
+                (document.getElementById("desktopFilterNav-appliedFilters-ul")).appendChild(li);
+            }else{
+                let li = document.createElement("li");
+                li.id = "desktopFilterNav-appliedFilters-" + filter;
+                li.className = "nav-item fit-content mx-1 my-auto";
+    
+                let p = document.createElement("p");
+                p.innerHTML = filter;
+                p.className = "p-2 px-3 my-auto";
+                li.appendChild(p);
+                (document.getElementById("desktopFilterNav-appliedFilters-ul")).appendChild(li);
+    
+            }
+        }
+    }
+    
+    function searchBar(){
+        let input = (document.getElementById("desktopFilterNav-search-input").value).toLowerCase();
+        resetDishes();
+        for(const dish of menu){
+            let stringDish = "";
+            for(const key in dish){
+                if(key == "name" || key == "ingredients" || key == "cuisine" || key == "category"){
+                    stringDish += dish[key];
+                }
+            }
+            stringDish = stringDish.replace(/ /g, "");
+            stringDish = stringDish.replace(/,/g, "");
+            stringDish = stringDish.toLowerCase();
+            console.log(stringDish);
+            if(stringDish.indexOf(input) != -1){
+                if(document.getElementById("allMenu-list-" + dish.id) == null){
+                    showDish(dish);
+                }
+            }
+        }
+        if(document.getElementById("allMenu-list").childElementCount == 0){
+            let divPopUp = document.createElement("div");
+            divPopUp.className = "popup";
+            let p = document.createElement("p");
+            p.innerHTML = "Non ci sono elementi che corrispondono alla tua ricerca";
+            divPopUp.appendChild(p);
+            (document.getElementById("allMenu-list")).appendChild(divPopUp);
+        }    
+    }
+    
+    function applyFilter(filter, value){
+        let dishDisplayed = [];
+        for (const dish of menu) {
+            if(document.getElementById("allMenu-list-" + dish.id) != null){
+                dishDisplayed.push(dish);
+            }
+        }
+        resetDishes();
+        for(const dish of dishDisplayed){
+            if(dish[filter] == value){
+                if(document.getElementById("allMenu-list-" + dish.id) == null){
+                        showDish(dish);
+                }
+            }
+        }
+        showAppliedFilters(value);
+        if(document.getElementById("allMenu-list").childElementCount == 0){
+            let divPopUp = document.createElement("div");
+            divPopUp.className = "popup";
+            let p = document.createElement("p");
+            p.innerHTML = "Non ci sono elementi che corrispondono alla tua ricerca";
+            divPopUp.appendChild(p);
+            (document.getElementById("allMenu-list")).appendChild(divPopUp);
+        } 
+    
+    }
+    function removeFilters(){
+        resetDishes();
+        showAllDishes();
+        while(document.getElementById("desktopFilterNav-appliedFilters-ul").childElementCount != 0){
+            document.getElementById("desktopFilterNav-appliedFilters-ul").firstChild.remove();
+        }
+        let li = document.createElement("li");
+        li.className = "nav-item fit-content mx-1 my-auto";
+        let p = document.createElement("p");
+        p.innerHTML = "Filtri attivi:";
+        p.className = "p-2 px-3 my-auto bold";
+        li.appendChild(p);
+        (document.getElementById("desktopFilterNav-appliedFilters-ul")).appendChild(li);
+    }
+}
+
+
 
 /* -- CART -- */
 {

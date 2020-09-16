@@ -1,67 +1,114 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.1.0/uuidv4.min.js"></script>
-    <script type="text/javascript" src="../data/customers.json"></script>
-    <script type="text/javascript" src="../data/restaurateurs.json"></script>
-    <script type="text/javascript" src="../data/dishes.json"></script>
-    <script type="text/javascript" src="../data/orderList.json"></script>
-
-    <script src="../scripts/cart.js"></script>
-    <script src="https://kit.fontawesome.com/62ec85265f.js" crossorigin="anonymous"></script>
+        <!--STYLE-->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/62ec85265f.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="../styles/style.css">
     
-    <link rel="stylesheet" href="../styles/style.css">
+        <!--DATA-->
+        <script type="text/javascript" src="../data/customers.json"></script>
+        <script type="text/javascript" src="../data/restaurateurs.json"></script>
+        <script type="text/javascript" src="../data/dishes.json"></script>
+        <script type="text/javascript" src="../data/orderList.json"></script>
     
-    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
-    <link rel="icon" href="../favicon.ico" type="image/x-icon">       
-    
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Carrello - Fastfood</title>
+        <script src="../scripts/cart.js"></script>
+        
+        
+        <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+        <link rel="icon" href="../favicon.ico" type="image/x-icon">       
+        
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <title>Carrello - FastFood</title>
 </head>
 <body onload="loadPage();">
-    <header>
-        <!--LOGO-->
-        <a href="../index.html">
-            <img id="logo" src="../images/FastfoodLogo.png" alt="fastFood-logo-bluprofile" id="logo">
-        </a>
-        <!--PRIVATE AREA-->
-        <div id="userArea">
-            <div id="userArea-logged">
-                <p onclick="areYouSure()">Esci</p>
-                <div class="hidden" id="userArea-logged-logout">
-                    Sei sicuro di voler uscire?
-                    <button type="button" id="userArea-logged-logout-y" onclick="logout();">
-                        Si, devo andare
-                    </button>
-                    <button type="button" id="userArea-logged-logout-n" onclick="stay()">
-                        No, rimango ancora un po'
-                    </button>
+    
+    <div class="container">
+        <header>
+            <!-- NAV AREA-->
+            <nav id="mainNav" class="navbar navbar-expand-sm navbar-light fixed-top justify-content-end bg-yellow">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse flex-grow-1 text-right" id="navbarMain">
+                    <ul class="navbar-nav ml-auto flex-nowrap">
+                        <div id="userArea-logged">
+                            <ul class="navbar-nav ml-auto flex-nowrap">
+                                <!--desktop dropdown-->
+                                <li id="desktop-dropdown" class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="userArea-logged-pArea" href="">
+                                        Area personale
+                                        <i class="fas fa-user-circle"></i>
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <a id="userArea-logged-pArea-pdata" class="dropdown-item" onclick="toPArea('pdata','')" href="#">Dati personali</a>
+                                        <a id="userArea-logged-pArea-payment" class="dropdown-item" onclick="toPArea('payment','')" href="#">Metodi di pagamento</a>
+                                        <a id="userArea-logged-pArea-privacy" class="dropdown-item" onclick="toPArea('privacy','')" href="#">Preferenze e privacy</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a id="logout" class="dropdown-item" onclick="logout()" href="">Esci</a>
+                                    </div>
+                                </li>
+                                <!-- end desktop dropdown-->
+                                
+                                <!-- mobile dropdown-->
+                                <li id="mobile-dropdown" class="hidden nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="userArea-logged-pArea" href="">
+                                        Area personale
+                                        <i class="fas fa-user-circle"></i>
+                                    </a>
+                                    <div class="hidden dropdown-menu text-right mobile-dropdown">
+                                        <a id="mobile-userArea-logged-pArea-pdata" class="dropdown-item" onclick="toPArea('pdata','mobile-')" href="#">Dati personali</a>
+                                        <a id="mobile-userArea-logged-pArea-payment" class="dropdown-item" onclick="toPArea('payment','mobile-')" href="#">Metodi di pagamento</a>
+                                        <a id="mobile-userArea-logged-pArea-privacy" class="dropdown-item" onclick="toPArea('privacy','mobile-')" href="#">Preferenze e privacy</a>
+                                        <a id="logout-mob" class="dropdown-item" onclick="logout()" href="">Esci</a>
+                                    </div>
+                                </li>
+                                <!-- end mobile dropdown-->
+                                <li class="nav-item">
+                                    <a id="userArea-logged-orders" href="" class="nav-link">
+                                        I tuoi ordini
+                                        <i class="fas fa-shopping-bag"></i>
+                                    </a>
+                                </li>
+                                <li class="nav-item" id="cartIcon">
+                                    <a class="nav-link"  href="../pages/cart.html">
+                                        Carrello
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </a>    
+                                </li>
+                            </ul>
+                        </div>
+                    </ul>
                 </div>
-                <a id="userArea-logged-pArea" href="personalAreaC.html">
-                    Area personale
-                    <i class="fas fa-user-circle"></i>
+            </nav>
+    
+            <!-- LOGO -->
+            <div class="text-center" >
+                <a href="../index.html">
+                    <img id="logo" src="../images/FastfoodLogov2.png" alt="fastFood-logo-bluprofile" class="img-fluid">
                 </a>
             </div>
-            <a class="hidden" id="cartIcon" href="cart.html">
-                Carrello
-                <i class="fas fa-shopping-cart"></i>
-            </a>
-        </div>
-        
-        
-    </header>
+            <!-- END LOGO -->
+        </header>
+    </div>
+    
 
-    <main id="orderView">
-        <div id="fullCart">
-            <div id="orderView-resName"></div>
+    <main id="orderView" class="container-fluid mt-5 py-5">
+        <div class="container rounded-lg shadow p-3 mt-5 bg-white">
+            <!--FULL-->
+            <div id="fullCart">
+                <div id="orderView-resName" class="pTitle w-100 text-center mx-auto my-2"></div>
 
-            <div id="orderView-items">
-                <ul id="orderView-items-list"></ul>
-            </div>
+                <div id="orderView-items">
+                    <ul id="orderView-items-list" class="nav nav-tabs justify-content-center text-right"></ul>
+                </div>
 
-            <form id="orderView-form" action="" onsubmit="orderOk()">
+                <form id="orderView-form" action="" onsubmit="orderOk()">
                 <div id="orderView-payment">
                     <div id="orderView-payment-tot"></div>
                         <span>Metodo di pagamento:</span>
@@ -93,23 +140,29 @@
                     </div>
                     
                 </div>-->
-            </form>
+                </form>
             
-            <div id="orderView-confirm">
-                <button form="orderView-form" type="submit">
-                    Ordina!
-                </button>
+                <div id="orderView-confirm">
+                    <button class="filter-button bg-yellow" form="orderView-form" type="submit">
+                        Ordina!
+                    </button>
+                </div>
+            </div>
+
+            <!--EMPTY-->
+            <div id="emptyCart" class="hidden text-center">
+                <p class="my-2">
+                    Il tuo carrello è vuoto!
+                </p>
+                <p class="my-2">
+                    Scegli un <a href="../index.html">ristorante</a> da cui ordinare
+                </p>
             </div>
         </div>
-        <div id="emptyCart" class="hidden">
-            Il tuo carrello è vuoto! <br>
-            Scegli un <a href="../index.html">ristorante</a> da cui ordinare
-        </div>
-        
     </main>
 
     <footer>
-        <p>Created by <br> Valentina Lor&eacute;</p>
+        <p>Created by Valentina Lor&eacute;</p>
     </footer> 
 
 

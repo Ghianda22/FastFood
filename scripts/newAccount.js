@@ -133,6 +133,7 @@ if(localStorage.getItem("restaurateurs")==null){
                 this.averagePrice = 0;
                 this.menu = [];
                 this.img = "";
+                this.banner = "";
             }
         }
 

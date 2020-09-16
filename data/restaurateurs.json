@@ -15,11 +15,12 @@ let restaurateurs = [
         "vatNum":"11000874354",
         "payment":[false,false,true,false],
         "therms":true,
-        "rating":null,
-        "orders":["567d1de5-cfe4-4fdd-b8a9-1977f2122a44"],
-        "averagePrice": 0,
+        "rating":5,
+        "orders":["6b03ef91-c680-44e2-8d4d-2530d4ba04e6","567d1de5-cfe4-4fdd-b8a9-1977f2122a44"],
+        "averagePrice": 6.75,
         "menu":[1,2,3,5,6,8,9,10],
-        "img":"../images/restaurant/aldoArona-logo.png"
+        "img":"images/restaurant/aldoArona-logo.png",
+        "banner":"../images/restaurant/banner/aldo-logo_banner.png"
     },
 
     {
@@ -38,14 +39,13 @@ let restaurateurs = [
         "vatNum":"01239710039",
         "payment":[false,true,false,true],
         "therms":true,
-        "rating":null,
-        "orders":[],
-        "averagePrice": 0,
+        "rating":3,
+        "orders":["444593ba-a40a-4608-a607-947056c0d0c0","5e985fea-bd12-4902-b032-03f9d42ed15e"],
+        "averagePrice": 6.62,
         "menu":[1,2,3,4,5,7,8,10],
-        "img":"../images/restaurant/amicimiei-logo.png"
+        "img":"images/restaurant/amicimiei-logo.png",
+        "banner":"../images/restaurant/banner/amici-miei.png"
     },
-
-    
     
     {
         "businessName":"Pizzeria Da Tonino",
@@ -63,10 +63,13 @@ let restaurateurs = [
             "vatNum":"77388388522",
         "payment":[true,false,true,true],
         "therms":true,
-        "rating":null,
-        "orders":[],
+        "rating":3,
+        "averagePrice": 6.93,
+        "orders":["4a8b06c0-7572-44e0-ad89-f4f3ac4c8258"],
         "menu":[1,2,3,5,6,7,10],
-        "img":""},
+        "img":"images/restaurant/da_Tonino.png",
+        "banner":"../images/restaurant/banner/datonino-banner.png"
+    },
 
     {
         "businessName":"Amy Sushi",
@@ -84,10 +87,12 @@ let restaurateurs = [
         "vatNum":"03475690123",
         "payment":[true,true,true,true],
         "therms":true,
-        "rating":null,
-        "orders":[],
+        "rating":2.5,
+        "averagePrice": 6.59,
+        "orders":["13ba1d55-77fe-4159-85bc-82b7652ca09d","5d1d0037-40f2-41ba-9880-ad9ce530d534"],
         "menu":[13,14,16,17,22,24],
-        "img":"../images/restaurant/amy-sushi1.jpg"
+        "img":"images/restaurant/amy-sushi1.jpg",
+        "banner":"../images/restaurant/banner/amy-sushi2.jpg"
     },
 
     {
@@ -106,10 +111,12 @@ let restaurateurs = [
         "vatNum":"03288477006",
         "payment":[true,false,false,true],
         "therms":true,
-        "rating":null,
-        "orders":[],
+        "rating":2,
+        "averagePrice": 5.36,
+        "orders":["2a55249f-2beb-49cf-847d-dd75b6d89559"],
         "menu":[26,24,23,22,19,18,17],
-        "img":"../images/restaurant/miyo-sushi.jpg"
+        "img":"images/restaurant/miyo-sushi.jpg",
+        "banner":"../images/restaurant/banner/miyo-sushi-banner.png"
     },
 
     {
@@ -128,10 +135,12 @@ let restaurateurs = [
         "vatNum":"03717390753",
         "payment":[false,false,false,true],
         "therms":true,
-        "rating":null,
-        "orders":[],
+        "rating":2,
+        "averagePrice": 5.13,
+        "orders":["90b8ee61-bb38-4855-95c6-9575f5e310c5","d2413ffc-de6d-4185-bebc-04979d6eb376"],
         "menu":[11,27,19,10,1,6],
-        "img":"../images/restaurant/el-sharm.jpg"
+        "img":"images/restaurant/el-sharm.jpg",
+        "banner":"../images/restaurant/banner/el-sharm1.jpg"
     },
     {
         "businessName":"Turkish Anatolia Doner Kebab",
@@ -149,11 +158,12 @@ let restaurateurs = [
         "vatNum":"03746739472",
         "payment":[false,true,true,true],
         "therms":true,
-        "rating":null,
-        "orders":[],
-        "averagePrice":0,
+        "rating":5,
+        "orders":["002da702-1cc8-4b8d-a376-3e7dc63d3c57"],
+        "averagePrice":4.4,
         "menu":[11,12,19,10,1],
-        "img":"../images/restaurant/turkish-anatolia.jpg"
+        "img":"images/restaurant/turkish-anatolia.jpg",
+        "banner":"../images/restaurant/banner/turkish-anatolia.jpg"
     },
     {
         "businessName":"Sushi Green",
@@ -171,11 +181,12 @@ let restaurateurs = [
         "vatNum":"03526850017",
         "payment":[true,true,true,true],
         "therms":true,
-        "rating":null,
-        "orders":[],
-        "averagePrice":0,
+        "rating":3,
+        "orders":["0589ab55-5840-47e3-b700-7a140acb1392","2f75eafe-05bc-4c89-819b-3a28b94aef04"],
+        "averagePrice":5,
         "menu":[26,25,24,23,21,19,17,15],
-        "img":"../images/restaurant/sushi-green.jpg"
+        "img":"images/restaurant/sushi-green.jpg",
+        "banner":"../images/restaurant/banner/s_green.png"
     }
 
 ];

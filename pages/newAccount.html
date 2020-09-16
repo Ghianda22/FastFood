@@ -1,191 +1,334 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <script type="text/javascript" src="..\data\customers.json"></script>
-    <script type="text/javascript" src="..\data\restaurateurs.json"></script>
-    <script type="text/javascript" src="..\data\dishes.json"></script>
+    <!--STYLE-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../styles/register.css">
+
+    <!--DATA-->
+    <script type="text/javascript" src="../data/customers.json"></script>
+    <script type="text/javascript" src="../data/restaurateurs.json"></script>
+    <script type="text/javascript" src="../data/dishes.json"></script>
     <script type="text/javascript" src="../data/orderList.json"></script>
 
     <script src="..\scripts\newAccount.js"></script>
-    <link rel="stylesheet" href="..\styles\style.css">
+
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrati - FastFood</title>
 </head>
 <body>
-    <div id="newAcc">
-        
-        <form id="newAcc-formChoice">
-            <input type="radio" name="newAcc-formChoice-type" id="newAcc-formChoice-type-c" value="Customer" onclick="cMode()">
-            <label for="newAcc-formChoice-type-c">Cliente</label>
-            <input type="radio" name="newAcc-formChoice-type" id="newAcc-formChoice-type-r" value="Restaurateur" onclick="rMode()">
-            <label for="newAcc-formChoice-type-r">Ristoratore</label>
-        </form>
-        
-        
-    <!--CUSTOMER FORM-->
-        <div id="newAcc-c">
-            
-            <form action="" onsubmit="checksC();" id="newAcc-c-form">
-                
+    <div class="container-fluid mt-5 py-5">
+        <div id="newAcc" class = "container rounded-lg shadow p-3 mt-5 bg-white">
+
+            <form id="newAcc-formChoice">
+            <div class="form-col align-items-center">
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" class="custom-control-input" name="newAcc-formChoice-type" id="newAcc-formChoice-type-c" value="Customer" onclick="cMode()">
+                    <label for="newAcc-formChoice-type-c" class="custom-control-label">Cliente</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" class="custom-control-input" name="newAcc-formChoice-type" id="newAcc-formChoice-type-r" value="Restaurateur" onclick="rMode()">
+                    <label for="newAcc-formChoice-type-r" class="custom-control-label">Ristoratore</label>
+                </div>
+            </div>
+            </form>
+
+
+            <!--CUSTOMER FORM-->
+            <div id="newAcc-c">            
+            <form action="" onsubmit="checksC();" id="newAcc-c-form">                
                 <!--PERSONAL DATA-->
-                <label for="newAcc-c-name">Nome:</label>
-                <input type="text" name="newAcc-c-name" id="newAcc-c-name" required>
-                <br>
-                <label for="newAcc-c-surname">Cognome:</label>
-                <input type="text" name="newAcc-c-surname" id="newAcc-c-surname" required>
-                <br>
-                <label for="newAcc-c-phone">Telefono:</label>
-                <input type="tel" name="newAcc-c-phone" id="newAcc-c-phone" pattern="[0-9]{10}" required>
-                <br>
-                <label for="newAcc-c-email">Email:</label>
-                <input type="email" name="newAcc-c-email" id="newAcc-c-email" required>
-                <br>               
-                <label for="newAcc-c-psw">Password:</label>
-                <input type="password" name="newAcc-c-psw" id="newAcc-c-psw" required>
-                <br>
-                <label for="newAcc-c-pswOk">Conferma password:</label>
-                <input type="password" name="newAcc-c-pswOk" id="newAcc-c-pswOk" required>
-                <br><br>
-                
-                <!--ADDRESS
-                <span>Indirizzo: </span>
-                <br>
-                <label for="newAcc-c-address-province">Provincia:</label>
-                <input type="text" name="newAcc-c-address-province" id="newAcc-c-address-province" pattern="[A-Z]{2}" placeholder ="Sigla della provincia es. MI">
-                <br>
-                <label for="newAcc-c-address-city">Citt&aacute;:</label>
-                <input type="text" name="newAcc-c-address-city" id="newAcc-c-address-city">
-                <br>
-                <label for="newAcc-c-address-zip">CAP:</label>
-                <input type="text" name="newAcc-c-address-zip" id="newAcc-c-address-zip">
-                <br>
-                <label for="newAcc-c-address-street">Via/Piazza:</label>
-                <input type="text" name="newAcc-c-address-street" id="newAcc-c-address-street">
-                <br>
-                <label for="newAcc-c-address-civN">Civico: </label>
-                <input type="text" name="newAcc-c-address-civN" id="newAcc-c-address-civN">
-                <br><br>-->
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <input type="text" name="newAcc-c-name" id="newAcc-c-name" required class="form-control" placeholder="Nome">
+                    </div>    
+                    <div class="form-group col-md-6">
+                        <input type="text" name="newAcc-c-surname" id="newAcc-c-surname" required class="form-control" placeholder="Cognome">
+                    </div>
+                </div>    
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <input type="email" name="newAcc-c-email" id="newAcc-c-email" required class="form-control" placeholder="Email">
+                    </div>    
+                    <div class="form-group col-md-6">
+                        <input type="tel" name="newAcc-c-phone" id="newAcc-c-phone" pattern="[0-9]{10}" required class="form-control" placeholder="Telefono">
+                    </div>
+                </div>   
+                 
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <input type="password" name="newAcc-c-psw" id="newAcc-c-psw" required class="form-control" placeholder="Password">
+                    </div>    
+                    <div class="form-group col-md-6">
+                        <input type="password" name="newAcc-c-pswOk" id="newAcc-c-pswOk"  class="form-control" placeholder="Conferma Password">
+                </div>
+        </div> 
 
                 <!--PAYMENT-->
-                <span>Metodi di pagamento: </span>
-                <br>
-                <input type="checkbox" name="newAcc-c-payment-paypal" id="newAcc-c-payment-paypal">
-                <label for="newAcc-c-payment-paypal">PayPal</label>
-                <br>
-                <input type="checkbox" name="newAcc-c-payment-prepaid" id="newAcc-c-payment-prepaid">
-                <label for="newAcc-c-payment-prepaid">Prepagata</label>
-                <br>
-                <input type="checkbox" name="newAcc-c-payment-card" id="newAcc-c-payment-card">
-                <label for="newAcc-c-payment-card">Carta di credito</label>
-                <br>
-                <input type="checkbox" name="newAcc-c-payment-cash" id="newAcc-c-payment-cash">
-                <label for="newAcc-c-payment-cash">Contanti</label>
-                <br><br>
-                
-                
-                <!--CONSENTS-->
-                <input type="checkbox" name="newAcc-c-therms" id="newAcc-c-therms" requiredp>
-                <label for="newAcc-c-therms">Dichiaro di aver letto e accetto i <span> Termini e le Condizioni d'uso </span> del servizio</label>
-                <br>
-                <input type="checkbox" name="newAcc-c-privacy" id="newAcc-c-privacy" required>
-                <label for="newAcc-c-privacy">Acconsento al trattamento dei miei dati personali secondo le modalit&aacute; descritte nell'<span>Informativa sulla Privacy</span></label>
-                <br>
-                <input type="checkbox" name="newAcc-c-ads" id="newAcc-c-ads">
-                <label for="newAcc-c-ads">Confermo di voler ricevere tramite email offerte e proposte personalizzate,
-                    basate su preferenze personali raccolte secondo l'<span>Informativa sulla pubblicit&aacute; definita in base agli interessi</span></label>
-                    <br><br><br>
-                    
-                    <!--BUTTONS-->
-                    <input type="submit" name="newAcc-c-sub" id="newAcc-c-sub" value="Iscriviti">
-                    <input type="reset" name="newAcc-c-res" id="newAcc-c-res" value="Cancella">
-                    
-                </form>
-                
+                <p>Metodi di pagamento:</p>
+                <div class="form-row"></div>
+                    <div class="custom-control-inline custom-control custom-checkbox">
+                        <input type="checkbox" name="newAcc-c-payment-paypal" id="newAcc-c-payment-paypal" class="custom-control-input" value="paypal">
+                        <label for="newAcc-c-payment-paypal" class="custom-control-label">PayPal</label>
+                    </div> 
+                    <div class="custom-control-inline custom-control custom-checkbox">
+                        <input type="checkbox" name="newAcc-c-payment-prepaid" id="newAcc-c-payment-prepaid" class="custom-control-input" value="prepaid">
+                        <label for="newAcc-c-payment-prepaid" class="custom-control-label">Prepagata</label>
+                    </div>
+                    <div class="custom-control-inline custom-control custom-checkbox">
+                        <input type="checkbox" name="newAcc-c-payment-card" id="newAcc-c-payment-card" class="custom-control-input" value="credit">
+                        <label for="newAcc-c-payment-card" class="custom-control-label">Carta di credito</label>
+                    </div>
+                    <div class="custom-control-inline custom-control custom-checkbox">
+                        <input type="checkbox" name="newAcc-c-payment-cash" id="newAcc-c-payment-cash" class="custom-control-input" value="cash">
+                        <label for="newAcc-c-payment-cash" class="custom-control-label">Contanti</label>
+                    </div> 
+        
+                        <!--CONSENTS-->
+                        <div class="form-row consents vertical-align">
+                            <div class="custom-control custom-control-inline custom-checkbox">
+                                <input type="checkbox" name="newAcc-c-therms" id="newAcc-c-therms" required  class="custom-control-input" >
+                                <label for="newAcc-c-therms"  class="custom-control-label">Dichiaro di aver letto e accetto i <a href="#">Termini e le Condizioni d'uso</a> del servizio</label>
+                            </div>
+                            <div class="custom-control custom-control-inline custom-checkbox">
+                                <input type="checkbox" name="newAcc-c-privacy" id="newAcc-c-privacy" required  class="custom-control-input" >
+                                <label for="newAcc-c-privacy"  class="custom-control-label">Acconsento al trattamento dei miei dati personali secondo le modalit&aacute; descritte nell'<a href="#">Informativa sulla Privacy</a></label>
+                            </div>
+                            <div class="custom-control custom-control-inline custom-checkbox">
+                                <input type="checkbox" name="newAcc-c-ads" id="newAcc-c-ads"  class="custom-control-input" >
+                                <label for="newAcc-c-ads"  class="custom-control-label">Confermo di voler ricevere tramite email offerte e proposte personalizzate,
+                                    basate su preferenze personali raccolte secondo l'<a href="#">Informativa sulla pubblicit&aacute; definita in base agli interessi</a></label>
+                            </div>
+                        </div>
+                                            
+                        
+                        <!--BUTTONS-->
+                        <div class="buttons">
+                            <input type="submit" name="newAcc-c-sub" id="newAcc-c-sub" value="Iscriviti" class="btn btn-warning">
+                            <input type="reset" name="newAcc-c-res" id="newAcc-c-res" value="Cancella" class="btn btn-secondary">
+                        </div>
             </div>
-            
 
-
-
-
-            
-        <!--RESTAURATEUR-->
+            <!--RESTAURATEUR-->
             <div id="newAcc-r">
-                
-                <form action="" onsubmit="checksR()" id="newAcc-r-form">
-                    
-                    <!--COMMERCIAL DATA--> 
-                    <label for="newAcc-r-businessName">Nome Attivit&aacute;:</label>
-                    <input type="text" name="newAcc-r-businessName" id="newAcc-r-businessName" required>
-                    <br>
-                    <label for="newAcc-r-email">Email:</label>
-                    <input type="email" name="newAcc-r-email" id="newAcc-r-email" required>
-                    <br>
-                    <label for="newAcc-r-phone">Telefono:</label>
-                    <input type="tel" name="newAcc-r-phone" id="newAcc-r-phone" pattern="[0-9]{10}" required>
-                    <br><br>
-                    <label for="newAcc-r-psw">Password:</label>
-                    <input type="password" name="newAcc-r-psw" id="newAcc-r-psw" required>
-                    <br>
-                    <label for="newAcc-r-pswOk">Conferma password:</label>
-                    <input type="password" name="newAcc-r-pswOk" id="newAcc-r-pswOk" required>
-                    <br><br>
-                    
-                    <!--ADDRESS-->
-                    <span>Indirizzo del locale: </span>
-                    <br>
-                    <label for="newAcc-r-address-province">Provincia:</label>
-                    <input type="text" name="newAcc-r-address-province" id="newAcc-r-address-province" pattern="[A-Z]{2}" title ="Sigla della provincia">
-                    <br>
-                    <label for="newAcc-r-address-city">Citt&aacute;:</label>
-                    <input type="text" name="newAcc-r-address-city" id="newAcc-r-address-city">
-                    <br>
-                    <label for="newAcc-r-address-zip">CAP:</label>
-                    <input type="text" name="newAcc-r-address-zip" id="newAcc-r-address-zip">
-                    <br>
-                    <label for="newAcc-r-address-street">Via: </label>
-                    <input type="text" name="newAcc-r-address-street" id="newAcc-r-address-street">
-                    <br>
-                    <label for="newAcc-r-address-civN">Civico: </label>
-                    <input type="text" name="newAcc-r-address-civN" id="newAcc-r-address-civN">
-                    <br><br>
-                    
-                    <!--PAYMENT DATA-->
-                    <label for="newAcc-r-vatNum">Partita IVA: </label>
-                    <input type="text" name="newAcc-r-vatNum" id="newAcc-r-vatNum" pattern="[0-9]{11}" required>
-                    <br>
-                    <span>Metodi di pagamento accettati: </span>
-                    <br>
-                    <input type="checkbox" name="newAcc-r-payment-paypal" id="newAcc-r-payment-paypal">
-                    <label for="newAcc-r-payment-paypal">PayPal</label>
-                    <br>
-                    <input type="checkbox" name="newAcc-r-payment-prepaid" id="newAcc-r-payment-prepaid">
-                    <label for="newAcc-r-payment-prepaid">Prepagata</label>
-                    <br>
-                    <input type="checkbox" name="newAcc-r-payment-card" id="newAcc-r-payment-card">
-                    <label for="newAcc-r-payment-card">Carta di credito</label>
-                    <br>
-                    <input type="checkbox" name="newAcc-r-payment-cash" id="newAcc-r-payment-cash">
-                    <label for="newAcc-r-payment-cash">Contanti</label>
-                    <br><br>
-                    
-                    <!--CONSENTS-->
-                    <input type="checkbox" name="newAcc-r-therms" id="newAcc-r-therms" required>
-                    <label for="newAcc-r-therms">Dichiaro di aver letto e accetto i <span> Termini e le Condizioni d'uso </span> del servizio</label>
-                    <br><br><br>
-    
-                    <input type="submit" name="newAcc-r-sub" id="newAcc-r-sub" value="Registrati">
-                    <input type="reset" name="newAcc-r-res" id="newAcc-r-res" value="Cancella">
-                    
-                </form>
-                
-            </div>
-            
-        <footer>
-            <p>Created by <br> Valentina Lor&eacute;</p>
-        </footer>
 
+                <form action="" onsubmit="checksR()" id="newAcc-r-form">
+                 <!--COMMERCIAL DATA--> 
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <input type="text" name="newAcc-r-businessName" id="newAcc-r-businessName" required class="form-control" placeholder="Nome Attività">
+                        </div>    
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <input type="email" name="newAcc-r-email" id="newAcc-r-email" required class="form-control" placeholder="Email">
+                        </div>
+                        <div class="form-group col">
+                            <input type="tel" name="newAcc-r-phone" id="newAcc-r-phone" pattern="[0-9]{10}" required class="form-control" placeholder="Telefono">
+                        </div>
+                    </div> 
+
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <input type="password" name="newAcc-r-psw" id="newAcc-r-psw" required class="form-control" placeholder="Password">
+                        </div>    
+                        <div class="form-group col">
+                            <input type="password" name="newAcc-r-pswOk" id="newAcc-r-pswOk" required class="form-control" placeholder="Conferma Passoword">
+                        </div>
+                    </div> 
+
+                    <!--ADDRESS-->
+                    <p>Indirizzo del locale:</p>
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <select id="provincia" name="provincia" class="custom-select" required>
+                                <option default>Provincia</option>
+                                <option value="ag">Agrigento</option>
+                                <option value="al">Alessandria</option>
+                                <option value="an">Ancona</option>
+                                <option value="ao">Aosta</option>
+                                <option value="ar">Arezzo</option>
+                                <option value="ap">Ascoli Piceno</option>
+                                <option value="at">Asti</option>
+                                <option value="av">Avellino</option>
+                                <option value="ba">Bari</option>
+                                <option value="bt">Barletta-Andria-Trani</option>
+                                <option value="bl">Belluno</option>
+                                <option value="bn">Benevento</option>
+                                <option value="bg">Bergamo</option>
+                                <option value="bi">Biella</option>
+                                <option value="bo">Bologna</option>
+                                <option value="bz">Bolzano</option>
+                                <option value="bs">Brescia</option>
+                                <option value="br">Brindisi</option>
+                                <option value="ca">Cagliari</option>
+                                <option value="cl">Caltanissetta</option>
+                                <option value="cb">Campobasso</option>
+                                <option value="ci">Carbonia-iglesias</option>
+                                <option value="ce">Caserta</option>
+                                <option value="ct">Catania</option>
+                                <option value="cz">Catanzaro</option>
+                                <option value="ch">Chieti</option>
+                                <option value="co">Como</option>
+                                <option value="cs">Cosenza</option>
+                                <option value="cr">Cremona</option>
+                                <option value="kr">Crotone</option>
+                                <option value="cn">Cuneo</option>
+                                <option value="en">Enna</option>
+                                <option value="fm">Fermo</option>
+                                <option value="fe">Ferrara</option>
+                                <option value="fi">Firenze</option>
+                                <option value="fg">Foggia</option>
+                                <option value="fc">Forl&igrave;-Cesena</option>
+                                <option value="fr">Frosinone</option>
+                                <option value="ge">Genova</option>
+                                <option value="go">Gorizia</option>
+                                <option value="gr">Grosseto</option>
+                                <option value="im">Imperia</option>
+                                <option value="is">Isernia</option>
+                                <option value="sp">La spezia</option>
+                                <option value="aq">L'aquila</option>
+                                <option value="lt">Latina</option>
+                                <option value="le">Lecce</option>
+                                <option value="lc">Lecco</option>
+                                <option value="li">Livorno</option>
+                                <option value="lo">Lodi</option>
+                                <option value="lu">Lucca</option>
+                                <option value="mc">Macerata</option>
+                                <option value="mn">Mantova</option>
+                                <option value="ms">Massa-Carrara</option>
+                                <option value="mt">Matera</option>
+                                <option value="vs">Medio Campidano</option>
+                                <option value="me">Messina</option>
+                                <option value="mi">Milano</option>
+                                <option value="mo">Modena</option>
+                                <option value="mb">Monza e della Brianza</option>
+                                <option value="na">Napoli</option>
+                                <option value="no">Novara</option>
+                                <option value="nu">Nuoro</option>
+                                <option value="og">Ogliastra</option>
+                                <option value="ot">Olbia-Tempio</option>
+                                <option value="or">Oristano</option>
+                                <option value="pd">Padova</option>
+                                <option value="pa">Palermo</option>
+                                <option value="pr">Parma</option>
+                                <option value="pv">Pavia</option>
+                                <option value="pg">Perugia</option>
+                                <option value="pu">Pesaro e Urbino</option>
+                                <option value="pe">Pescara</option>
+                                <option value="pc">Piacenza</option>
+                                <option value="pi">Pisa</option>
+                                <option value="pt">Pistoia</option>
+                                <option value="pn">Pordenone</option>
+                                <option value="pz">Potenza</option>
+                                <option value="po">Prato</option>
+                                <option value="rg">Ragusa</option>
+                                <option value="ra">Ravenna</option>
+                                <option value="rc">Reggio di Calabria</option>
+                                <option value="re">Reggio nell'Emilia</option>
+                                <option value="ri">Rieti</option>
+                                <option value="rn">Rimini</option>
+                                <option value="rm">Roma</option>
+                                <option value="ro">Rovigo</option>
+                                <option value="sa">Salerno</option>
+                                <option value="ss">Sassari</option>
+                                <option value="sv">Savona</option>
+                                <option value="si">Siena</option>
+                                <option value="sr">Siracusa</option>
+                                <option value="so">Sondrio</option>
+                                <option value="ta">Taranto</option>
+                                <option value="te">Teramo</option>
+                                <option value="tr">Terni</option>
+                                <option value="to">Torino</option>
+                                <option value="tp">Trapani</option>
+                                <option value="tn">Trento</option>
+                                <option value="tv">Treviso</option>
+                                <option value="ts">Trieste</option>
+                                <option value="ud">Udine</option>
+                                <option value="va">Varese</option>
+                                <option value="ve">Venezia</option>
+                                <option value="vb">Verbano-Cusio-Ossola</option>
+                                <option value="vc">Vercelli</option>
+                                <option value="vr">Verona</option>
+                                <option value="vv">Vibo valentia</option>
+                                <option value="vi">Vicenza</option>
+                                <option value="vt">Viterbo</option>
+                            </select>
+                        </div>
+                        <div class="form-group col">
+                            <input type="text" name="newAcc-r-address-city" id="newAcc-r-address-city" required class="form-control" placeholder="Città">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <input type="number" min="00000" max="99999" name="newAcc-r-address-zip" id="newAcc-r-address-zip" required class="form-control" placeholder="CAP">
+                        </div>
+                    </div> 
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <input type="text" name="newAcc-r-address-street" id="newAcc-r-address-street" required class="form-control" placeholder="Via">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <input type="number" name="newAcc-r-address-civN" id="newAcc-r-address-civN" required class="form-control" placeholder="Civico">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <input type="text" name="newAcc-r-vatNum" id="newAcc-r-vatNum" pattern="[0-9]{11}" required class="form-control" placeholder="Partita IVA">
+                        </div>
+                    </div>
+
+                    <p>Metodi di pagamento accettati: </p>
+                    <div class="form-row mx-auto">
+                        <div class="custom-control-inline custom-control custom-checkbox">
+                            <input type="checkbox" name="newAcc-r-payment-paypal" id="newAcc-r-payment-paypal" class="custom-control-input" value="paypal">
+                            <label for="newAcc-r-payment-paypal" class="custom-control-label">PayPal</label>
+                        </div> 
+                        <div class="custom-control-inline custom-control custom-checkbox">
+                            <input type="checkbox" name="newAcc-r-payment-prepaid" id="newAcc-r-payment-prepaid" class="custom-control-input" value="prepaid">
+                            <label for="newAcc-r-payment-prepaid" class="custom-control-label">Prepagata</label>
+                        </div>
+                        <div class="custom-control-inline custom-control custom-checkbox">
+                            <input type="checkbox" name="newAcc-r-payment-card" id="newAcc-r-payment-card" class="custom-control-input" value="credit">
+                            <label for="newAcc-r-payment-card" class="custom-control-label">Carta di credito</label>
+                        </div>
+                        <div class="custom-control-inline custom-control custom-checkbox">
+                            <input type="checkbox" name="newAcc-r-payment-cash" id="newAcc-r-payment-cash" class="custom-control-input" value="cash">
+                            <label for="newAcc-r-payment-cash" class="custom-control-label">Contanti</label>
+                        </div> 
+                    </div>
+
+                    <!--CONSENTS-->
+                    <div class="form-row consents vertical-align">
+                        <div class="custom-control custom-control-inline custom-checkbox">
+                            <input type="checkbox" name="newAcc-r-therms" id="newAcc-r-therms" required class="form-check-input">
+                            <label for="newAcc-r-therms">Dichiaro di aver letto e accetto i <a href="#"> Termini e le Condizioni d'uso</a> del servizio.</label>   
+                        </div>
+                    </div>
+
+
+                    <!--BUTTONS-->
+                    <div class="buttons">
+                        <input type="submit" name="newAcc-r-sub" id="newAcc-r-sub" value="Registrati" class="btn btn-warning">
+                        <input type="reset" name="newAcc-r-res" id="newAcc-r-res" value="Cancella" class="btn btn-secondary">
+                    </div>
+
+                </form>
+            </div>
+
+
+               
+        </div>
+
+  
     </div>
-    
+    <div class = "svgDiv w-100">  
+
+    </div> 
 </body>
 </html>

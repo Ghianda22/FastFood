@@ -6,6 +6,9 @@ for (let j = 0; j < users.length; j++) {
         corresp = j;
     }
 }
+
+let payArr = ["Paypal", "Prepagata", "Carta di credito", "Contanti"]
+
 function updateUser(){
     sessionStorage.setItem("logged",JSON.stringify(user));
     users[corresp] = user;
@@ -14,6 +17,12 @@ function updateUser(){
 function toPArea(data){
     sessionStorage.setItem("pArea-data", JSON.stringify(data));
     document.getElementById("userArea-logged-pArea-" + data).href = "personalAreaC.html";
+}
+function logout(){
+    sessionStorage.removeItem("logged");
+    sessionStorage.removeItem("cart");
+    document.getElementById("logout").href = "../index.html";
+    document.getElementById("logout-mob").href = "../index.html";
 }
 
 function exitModify(){
@@ -29,30 +38,6 @@ function exitModify(){
     paymentOk();   
 }
 
-function checkShowData(){
-    let data = JSON.parse(sessionStorage.getItem("pArea-data"));
-    if(data == "pdata"){
-        showPersonalData();
-    }else if(data == "payment"){
-        showPaymentData();
-    }else if(data == "privacy"){
-        showAdsData();
-    }
-    sessionStorage.removeItem("pArea-data");
-}
-
-function showData(data){
-    document.getElementById("pArea-"+data+"-show").style.display = "block";
-    document.getElementById("pArea-"+data+"-down").style.display = "none";
-    document.getElementById("pArea-"+data+"-up").style.display = "inline";
-
-}
-
-function hideData(data){
-    document.getElementById("pArea-"+data+"-show").style.display = "none";
-    document.getElementById("pArea-"+data+"-down").style.display = "inline";
-    document.getElementById("pArea-"+data+"-up").style.display = "none";
-}
 
 
 /*class Address{
@@ -68,10 +53,7 @@ function hideData(data){
         }
 }*/
 
-
-/* -- PERSONAL DATA -- */
-{
-    function pswCheck(){
+function pswCheck(){
         if(document.getElementById("pArea-pData-mod-psw-input").value != document.getElementById("pArea-pData-mod-pswOk-input").value){
             //warning
             document.getElementById("psw-warning").style.display = "inline";
@@ -81,23 +63,52 @@ function hideData(data){
             return true;
         }
     }
+/* -- SHOW -- */
+{
+    
+    function insertData(){
+        showPersonalData();        
+        showPayment();
+        showAds();
+    }
 
-    //show
     function showPersonalData(){
         document.getElementById("pArea-pData-show-name-p").innerHTML = user.name;
         document.getElementById("pArea-pData-show-surname-p").innerHTML = user.surname;
         document.getElementById("pArea-pData-show-phone-p").innerHTML = user.phone;
         document.getElementById("pArea-pData-show-email-p").innerHTML = user.email;
-        showData('pData');
+    }
+    //payment
+    function showPayment(){
+        for (let i = 0; i < user.payment.length; i++) {
+            if(user.payment[i] == true){
+                let p = document.createElement("p");
+                p.id = "pArea-payment-show-all-" + payArr[i];
+                p.innerHTML = payArr[i];
+                p.className = "w-100 my-1 text-left";
+                (document.getElementById("pArea-payment-show-all")).appendChild(p);
+            }
+        }
+    }
+    function resetPayment(){
+        while((document.getElementById("pArea-payment-show-all")).childElementCount != 0){
+            document.getElementById("pArea-payment-show-all").firstChild.remove();
+        }
     }
 
-    //modify
+    function showAds(){
+        document.getElementById("pArea-ads-show-pref-newsletter").checked = user.ads;
+    }
+}
+
+
+/* -- FUNCTIONING -- */
+{
+    //personal area
     function pDataModifier(data){
         document.getElementById("pArea-pData-show-"+data).style.display="none";
         document.getElementById("pArea-pData-mod-"+data).style.display="block";
     }
-
-    //ok
     function pDataOk(data){
         if(document.getElementById("pArea-pData-mod-"+data+"-input").value != ""){
             user[data] = document.getElementById("pArea-pData-mod-"+data+"-input").value;
@@ -117,34 +128,14 @@ function hideData(data){
             updateUser();
         }
     }
-    
-}
 
-
-/* -- PAYMENT -- */   
-//[paypal, prepagata, carta di credito, contanti]
-{
-    function payment(){
-        for (let i = 0; i < user.payment.length; i++) {
-            if(user.payment[i] != false){
-                document.getElementById("pArea-payment-show-"+i).style.display = "block";
-            }else{
-                document.getElementById("pArea-payment-show-"+i).style.display = "none";
-            }
-        }
-    }
-
-    //show
-    function showPaymentData(){     
-        showData('payment');
-        payment();
-    }
-
-    //modify
+    //payment
+    //[paypal, prepagata, carta di credito, contanti]
     function paymentModifier(){     //prev +
-        for (const tag of document.getElementById("pArea-payment-show-all").getElementsByTagName("p")){
+        for (let i = 0; i < payArr.length; i++){
+            let tag = document.getElementById("pArea-payment-show-" + i);
             let prev = tag.previousElementSibling;
-            if(tag.style.display == "block"){
+            if(user.payment[i] == true){
                 prev.style.display = "none";
                 prev.previousElementSibling.style.display = "inline";
             }else{
@@ -153,7 +144,8 @@ function hideData(data){
             }
             tag.style.display = "block";
         }
-        document.getElementById("pArea-payment-show").firstChild.innerHTML = "Aggiungi(+) o rimuovi(-) i metodi di pagamento";
+        document.getElementById("pArea-payment-mod").style.display = "block";
+        document.getElementById("pArea-payment-show-all").style.display = "none";
         document.getElementById("pArea-payment-show-ok").style.display = "block";
         document.getElementById("pArea-payment-show-mod").style.display = "none";
     }
@@ -171,16 +163,44 @@ function hideData(data){
         prev.previousElementSibling.style.display = "none";
         updateUser();
     }
-
-    //ok
     function paymentOk(){
-        payment();
-        for (const i of document.getElementById("pArea-payment-show-all").getElementsByTagName("i")){
-            i.style.display = "none";
-        }
-        document.getElementById("pArea-payment-show").firstChild.innerHTML = "Metodi di pagamento attivi:";
+        resetPayment();
+        showPayment();
+        document.getElementById("pArea-payment-show-all").style.display = "block";
+        document.getElementById("pArea-payment-mod").style.display = "none";
         document.getElementById("pArea-payment-show-ok").style.display = "none";
-        document.getElementById("pArea-payment-show-mod").style.display = "inline";
+        document.getElementById("pArea-payment-show-mod").style.display = "block";
+    }
+
+    //ads
+    function adsModifier(){
+        if(document.getElementById("pArea-ads-show-pref-newsletter").checked == true){
+            user.ads = true;
+        }else{
+            user.ads = false;
+        }
+    }
+}
+
+
+/* -- ELIMINA -- */
+{
+    function areYouSure(){
+        document.getElementById("pArea-deleteUser").style.display = "block";
+    }
+
+    function deleteUser(){
+        let temp = users[0];
+        users[0] = users[corresp];
+        users[corresp] = temp;
+        users.shift();
+        localStorage.setItem("customers",JSON.stringify(users));
+        sessionStorage.clear();
+        document.location.href = "../index.html";
+    }
+
+    function userSave(){
+        document.getElementById("pArea-deleteUser").style.display = "none";
     }
 }
 
@@ -321,7 +341,6 @@ function hideData(data){
     //show
     function showAddressData(){
         address();
-        showData('address');
     }
 
     //modify
@@ -394,52 +413,3 @@ function hideData(data){
         }
     }
 }*/
-
-
-/* -- ADS -- */
-{
-    //show
-    function showAdsData(){
-        showData('ads');
-        document.getElementById("pArea-ads-show-pref-newsletter").checked = user.ads;
-    }
-
-    //popup
-    function popup(data){
-        document.getElementById("pArea-ads-show-"+data+"-text").style.display = "block";
-    }
-    function closePopup(data){
-        document.getElementById("pArea-ads-show-"+data+"-text").style.display = "none";
-    }
-
-    //modify
-    function adsModifier(){
-        if(document.getElementById("pArea-ads-show-pref-newsletter").checked == true){
-            user.ads = true;
-        }else{
-            user.ads = false;
-        }
-    }
-}
-
-
-/* -- ELIMINA -- */
-{
-    function areYouSure(){
-        document.getElementById("pArea-deleteUser").style.display = "block";
-    }
-
-    function deleteUser(){
-        let temp = users[0];
-        users[0] = users[corresp];
-        users[corresp] = temp;
-        users.shift();
-        localStorage.setItem("customers",JSON.stringify(users));
-        sessionStorage.clear();
-        document.location.href = "../index.html";
-    }
-
-    function userSave(){
-        document.getElementById("pArea-deleteUser").style.display = "none";
-    }
-}

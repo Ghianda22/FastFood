@@ -28,28 +28,48 @@
     <title>I tuoi ordini - FastFood</title>
 </head>
 <body onload="showOrders()">
+    
     <div class="container">
         <header>
             <!-- NAV AREA-->
-            <nav id="desktopNav" class="navbar navbar-expand-sm navbar-light fixed-top">
-                <div class="collapse navbar-collapse flex-grow-1 text-right" id="navbarSupportedContent">
+            <nav id="mainNav" class="navbar navbar-expand-sm navbar-light fixed-top justify-content-end bg-yellow">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse flex-grow-1 text-right" id="navbarMain">
                     <ul class="navbar-nav ml-auto flex-nowrap">
                         <div id="userArea-logged">
                             <ul class="navbar-nav ml-auto flex-nowrap">
-                                <li class="nav-item dropdown">
+                                <!--desktop dropdown-->
+                                <li id="desktop-dropdown" class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="userArea-logged-pArea" href="">
                                         Area personale
                                         <i class="fas fa-user-circle"></i>
                                     </a>
                                     <div class="dropdown-menu">
-                                        <a id="userArea-logged-pArea-pdata" class="dropdown-item" onclick="toPArea('pdata')" href="#">Dati personali</a>
-                                        <a id="userArea-logged-pArea-payment" class="dropdown-item" onclick="toPArea('payment')" href="#">Metodi di pagamento</a>
-                                    <a id="userArea-logged-pArea-privacy" class="dropdown-item" onclick="toPArea('privacy')" href="#">Preferenze e privacy</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" onclick="logout()" href="../index.html">Esci</a>
-                                </div>
-    
+                                        <a id="userArea-logged-pArea-pdata" class="dropdown-item" onclick="toPArea('pdata','')" href="#">Dati personali</a>
+                                        <a id="userArea-logged-pArea-payment" class="dropdown-item" onclick="toPArea('payment','')" href="#">Metodi di pagamento</a>
+                                        <a id="userArea-logged-pArea-privacy" class="dropdown-item" onclick="toPArea('privacy','')" href="#">Preferenze e privacy</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a id="logout" class="dropdown-item" onclick="logout()" href="">Esci</a>
+                                    </div>
                                 </li>
+                                <!-- end desktop dropdown-->
+                                
+                                <!-- mobile dropdown-->
+                                <li id="mobile-dropdown" class="hidden nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="userArea-logged-pArea" href="">
+                                        Area personale
+                                        <i class="fas fa-user-circle"></i>
+                                    </a>
+                                    <div class="hidden dropdown-menu text-right mobile-dropdown">
+                                        <a id="mobile-userArea-logged-pArea-pdata" class="dropdown-item" onclick="toPArea('pdata','mobile-')" href="#">Dati personali</a>
+                                        <a id="mobile-userArea-logged-pArea-payment" class="dropdown-item" onclick="toPArea('payment','mobile-')" href="#">Metodi di pagamento</a>
+                                        <a id="mobile-userArea-logged-pArea-privacy" class="dropdown-item" onclick="toPArea('privacy','mobile-')" href="#">Preferenze e privacy</a>
+                                        <a id="logout-mob" class="dropdown-item" onclick="logout()" href="">Esci</a>
+                                    </div>
+                                </li>
+                                <!-- end mobile dropdown-->
                                 <li class="nav-item">
                                     <a id="userArea-logged-orders" href="ordersR.html" class="nav-link">
                                         I tuoi ordini
@@ -57,7 +77,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item" id="menuIcon">
-                                    <a class="nav-link"   href="../pages/menuR.html">
+                                    <a class="nav-link"   href="menuR.html">
                                         Il tuo men&uacute;
                                         <i class="fas fa-book-open"></i>
                                     </a>
@@ -67,50 +87,6 @@
                     </ul>
                 </div>
             </nav>
-    
-            
-            <nav id="mobileNav" class="hidden navbar fixed-top">
-                <div class="text-right">
-                    <nav class="navbar navbar-dark fixed-top justify-content-end">
-                      <button id="hambmenu-button" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobileNavElements" aria-controls="mobileNavElements" aria-expanded="false" aria-label="Toggle navigation">
-                        <span id="hambmenu" class="navbar-toggler-icon"></span>
-                      </button>
-                    </nav>
-                    <div class="nav flex-column collapse" id="mobileNavElements">
-                        <div id="mobile-userArea-logged">
-                            <ul  class="navbar-nav ml-auto flex-nowrap">
-                                <li class="nav-item" id="mobile-menuIcon">
-                                    <a class="nav-link"   href="../pages/menuR.html">
-                                        Il tuo men&uacute;
-                                        <i class="fas fa-book-open"></i>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a id="mobile-userArea-logged-orders" href="ordersR.html" class="nav-link">
-                                        I tuoi ordini
-                                        <i class="fas fa-shopping-bag"></i>
-                                    </a>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="mobile-userArea-logged-pArea" href="personalAreaR.html">
-                                        Area personale
-                                        <i class="fas fa-user-circle"></i>
-                                    </a>
-                                    <div id="mobile-dropdown" class="dropdown-menu text-right">
-                                        <a id="mobile-userArea-logged-pArea-pdata" class="dropdown-item" onclick="toPArea('pdata')" href="#">Dati personali</a>
-                                        <a id="mobile-userArea-logged-pArea-payment" class="dropdown-item" onclick="toPArea('payment')" href="#">Metodi di pagamento</a>
-                                    <a id="mobile-userArea-logged-pArea-privacy" class="dropdown-item" onclick="toPArea('privacy')" href="#">Preferenze e privacy</a>
-                                    <a class="dropdown-item" onclick="logout()" href="../index.html">Esci</a>
-                                </div>
-                        
-                                </li>
-                                
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-            <!-- END NAV AREA-->
     
             <!-- LOGO -->
             <div class="text-center" >
@@ -122,28 +98,6 @@
         </header>
     </div>
 
-    <nav>
-        <ul>
-            <li>
-                <a href="#">Ordina per:</a>
-                <div>
-                    <a href="#">Più recente</a>
-                    <a href="#">Meno recente</a>
-                </div>
-            </li>
-            <li>
-                <a href="#">Filtra</a>
-                <div>
-                    <a href="#">Da accettare</a>
-                    <a href="#">In preparazione</a>
-                    <a href="#">Pronti per il ritiro</a>
-                    <a href="#">Completati</a>
-                </div>
-               
-            </li>
-
-        </ul>
-    </nav>
     
     <main id="orderList-container" class="container">
         <ul id="orderList-container-ul">

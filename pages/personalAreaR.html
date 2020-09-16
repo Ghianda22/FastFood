@@ -1,79 +1,83 @@
 <!DOCTYPE html>
 <html lang="it">
-    <head>
-        <!--STYLE-->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-        <script src="https://kit.fontawesome.com/62ec85265f.js" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="../styles/style.css">
+<head>
+    <!--STYLE-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/62ec85265f.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../styles/personalAreaC.css">
+
+    <!--DATA-->
+    <script type="text/javascript" src="../data/customers.json"></script>
+    <script type="text/javascript" src="../data/restaurateurs.json"></script>
+    <script type="text/javascript" src="../data/dishes.json"></script>
+    <script type="text/javascript" src="../data/orderList.json"></script>
+
+    <script src="../scripts/personalAreaR.js"></script>
     
-        <!--DATA-->
-        <script type="text/javascript" src="../data/customers.json"></script>
-        <script type="text/javascript" src="../data/restaurateurs.json"></script>
-        <script type="text/javascript" src="../data/dishes.json"></script>
-        <script type="text/javascript" src="../data/orderList.json"></script>
     
-        <script src="../scripts/personalAreaR.js"></script>
-        
-        
-        <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
-        <link rel="icon" href="../favicon.ico" type="image/x-icon">       
-        
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        <title>Area Personale - FastFood</title>
-    </head>
-<body ondblclick="exitModify()">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">       
     
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Area Personale - FastFood</title>
+</head>
+<body onload="insertData()" ondblclick="exitModify()">
+
     <div class="container">
         <header>
             <!-- NAV AREA-->
-            <nav id="desktopNav" class="navbar navbar-expand-sm navbar-light fixed-top">
-                <div class="collapse navbar-collapse flex-grow-1 text-right" id="navbarSupportedContent">
+            <nav id="mainNav" class="navbar navbar-expand-sm navbar-light fixed-top justify-content-end bg-yellow">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse flex-grow-1 text-right" id="navbarMain">
                     <ul class="navbar-nav ml-auto flex-nowrap">
-                        <div id="userArea-login">
+                        <div id="userArea-logged">
                             <ul class="navbar-nav ml-auto flex-nowrap">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="../pages/login.html">Accedi</a>
-                                </li>
-                                <li  class="nav-item">
-                                    <a class="nav-link" href="../pages/newAccount.html">Registrati</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div id="userArea-logged" class="hidden">
-                            <ul class="navbar-nav ml-auto flex-nowrap">
-                                <li class="nav-item dropdown">
+                                <!--desktop dropdown-->
+                                <li id="desktop-dropdown" class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="userArea-logged-pArea" href="">
                                         Area personale
                                         <i class="fas fa-user-circle"></i>
                                     </a>
                                     <div class="dropdown-menu">
-                                        <a id="userArea-logged-pArea-pdata" class="dropdown-item" onclick="toPArea('pdata')" href="#">Dati personali</a>
-                                        <a id="userArea-logged-pArea-payment" class="dropdown-item" onclick="toPArea('payment')" href="#">Metodi di pagamento</a>
-                                    <a id="userArea-logged-pArea-privacy" class="dropdown-item" onclick="toPArea('privacy')" href="#">Preferenze e privacy</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" onclick="logout()" href="">Esci</a>
-                                </div>
-    
+                                        <a id="userArea-logged-pArea-pdata" class="dropdown-item" onclick="toPArea('pdata','')" href="#">Dati personali</a>
+                                        <a id="userArea-logged-pArea-payment" class="dropdown-item" onclick="toPArea('payment','')" href="#">Metodi di pagamento</a>
+                                        <a id="userArea-logged-pArea-privacy" class="dropdown-item" onclick="toPArea('privacy','')" href="#">Preferenze e privacy</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a id="logout" class="dropdown-item" onclick="logout()" href="">Esci</a>
+                                    </div>
                                 </li>
+                                <!-- end desktop dropdown-->
+                                
+                                <!-- mobile dropdown-->
+                                <li id="mobile-dropdown" class="hidden nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="userArea-logged-pArea" href="">
+                                        Area personale
+                                        <i class="fas fa-user-circle"></i>
+                                    </a>
+                                    <div class="hidden dropdown-menu text-right mobile-dropdown">
+                                        <a id="mobile-userArea-logged-pArea-pdata" class="dropdown-item" onclick="toPArea('pdata','mobile-')" href="#">Dati personali</a>
+                                        <a id="mobile-userArea-logged-pArea-payment" class="dropdown-item" onclick="toPArea('payment','mobile-')" href="#">Metodi di pagamento</a>
+                                        <a id="mobile-userArea-logged-pArea-privacy" class="dropdown-item" onclick="toPArea('privacy','mobile-')" href="#">Preferenze e privacy</a>
+                                        <a id="logout-mob" class="dropdown-item" onclick="logout()" href="">Esci</a>
+                                    </div>
+                                </li>
+                                <!-- end mobile dropdown-->
                                 <li class="nav-item">
-                                    <a id="userArea-logged-orders" href="" class="nav-link">
+                                    <a id="userArea-logged-orders" href="ordersR.html" class="nav-link">
                                         I tuoi ordini
                                         <i class="fas fa-shopping-bag"></i>
                                     </a>
                                 </li>
-                                <li class="hidden nav-item" id="cartIcon">
-                                    <a class="nav-link"  href="../pages/cart.html">
-                                        Carrello
-                                        <i class="fas fa-shopping-cart"></i>
-                                    </a>    
-                                </li>
-                                <li class="hidden nav-item" id="menuIcon">
-                                    <a class="nav-link"   href="../pages/menuR.html">
+                                <li class="nav-item" id="menuIcon">
+                                    <a class="nav-link"   href="menuR.html">
                                         Il tuo men&uacute;
                                         <i class="fas fa-book-open"></i>
                                     </a>
@@ -84,69 +88,9 @@
                 </div>
             </nav>
     
-            
-            <nav id="mobileNav" class="hidden navbar fixed-top">
-                <div class="text-right">
-                    <nav class="navbar navbar-dark fixed-top justify-content-end">
-                      <button id="hambmenu-button" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobileNavElements" aria-controls="mobileNavElements" aria-expanded="false" aria-label="Toggle navigation">
-                        <span id="hambmenu" class="navbar-toggler-icon"></span>
-                      </button>
-                    </nav>
-                    <div class="nav flex-column collapse" id="mobileNavElements">
-                        <div id="mobile-userArea-login">
-                            <ul class="navbar-nav ml-auto flex-nowrap">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="../pages/login.html">Accedi</a>
-                                </li>
-                                <li  class="nav-item">
-                                    <a class="nav-link" href="../pages/newAccount.html">Registrati</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div id="mobile-userArea-logged" class="hidden">
-                            <ul  class="navbar-nav ml-auto flex-nowrap">
-                                <li class="hidden nav-item" id="mobile-cartIcon">
-                                    <a class="nav-link"  href="../pages/cart.html">
-                                        Carrello
-                                        <i class="fas fa-shopping-cart"></i>
-                                    </a>    
-                                </li>
-                                <li class="hidden nav-item" id="mobile-menuIcon">
-                                    <a class="nav-link"   href="../pages/menuR.html">
-                                        Il tuo men&uacute;
-                                        <i class="fas fa-book-open"></i>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a id="mobile-userArea-logged-orders" href="" class="nav-link">
-                                        I tuoi ordini
-                                        <i class="fas fa-shopping-bag"></i>
-                                    </a>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="mobile-userArea-logged-pArea" href="">
-                                        Area personale
-                                        <i class="fas fa-user-circle"></i>
-                                    </a>
-                                    <div id="mobile-dropdown" class="dropdown-menu text-right">
-                                        <a id="mobile-userArea-logged-pArea-pdata" class="dropdown-item" onclick="toPArea('pdata')" href="#">Dati personali</a>
-                                        <a id="mobile-userArea-logged-pArea-payment" class="dropdown-item" onclick="toPArea('payment')" href="#">Metodi di pagamento</a>
-                                    <a id="mobile-userArea-logged-pArea-privacy" class="dropdown-item" onclick="toPArea('privacy')" href="#">Preferenze e privacy</a>
-                                    <a class="dropdown-item" onclick="logout()" href="">Esci</a>
-                                </div>
-                        
-                                </li>
-                                
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-            <!-- END NAV AREA-->
-    
             <!-- LOGO -->
             <div class="text-center" >
-                <a href="index.html">
+                <a href="../index.html">
                     <img id="logo" src="../images/FastfoodLogov2.png" alt="fastFood-logo-bluprofile" class="img-fluid">
                 </a>
             </div>
@@ -154,256 +98,514 @@
         </header>
     </div>
 
-
-    <main class="container" id="pArea">
-        <ul id="pArea-dropdown">
+    <div class="container" id="pArea">
+        <div class="row row-cols-1 row-cols-sm-6 contenuti contenuti justify-content-center">
             <!--PERSONAL AREA-->
-            <li>
-                <div class="titlebox" id="pArea-pData">
-                    <i id="pArea-pData-down" class="fas fa-chevron-down" onclick="showPersonalData()"></i>
-                    <i id="pArea-pData-up" class="hidden fas fa-chevron-up" onclick="exitModify();hideData('pData')"></i>
-                    <span>Dati commerciali</span>
+            <div class="col col-sm-6 areaCol my-3 ">
+                <p class="areaTitoli my-2">
+                    <a class="btn btn-warning" data-toggle="collapse" href="#datiPersonali" role="button"
+                        aria-expanded="false" aria-controls="collapseExample">
+                        Dati Commerciali
+                    </a>
+                </p>
+                <div class="collapse" id="datiPersonali">
+                    <div class="card card-body ">
+                        <!--img-->
+                        <p class="pTitle pArea">Immagine di presentazione</p>
+                        <div class="input-group mb-3 data imageUpload justify-content-center" id="pArea-pData-show-img">
+
+                            <img class="master-Card" id="pArea-pData-show-img-view" src="" alt="">
+                            <input type="file" name="pArea-pData-show-img-load" id="pArea-pData-show-img-load"
+                                onchange="showImg(this);">
+                        </div>
+
+                        <p class="pTitle pArea">Banner</p>
+                        <div class="input-group mb-3 data imageUpload" id="pArea-pData-show-img">
+
+                            <img class="w-100 banner" id="pArea-pData-show-banner-view" src="" alt="">
+                            <input type="file" name="pArea-pData-show-banner-load" id="pArea-pData-show-img-load"
+                                onchange="showBanner(this);">
+                        </div>
+
+                        <p class="pTitle pArea"><i class="fas fa-edit" onclick="pDataModifier('businessName')"></i> Nome
+                            dell'attivit&aacute;: </p>
+                        <div class="data" id="pArea-pData-show-businessName">
+                            <p id="pArea-pData-show-businessName-p"></p>
+
+                        </div>
+                        <div class="mod hidden" id="pArea-pData-mod-businessName">
+                            <input type="text" name="pArea-pData-mod-businessName-input"
+                                id="pArea-pData-mod-businessName-input">
+                            <i class="fas fa-check" onclick="pDataOk('businessName')"></i>
+                        </div>
+
+                        <!--vat number-->
+                        <p class="pTitle pArea"><i class="fas fa-edit" onclick="pDataModifier('vatNum')"></i> P.IVA: </p>
+                        <div class="data" id="pArea-pData-show-vatNum">
+                            <p id="pArea-pData-show-vatNum-p"></p>
+
+                        </div>
+                        <div class="mod hidden" id="pArea-pData-mod-vatNum">
+                            <input type="text" name="pArea-pData-mod-vatNum-input" id="pArea-pData-mod-vatNum-input">
+                            <i class="fas fa-check" onclick="pDataOk('vatNum')"></i>
+                        </div>
+
+                        <!--phone-->
+                        <p class="pTitle pArea"><i class="fas fa-edit" onclick="pDataModifier('phone')"></i> Tel: </p>
+                        <div class="data" id="pArea-pData-show-phone">
+                            <p id="pArea-pData-show-phone-p"></p>
+
+                        </div>
+                        <div class="mod hidden" id="pArea-pData-mod-phone">
+                            <input type="tel" name="pArea-pData-mod-phone-input" id="pArea-pData-mod-phone-input"
+                                pattern="[0-9]{10}">
+                            <i class="fas fa-check" onclick="pDataOk('phone')"></i>
+                        </div>
+
+                        <!--business email-->
+                        <p class="dataDescription"><i class="fas fa-edit" onclick="pDataModifier('email')"></i> Email:
+                        </p>
+                        <div class="data" id="pArea-pData-show-email">
+                            <p id="pArea-pData-show-email-p"></p>
+
+                        </div>
+                        <div class="mod hidden" id="pArea-pData-mod-email">
+                            <input type="email" name="pArea-pData-mod-email-input" id="pArea-pData-mod-email-input">
+                            <i class="fas fa-check" onclick="pDataOk('email')"></i>
+                        </div>
+
+                        <!--psw-->
+                        <p class="pTitle pArea"><i class="fas fa-edit" onclick="pDataModifier('psw')"></i> Password: </p>
+                        <div class="data" id="pArea-pData-show-psw">
+                            <p id="pArea-pData-show-psw-p">********</p>
+
+                        </div>
+                        <div class="mod hidden" id="pArea-pData-mod-psw">
+                            <input type="password" name="pArea-pData-mod-psw-input" id="pArea-pData-mod-psw-input">
+                            <span class="warning hidden" id="psw-warning">
+                                Le password non corrispondono
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </span>
+                            <input type="password" name="pArea-pData-mod-pswOk-input" id="pArea-pData-mod-pswOk-input"
+                                onchange="pswCheck()">
+                            <i class="fas fa-check" onclick="pswOk('psw')"></i>
+                        </div>
+
+                        <!--DELETE-->
+                        <p onclick="areYouSure()" class="btn btn-danger">
+                            Cancella l'account
+                        </p>
+
+                        <div class="hidden text-center" id="pArea-deleteUser">
+                            Sei sicuro di voler eliminare il tuo account?
+                            <div class="text-center">
+                                <button class="btn btn-confirm my-1" type="button" id="pArea-deleteUser-n" onclick="userSave()">
+                                    <i class="fas fa-heart"></i>
+                                    No, meglio tenerlo
+                                </button>
+                                <button class="btn btn-confirm my-1" type="button" id="pArea-deleteUser-y" onclick="deleteUser();">
+                                    <i class="fas fa-heart-broken"></i>
+                                    Si, Elimina
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                
-                <div class="drop hidden" id="pArea-pData-show">
-                    
-                    <!--business name-->
-                    <span>Nome dell'attivit&aacute;: </span>
-                    <div class="data" id="pArea-pData-show-businessName">
-                        <p id="pArea-pData-show-businessName-p"></p>
-                        <i class="fas fa-edit" onclick="pDataModifier('businessName')"></i>
-                    </div>
-                    <div class="mod hidden" id="pArea-pData-mod-businessName">
-                        <input type="text" name="pArea-pData-mod-businessName-input" id="pArea-pData-mod-businessName-input">
-                        <i class="fas fa-check" onclick="pDataOk('businessName')"></i>
-                    </div>
+            </div>
 
-                    <!--img-->
-                    <div class="data" id="pArea-pData-show-img">
-                        <img id="pArea-pData-show-img-view" src="" alt="">
-                        <input type="file" name="pArea-pData-show-img-load" id="pArea-pData-show-img-load" onchange="showImg(this);">
-                    </div>
-
-                    <!--vat number-->
-                    <span>P.IVA: </span>
-                    <div class="data" id="pArea-pData-show-vatNum">
-                        <p id="pArea-pData-show-vatNum-p"></p>
-                        <i class="fas fa-edit" onclick="pDataModifier('vatNum')"></i>
-                    </div>
-                    <div class="mod hidden" id="pArea-pData-mod-vatNum">
-                        <input type="text" name="pArea-pData-mod-vatNum-input" id="pArea-pData-mod-vatNum-input">
-                        <i class="fas fa-check" onclick="pDataOk('vatNum')"></i>
-                    </div>
-                    
-                    <!--phone-->
-                    <span>Tel: </span>
-                    <div class="data" id="pArea-pData-show-phone">
-                        <p id="pArea-pData-show-phone-p"></p>
-                        <i class="fas fa-edit" onclick="pDataModifier('phone')"></i>
-                    </div>
-                    <div class="mod hidden" id="pArea-pData-mod-phone">
-                        <input type="tel" name="pArea-pData-mod-phone-input" id="pArea-pData-mod-phone-input" pattern="[0-9]{10}">
-                        <i class="fas fa-check" onclick="pDataOk('phone')"></i>
-                    </div>
-
-                    <!--business email-->
-                    <span class="dataDescription">Email: </span>
-                    <div class="data" id="pArea-pData-show-email">
-                        <p id="pArea-pData-show-email-p"></p>
-                        <i class="fas fa-edit" onclick="pDataModifier('email')"></i>                        
-                    </div>
-                    <div class="mod hidden" id="pArea-pData-mod-email">
-                        <input type="email" name="pArea-pData-mod-email-input" id="pArea-pData-mod-email-input">
-                        <i class="fas fa-check" onclick="pDataOk('email')"></i>
-                    </div>
-                
-                    <!--psw-->
-                    <span>Password: </span>
-                    <div class="data" id="pArea-pData-show-psw">
-                        <p id="pArea-pData-show-psw-p">********</p>
-                        <i class="fas fa-edit" onclick="pDataModifier('psw')"></i>
-                    </div>
-                    <div class="mod hidden" id="pArea-pData-mod-psw">
-                        <input type="password" name="pArea-pData-mod-psw-input" id="pArea-pData-mod-psw-input">
-                        <span class="warning hidden" id="psw-warning">
-                            Le password non corrispondono
-                            <i class="fas fa-exclamation-triangle"></i>
-                        </span>
-                        <input type="password" name="pArea-pData-mod-pswOk-input" id="pArea-pData-mod-pswOk-input" onchange="pswCheck()">
-                        <i class="fas fa-check" onclick="pswOk('psw')"></i>
-                    </div>
-                </div>
-            </li>
-            <!--PAYMENT-->
-            <li>
-                <div class="titlebox" id="pArea-payment">
-                    <i id="pArea-payment-down" class="fas fa-chevron-down" onclick="showPaymentData()"></i>
-                    <i id="pArea-payment-up" class="hidden fas fa-chevron-up" onclick="paymentOk();hideData('payment')"></i>
-                    <span>Metodi di pagamento</span>
-                </div>
-
-                <div  class="drop hidden" id="pArea-payment-show">
-
-                    <span>Metodi di pagamento accettati:</span>
-                    <div class="data" id="pArea-payment-show-all">
-                        <i class="hidden fas fa-minus"onclick="paymentRemover(0)"></i>
-                        <i class="hidden fas fa-plus" onclick="paymentAdder(0)"></i>
-                        <p id="pArea-payment-show-0">Paypal</p>
-                        
-                        <i class="hidden fas fa-minus"onclick="paymentRemover(1)"></i>
-                        <i class="hidden fas fa-plus" onclick="paymentAdder(1)"></i>
-                        <p id="pArea-payment-show-1">Prepagata</p>
-                        
-                        <i class="hidden fas fa-minus"onclick="paymentRemover(2)"></i>
-                        <i class="hidden fas fa-plus" onclick="paymentAdder(2)"></i>
-                        <p id="pArea-payment-show-2">Carta di credito</p>
-                        
-                        <i class="hidden fas fa-minus" onclick="paymentRemover(3)"></i>
-                        <i class="hidden fas fa-plus" onclick="paymentAdder(3)"></i>
-                        <p id="pArea-payment-show-3">Contanti</p>
-                    </div>
-                    <i id="pArea-payment-show-mod" class="fas fa-edit" onclick="paymentModifier()"></i>
-                    <i id="pArea-payment-show-ok" class="hidden fas fa-check" onclick="paymentOk()"></i>
-                    
-                </div>
-                
-            </li>
             <!--ADDRESS-->
-            <li>
-                <div class="titlebox" id="pArea-address">
-                    <i id="pArea-address-down" class="fas fa-chevron-down" onclick="showAddressData();"></i>
-                    <i id="pArea-address-up" class="hidden fas fa-chevron-up" onclick="exitModify();hideData('address');"></i>
-                    <span>Indirizzo del locale:</span>
-                </div>
+            <div class="col col-sm-6 areaCol my-3">
+                <p class="areaTitoli my-2">
+                    <a class="btn btn-warning" data-toggle="collapse" href="#indirizzo" role="button"
+                        aria-expanded="false" aria-controls="collapseExample">
+                        Indirizzo del Locale
+                    </a>
+                </p>
+                <div class="collapse" id="indirizzo">
+                    <div class="card card-body ">
+                        <div class="data" id="pArea-address-show-venue">
+                            <p class="font-weight-bold address" id="pArea-address-show-line0"></p>
+                            <p class="address" id="pArea-address-show-line1"></p>
+                            <p class="address" id="pArea-address-show-line2"></p>
+                            <p class="address" id="pArea-address-show-line3"></p>
+                            <div class="text-center">
+                                <a id="pArea-payment-show-mod" class="btn btn-confirm my-auto mx-auto" onclick="addressModifier()">
+                                    Modifica
+                                    <i id="pArea-payment-show-mod" class="fas fa-edit"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <form class="mod hidden" id="pArea-address-mod-venue" onsubmit="addressOk();return false;">
+                            <input type="text" name="pArea-address-mod-venue-owner" id="pArea-address-mod-venue-owner"
+                                placeholder="Nome sul citofono" required>
+                            <p class="pTitle pArea">
+                                <input type="text" name="pArea-address-mod-venue-street"
+                                    id="pArea-address-mod-venue-street" placeholder="Via/Piazza" required>
+                                <input type="text" name="pArea-address-mod-venue-civN" id="pArea-address-mod-venue-civN"
+                                    placeholder="Civico" required>
+                            </p>
+                            <p class="pTitle pArea">
+                                <input type="text" name="pArea-address-mod-venue-zip" id="pArea-address-mod-venue-zip"
+                                    pattern="[0-9]{5}" placeholder="CAP" required>
+                                <input type="text" name="pArea-address-mod-venue-city" id="pArea-address-mod-venue-city"
+                                    placeholder="Città" required>
+                                <input type="text" name="pArea-address-mod-venue-province"
+                                    id="pArea-address-mod-venue-province" pattern="[A-Z]{2}"
+                                    placeholder="Sigla della provincia es. MI" required>
+                            </p>
+                            <input type="text" name="pArea-address-mod-venue-other" id="pArea-address-mod-venue-other"
+                                placeholder="Dettagli per la consegna">
 
-                <div class="drop hidden" id="pArea-address-show">
-                    
-                    <div class="data" id="pArea-address-show-venue">
-                        <p id="pArea-address-show-line0"></p>
-                        <p id="pArea-address-show-line1"></p>
-                        <p id="pArea-address-show-line2"></p>
-                        <p id="pArea-address-show-line3"></p>
-                        <i id="pArea-payment-show-mod" class="fas fa-edit" onclick="addressModifier()"></i>
+                            <button class="btn btn-confirm my-auto mx-auto" type="reset">
+                                <i class="fas fa-eraser"></i>
+                                Cancella
+                            </button>
+                            <button class="btn btn-confirm my-auto mx-auto" type="submit">
+                                <i class="fas fa-check"></i>
+                                Applica modifiche
+                            </button>
+
+                        </form>
                     </div>
-                    <form class="mod hidden" id="pArea-address-mod-venue" onsubmit="addressOk();return false;">
-                        <input type="text" name="pArea-address-mod-venue-owner" id="pArea-address-mod-venue-owner" placeholder="Nome sul citofono" required>
-                        <p>
-                            <input type="text" name="pArea-address-mod-venue-street" id="pArea-address-mod-venue-street" placeholder="Via/Piazza" required>
-                            <input type="text" name="pArea-address-mod-venue-civN" id="pArea-address-mod-venue-civN" placeholder="Civico" required>
-                        </p>
-                        <p >
-                            <input type="text" name="pArea-address-mod-venue-zip" id="pArea-address-mod-venue-zip" pattern="[0-9]{5}" placeholder="CAP" required>
-                            <input type="text" name="pArea-address-mod-venue-city" id="pArea-address-mod-venue-city" placeholder="Città" required>
-                            <input type="text" name="pArea-address-mod-venue-province" id="pArea-address-mod-venue-province" pattern="[A-Z]{2}" placeholder ="Sigla della provincia es. MI" required>
-                        </p>
-                        <input type="text" name="pArea-address-mod-venue-other" id="pArea-address-mod-venue-other" placeholder="Dettagli per la consegna">
-
-                        <button type="reset">
-                            <i class="fas fa-eraser"></i>
-                            Cancella
-                        </button>
-                        <button type="submit">
-                            <i class="fas fa-check"></i>
-                            Applica modifiche
-                        </button>
-                
-                    </form>
-
                 </div>
-            </li>
-            <!--ADS-->
-            <li>
-                <div class="titlebox" id="pArea-ads">
-                    <i id="pArea-ads-down" class="fas fa-chevron-down" onclick="showData('ads');"></i>
-                    <i id="pArea-ads-up" class="hidden fas fa-chevron-up" onclick="exitModify();hideData('ads');"></i>
-                    <span>Preferenze e privacy:</span>
-                </div>
+            </div>
 
-                <div class="drop hidden" id="pArea-ads-show">
-                    
-                    <p id="pArea-ads-show-terms" class="link" onclick="popup('terms')">Termini e condizioni d'uso
-                        <div id="pArea-ads-show-terms-text" class="popup hidden">
-                            <i class="fas fa-times" onclick="closePopup('terms')"></i>
-                            <h1>Website Terms and Conditions of Use</h1>
-                            <h2>1. Terms</h2>
-                            <p>By accessing this Website, accessible from file:///C:/Users/Admin/Desktop/index.html, you are agreeing to be bound by these Website Terms and Conditions of Use and agree that you are responsible for the agreement with any applicable local laws. If you disagree with any of these terms, you are prohibited from accessing this site. The materials contained in this Website are protected by copyright and trade mark law. These Terms of Service has been created with the help of the <a href="https://www.termsofservicegenerator.net">Terms of Service Generator</a> and the <a href="https://www.termsconditionsexample.com">Terms & Conditions Example</a>.</p>
-                            <h2>2. Use License</h2>
-                            <p>Permission is granted to temporarily download one copy of the materials on FastFood's Website for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:</p>
-                            <ul>
-                                <li>modify or copy the materials;</li>
-                                <li>use the materials for any commercial purpose or for any public display;</li>
-                                <li>attempt to reverse engineer any software contained on FastFood's Website;</li>
-                                <li>remove any copyright or other proprietary notations from the materials; or</li>
-                                <li>transferring the materials to another person or "mirror" the materials on any other server.</li>
-                            </ul>
-                            <p>This will let FastFood to terminate upon violations of any of these restrictions. Upon termination, your viewing right will also be terminated and you should destroy any downloaded materials in your possession whether it is printed or electronic format.</p>
-                            <h2>3. Disclaimer</h2>
-                            <p>All the materials on FastFoodâ€™s Website are provided "as is". FastFood makes no warranties, may it be expressed or implied, therefore negates all other warranties. Furthermore, FastFood does not make any representations concerning the accuracy or reliability of the use of the materials on its Website or otherwise relating to such materials or any sites linked to this Website.</p>
-                            <h2>4. Limitations</h2>
-                            <p>FastFood or its suppliers will not be hold accountable for any damages that will arise with the use or inability to use the materials on FastFoodâ€™s Website, even if FastFood or an authorize representative of this Website has been notified, orally or written, of the possibility of such damage. Some jurisdiction does not allow limitations on implied warranties or limitations of liability for incidental damages, these limitations may not apply to you.</p>
-                            <h2>5. Revisions and Errata</h2>
-                            <p>The materials appearing on FastFoodâ€™s Website may include technical, typographical, or photographic errors. FastFood will not promise that any of the materials in this Website are accurate, complete, or current. FastFood may change the materials contained on its Website at any time without notice. FastFood does not make any commitment to update the materials.</p>
-                            <h2>6. Links</h2>
-                            <p>FastFood has not reviewed all of the sites linked to its Website and is not responsible for the contents of any such linked site. The presence of any link does not imply endorsement by FastFood of the site. The use of any linked website is at the userâ€™s own risk.</p>
-                            <h2>7. Site Terms of Use Modifications</h2>
-                            <p>FastFood may revise these Terms of Use for its Website at any time without prior notice. By using this Website, you are agreeing to be bound by the current version of these Terms and Conditions of Use.</p>
-                            <h2>8. Your Privacy</h2>
-                            <p>Please read <a href="https://www.privacypolicygenerator.info/">our Privacy Policy</a>.</p>
-                            <h2>9. Governing Law</h2>
-                            <p>Any claim related to FastFood's Website shall be governed by the laws of it without regards to its conflict of law provisions.</p>
+            <!--PAYMENT AREA-->
+            <div class="col col-sm-6 areaCol my-3">
+                <p class="areaTitoli my-2">
+                    <a class="btn btn-warning" data-toggle="collapse" href="#pArea-payment-show" role="button"
+                        aria-expanded="false" aria-controls="collapseExample">
+                        Metodi di Pagamento
+                    </a>
+                </p>
+                <div class="collapse" id="pArea-payment-show">
+                    <div class="card card-body">
+                        <span>Metodi di pagamento attivi:</span>
+                        <div class="data" id="pArea-payment-show-all">
+
                         </div>
-                    </p>
-                    <p id="pArea-ads-show-privacy" class="link" onclick="popup('privacy')">Informativa sulla privacy
-                        <div id="pArea-ads-show-privacy-text" class="popup hidden">
-                            <i class="fas fa-times" onclick="closePopup('privacy')"></i>
-                            <h1>Website Terms and Conditions of Use</h1>
-                            <h2>1. Terms</h2>
-                            <p>By accessing this Website, accessible from file:///C:/Users/Admin/Desktop/index.html, you are agreeing to be bound by these Website Terms and Conditions of Use and agree that you are responsible for the agreement with any applicable local laws. If you disagree with any of these terms, you are prohibited from accessing this site. The materials contained in this Website are protected by copyright and trade mark law. These Terms of Service has been created with the help of the <a href="https://www.termsofservicegenerator.net">Terms of Service Generator</a> and the <a href="https://www.termsconditionsexample.com">Terms & Conditions Example</a>.</p>
-                            <h2>2. Use License</h2>
-                            <p>Permission is granted to temporarily download one copy of the materials on FastFood's Website for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:</p>
-                            <ul>
-                                <li>modify or copy the materials;</li>
-                                <li>use the materials for any commercial purpose or for any public display;</li>
-                                <li>attempt to reverse engineer any software contained on FastFood's Website;</li>
-                                <li>remove any copyright or other proprietary notations from the materials; or</li>
-                                <li>transferring the materials to another person or "mirror" the materials on any other server.</li>
-                            </ul>
-                            <p>This will let FastFood to terminate upon violations of any of these restrictions. Upon termination, your viewing right will also be terminated and you should destroy any downloaded materials in your possession whether it is printed or electronic format.</p>
-                            <h2>3. Disclaimer</h2>
-                            <p>All the materials on FastFoodâ€™s Website are provided "as is". FastFood makes no warranties, may it be expressed or implied, therefore negates all other warranties. Furthermore, FastFood does not make any representations concerning the accuracy or reliability of the use of the materials on its Website or otherwise relating to such materials or any sites linked to this Website.</p>
-                            <h2>4. Limitations</h2>
-                            <p>FastFood or its suppliers will not be hold accountable for any damages that will arise with the use or inability to use the materials on FastFoodâ€™s Website, even if FastFood or an authorize representative of this Website has been notified, orally or written, of the possibility of such damage. Some jurisdiction does not allow limitations on implied warranties or limitations of liability for incidental damages, these limitations may not apply to you.</p>
-                            <h2>5. Revisions and Errata</h2>
-                            <p>The materials appearing on FastFoodâ€™s Website may include technical, typographical, or photographic errors. FastFood will not promise that any of the materials in this Website are accurate, complete, or current. FastFood may change the materials contained on its Website at any time without notice. FastFood does not make any commitment to update the materials.</p>
-                            <h2>6. Links</h2>
-                            <p>FastFood has not reviewed all of the sites linked to its Website and is not responsible for the contents of any such linked site. The presence of any link does not imply endorsement by FastFood of the site. The use of any linked website is at the userâ€™s own risk.</p>
-                            <h2>7. Site Terms of Use Modifications</h2>
-                            <p>FastFood may revise these Terms of Use for its Website at any time without prior notice. By using this Website, you are agreeing to be bound by the current version of these Terms and Conditions of Use.</p>
-                            <h2>8. Your Privacy</h2>
-                            <p>Please read <a href="https://www.privacypolicygenerator.info/">our Privacy Policy</a>.</p>
-                            <h2>9. Governing Law</h2>
-                            <p>Any claim related to FastFood's Website shall be governed by the laws of it without regards to its conflict of law provisions.</p>
+                        <div class="hidden data" id="pArea-payment-mod">
+                            <i class="hidden fas fa-minus" onclick="paymentRemover(0)"></i>
+                            <i class="hidden fas fa-plus" onclick="paymentAdder(0)"></i>
+                            <p id="pArea-payment-show-0">Paypal</p>
+
+                            <i class="hidden fas fa-minus" onclick="paymentRemover(1)"></i>
+                            <i class="hidden fas fa-plus" onclick="paymentAdder(1)"></i>
+                            <p id="pArea-payment-show-1">Prepagata</p>
+
+                            <i class="hidden fas fa-minus" onclick="paymentRemover(2)"></i>
+                            <i class="hidden fas fa-plus" onclick="paymentAdder(2)"></i>
+                            <p id="pArea-payment-show-2">Carta di credito</p>
+
+                            <i class="hidden fas fa-minus" onclick="paymentRemover(3)"></i>
+                            <i class="hidden fas fa-plus" onclick="paymentAdder(3)"></i>
+                            <p id="pArea-payment-show-3">Contanti</p>
+
                         </div>
-                    </p>
+                        <div class="w-100 text-center">
+                            <a id="pArea-payment-show-mod" class="btn btn-confirm my-auto mx-auto" onclick="paymentModifier()">
+                                Modifica
+                                <i id="pArea-payment-show-mod" class="fas fa-edit"></i>
+                            </a>
+                            <a id="pArea-payment-show-ok" class="hidden btn btn-confirm my-auto mx-auto" onclick="paymentOk()" class="hidden">
+                                Conferma
+                                <i id="pArea-payment-show-ok" class="hidden fas fa-check"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
-            </li>
+            </div>
 
-        </ul>
+            <!--ADS AREA-->
+            <div class="col col-sm-6 areaCol my-3">
+                <p class="areaTitoli my-2">
+                    <a class="btn btn-warning" data-toggle="collapse" href="#privacy" role="button"
+                        aria-expanded="false" aria-controls="collapseExample">
+                        Preferenze e privacy
+                    </a>
+                </p>
+                <div class="collapse" id="privacy">
+                    <div class="card card-body">
+                        <!-- Terms -->
+                        <a href="#" role="button" data-toggle="modal" data-target="#terms-conditions">
+                            Termini e Condizioni d'uso
+                        </a>
+                        <div class="modal fade" id="terms-conditions" tabindex="-1" aria-labelledby="terms"
+                            aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Termini e Condizioni d'uso</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Chiudi">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h1>Website Terms and Conditions of Use</h1>
+                                        <h2>1. Terms</h2>
+                                        <p class="pTitle pArea">By accessing this Website, accessible from
+                                            file:///C:/Users/Admin/Desktop/index.html, you are agreeing to be bound by
+                                            these Website Terms and Conditions of Use and agree that you are responsible
+                                            for the agreement with any applicable local laws. If you disagree with any
+                                            of these terms, you are prohibited from accessing this site. The materials
+                                            contained in this Website are protected by copyright and trade mark law.
+                                            These Terms of Service has been created with the help of the <a
+                                                href="https://www.termsofservicegenerator.net">Terms of Service
+                                                Generator</a> and the <a
+                                                href="https://www.termsconditionsexample.com">Terms & Conditions
+                                                Example</a>.</p>
+                                        <h2>2. Use License</h2>
+                                        <p class="pTitle pArea">Permission is granted to temporarily download one copy of the materials on
+                                            FastFood's Website for personal, non-commercial transitory viewing only.
+                                            This is the grant of a license, not a transfer of title, and under this
+                                            license you may not:</p>
+                                        <ul>
+                                            <li>modify or copy the materials;</li>
+                                            <li>use the materials for any commercial purpose or for any public display;
+                                            </li>
+                                            <li>attempt to reverse engineer any software contained on FastFood's
+                                                Website;</li>
+                                            <li>remove any copyright or other proprietary notations from the materials;
+                                                or</li>
+                                            <li>transferring the materials to another person or "mirror" the materials
+                                                on any other server.</li>
+                                        </ul>
+                                        <p class="pTitle pArea">This will let FastFood to terminate upon violations of any of these
+                                            restrictions. Upon termination, your viewing right will also be terminated
+                                            and you should destroy any downloaded materials in your possession whether
+                                            it is printed or electronic format.</p>
+                                        <h2>3. Disclaimer</h2>
+                                        <p class="pTitle pArea">All the materials on FastFood’s Website are provided "as is". FastFood makes
+                                            no warranties, may it be expressed or implied, therefore negates all other
+                                            warranties. Furthermore, FastFood does not make any representations
+                                            concerning the accuracy or reliability of the use of the materials on its
+                                            Website or otherwise relating to such materials or any sites linked to this
+                                            Website.</p>
+                                        <h2>4. Limitations</h2>
+                                        <p class="pTitle pArea">FastFood or its suppliers will not be hold accountable for any damages that
+                                            will arise with the use or inability to use the materials on FastFood’s
+                                            Website, even if FastFood or an authorize representative of this Website has
+                                            been notified, orally or written, of the possibility of such damage. Some
+                                            jurisdiction does not allow limitations on implied warranties or limitations
+                                            of liability for incidental damages, these limitations may not apply to you.
+                                        </p>
+                                        <h2>5. Revisions and Errata</h2>
+                                        <p class="pTitle pArea">The materials appearing on FastFood’s Website may include technical,
+                                            typographical, or photographic errors. FastFood will not promise that any of
+                                            the materials in this Website are accurate, complete, or current. FastFood
+                                            may change the materials contained on its Website at any time without
+                                            notice. FastFood does not make any commitment to update the materials.</p>
+                                        <h2>6. Links</h2>
+                                        <p class="pTitle pArea">FastFood has not reviewed all of the sites linked to its Website and is not
+                                            responsible for the contents of any such linked site. The presence of any
+                                            link does not imply endorsement by FastFood of the site. The use of any
+                                            linked website is at the user’s own risk.</p>
+                                        <h2>7. Site Terms of Use Modifications</h2>
+                                        <p class="pTitle pArea">FastFood may revise these Terms of Use for its Website at any time without
+                                            prior notice. By using this Website, you are agreeing to be bound by the
+                                            current version of these Terms and Conditions of Use.</p>
+                                        <h2>8. Your Privacy</h2>
+                                        <p class="pTitle pArea">Please read <a href="https://www.privacypolicygenerator.info/">our Privacy
+                                                Policy</a>.</p>
+                                        <h2>9. Governing Law</h2>
+                                        <p class="pTitle pArea">Any claim related to FastFood's Website shall be governed by the laws of it
+                                            without regards to its conflict of law provisions.</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Chiudi</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-        <p onclick="areYouSure()">Cancella l'account</p>
-        <div class="hidden" id="pArea-deleteUser">
-            Sei sicuro di voler eliminare il tuo account?
-            <button type="button" id="pArea-deleteUser-y" onclick="deleteUser();">
-                <i class="fas fa-heart-broken"></i>
-                Si, Elimina
-            </button>
-            <button type="button" id="pArea-deleteUser-n" onclick="userSave()">
-                <i class="fas fa-heart"></i>
-                No, meglio tenerlo
-            </button>
+                        <!-- Privacy -->
+                        <a href="#" role="button" data-toggle="modal" data-target="#privacy-policy">
+                            Informativa sulla privacy
+                        </a>
+                        <div class="modal fade" id="privacy-policy" tabindex="-1" aria-labelledby="privacy"
+                            aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Informativa sulla privacy</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h1>Privacy Policy for FastFood</h1>
+
+                                        <p class="pTitle pArea">At FastFood.exam, accessible from file:///C:/Users/Admin/Desktop/index.html,
+                                            one of our main priorities is the privacy of our visitors. This Privacy
+                                            Policy document contains types of information that is collected and recorded
+                                            by FastFood.exam and how we use it.</p>
+
+                                        <p class="pTitle pArea">If you have additional questions or require more information about our
+                                            Privacy Policy, do not hesitate to contact us.</p>
+
+                                        <p class="pTitle pArea">This Privacy Policy applies only to our online activities and is valid for
+                                            visitors to our website with regards to the information that they shared
+                                            and/or collect in FastFood.exam. This policy is not applicable to any
+                                            information collected offline or via channels other than this website.</p>
+
+                                        <h2>Consent</h2>
+
+                                        <p class="pTitle pArea">By using our website, you hereby consent to our Privacy Policy and agree to
+                                            its terms.</p>
+
+                                        <h2>Information we collect</h2>
+
+                                        <p class="pTitle pArea">The personal information that you are asked to provide, and the reasons why
+                                            you are asked to provide it, will be made clear to you at the point we ask
+                                            you to provide your personal information.</p>
+                                        <p class="pTitle pArea">If you contact us directly, we may receive additional information about you
+                                            such as your name, email address, phone number, the contents of the message
+                                            and/or attachments you may send us, and any other information you may choose
+                                            to provide.</p>
+                                        <p class="pTitle pArea">When you register for an Account, we may ask for your contact information,
+                                            including items such as name, company name, address, email address, and
+                                            telephone number.</p>
+
+                                        <h2>How we use your information</h2>
+
+                                        <p class="pTitle pArea">We use the information we collect in various ways, including to:</p>
+
+                                        <ul>
+                                            <li>Provide, operate, and maintain our webste</li>
+                                            <li>Improve, personalize, and expand our webste</li>
+                                            <li>Understand and analyze how you use our webste</li>
+                                            <li>Develop new products, services, features, and functionality</li>
+                                            <li>Communicate with you, either directly or through one of our partners,
+                                                including for customer service, to provide you with updates and other
+                                                information relating to the webste, and for marketing and promotional
+                                                purposes</li>
+                                            <li>Send you emails</li>
+                                            <li>Find and prevent fraud</li>
+                                        </ul>
+
+                                        <h2>Log Files</h2>
+
+                                        <p class="pTitle pArea">FastFood.exam follows a standard procedure of using log files. These files
+                                            log visitors when they visit websites. All hosting companies do this and a
+                                            part of hosting services' analytics. The information collected by log files
+                                            include internet protocol (IP) addresses, browser type, Internet Service
+                                            Provider (ISP), date and time stamp, referring/exit pages, and possibly the
+                                            number of clicks. These are not linked to any information that is personally
+                                            identifiable. The purpose of the information is for analyzing trends,
+                                            administering the site, tracking users' movement on the website, and
+                                            gathering demographic information. Our Privacy Policy was created with the
+                                            help of the <a href="https://www.privacypolicygenerator.info">Privacy Policy
+                                                Generator</a> and the <a
+                                                href="https://www.privacypolicyonline.com/privacy-policy-generator/">Online
+                                                Privacy Policy Generator</a>.</p>
+
+                                        <h2>Cookies and Web Beacons</h2>
+
+                                        <p class="pTitle pArea">Like any other website, FastFood.exam uses 'cookies'. These cookies are used
+                                            to store information including visitors' preferences, and the pages on the
+                                            website that the visitor accessed or visited. The information is used to
+                                            optimize the users' experience by customizing our web page content based on
+                                            visitors' browser type and/or other information.</p>
+
+                                        <p class="pTitle pArea">For more general information on cookies, please read <a
+                                                href="https://www.cookieconsent.com/what-are-cookies/">"What Are
+                                                Cookies"</a>.</p>
+
+
+
+                                        <h2>Advertising Partners Privacy Policies</h2>
+
+                                        <P class="pTitle pArea">You may consult this list to find the Privacy Policy for each of the
+                                            advertising partners of FastFood.exam.</p>
+
+                                        <p class="pTitle pArea">Third-party ad servers or ad networks uses technologies like cookies,
+                                            JavaScript, or Web Beacons that are used in their respective advertisements
+                                            and links that appear on FastFood.exam, which are sent directly to users'
+                                            browser. They automatically receive your IP address when this occurs. These
+                                            technologies are used to measure the effectiveness of their advertising
+                                            campaigns and/or to personalize the advertising content that you see on
+                                            websites that you visit.</p>
+
+                                        <p class="pTitle pArea">Note that FastFood.exam has no access to or control over these cookies that
+                                            are used by third-party advertisers.</p>
+
+                                        <h2>Third Party Privacy Policies</h2>
+
+                                        <p class="pTitle pArea">FastFood.exam's Privacy Policy does not apply to other advertisers or
+                                            websites. Thus, we are advising you to consult the respective Privacy
+                                            Policies of these third-party ad servers for more detailed information. It
+                                            may include their practices and instructions about how to opt-out of certain
+                                            options. </p>
+
+                                        <p class="pTitle pArea">You can choose to disable cookies through your individual browser options. To
+                                            know more detailed information about cookie management with specific web
+                                            browsers, it can be found at the browsers' respective websites.</p>
+
+                                        <h2>CCPA Privacy Rights (Do Not Sell My Personal Information)</h2>
+
+                                        <p class="pTitle pArea">Under the CCPA, among other rights, California consumers have the right to:
+                                        </p>
+                                        <p class="pTitle pArea">Request that a business that collects a consumer's personal data disclose the
+                                            categories and specific pieces of personal data that a business has
+                                            collected about consumers.</p>
+                                        <p class="pTitle pArea">Request that a business delete any personal data about the consumer that a
+                                            business has collected.</p>
+                                        <p class="pTitle pArea">Request that a business that sells a consumer's personal data, not sell the
+                                            consumer's personal data.</p>
+                                        <p class="pTitle pArea">If you make a request, we have one month to respond to you. If you would like
+                                            to exercise any of these rights, please contact us.</p>
+
+                                        <h2>GDPR Data Protection Rights</h2>
+
+                                        <p class="pTitle pArea">We would like to make sure you are fully aware of all of your data protection
+                                            rights. Every user is entitled to the following:</p>
+                                        <p class="pTitle pArea">The right to access – You have the right to request copies of your personal
+                                            data. We may charge you a small fee for this service.</p>
+                                        <p class="pTitle pArea">The right to rectification – You have the right to request that we correct
+                                            any information you believe is inaccurate. You also have the right to
+                                            request that we complete the information you believe is incomplete.</p>
+                                        <p class="pTitle pArea">The right to erasure – You have the right to request that we erase your
+                                            personal data, under certain conditions.</p>
+                                        <p class="pTitle pArea">The right to restrict processing – You have the right to request that we
+                                            restrict the processing of your personal data, under certain conditions.</p>
+                                        <p class="pTitle pArea">The right to object to processing – You have the right to object to our
+                                            processing of your personal data, under certain conditions.</p>
+                                        <p class="pTitle pArea">The right to data portability – You have the right to request that we
+                                            transfer the data that we have collected to another organization, or
+                                            directly to you, under certain conditions.</p>
+                                        <p class="pTitle pArea">If you make a request, we have one month to respond to you. If you would like
+                                            to exercise any of these rights, please contact us.</p>
+
+                                        <h2>Children's Information</h2>
+
+                                        <p class="pTitle pArea">Another part of our priority is adding protection for children while using
+                                            the internet. We encourage parents and guardians to observe, participate in,
+                                            and/or monitor and guide their online activity.</p>
+
+                                        <p class="pTitle pArea">FastFood.exam does not knowingly collect any Personal Identifiable
+                                            Information from children under the age of 13. If you think that your child
+                                            provided this kind of information on our website, we strongly encourage you
+                                            to contact us immediately and we will do our best efforts to promptly remove
+                                            such information from our records.</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Chiudi</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
 
-    </main>
-    
+        <div class="row justify-content-center contenuti privacy">
+            
+        </div>
+    </div>
 </body>
+
 </html>

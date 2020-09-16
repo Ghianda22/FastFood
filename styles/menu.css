@@ -1,0 +1,15 @@
+.list-group-item{
+    width: 300px;
+    text-align: center;
+}
+
+.divImg img{
+    height: 150px;
+    width: 100%;
+}
+
+.menuButtons{
+    margin-bottom: 50px;
+    margin-top: 50px;
+    text-align: center;
+}

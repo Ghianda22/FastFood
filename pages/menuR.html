@@ -1,43 +1,155 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/62ec85265f.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles/style.css">
 
     <script src="..\scripts\menuR.js"></script>
     <link rel="stylesheet" href="..\styles\style.css">
-    <script src="https://kit.fontawesome.com/62ec85265f.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="..\styles\menu.css">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestione menu - FastFood</title>
 </head>
+
 <body onload="showMenu()">
 
-    <div id="yourMenu">
-        <h1>Il tuo men&uacute;</h1>
-        <h3 id="yourMenu-averagePrice">Prezzo medio: </h3>
-        <ul id="yourMenu-list">
+    <div class="container">
+        <header>
+            <!-- NAV AREA-->
+            <nav id="mainNav" class="navbar navbar-expand-sm navbar-light fixed-top justify-content-end bg-yellow">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMain"
+                    aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse flex-grow-1 text-right" id="navbarMain">
+                    <ul class="navbar-nav ml-auto flex-nowrap">
+                        <div id="userArea-login">
+                            <ul class="navbar-nav ml-auto flex-nowrap">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pages/login.html">Accedi</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pages/newAccount.html">Registrati</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="userArea-logged" class="hidden">
+                            <ul class="navbar-nav ml-auto flex-nowrap">
+                                <!--desktop dropdown-->
+                                <li id="desktop-dropdown" class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
+                                        aria-haspopup="true" aria-expanded="false" id="userArea-logged-pArea" href="">
+                                        Area personale
+                                        <i class="fas fa-user-circle"></i>
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <a id="userArea-logged-pArea-pdata" class="dropdown-item"
+                                            onclick="toPArea('pdata','')" href="#">Dati personali</a>
+                                        <a id="userArea-logged-pArea-payment" class="dropdown-item"
+                                            onclick="toPArea('payment','')" href="#">Metodi di pagamento</a>
+                                        <a id="userArea-logged-pArea-privacy" class="dropdown-item"
+                                            onclick="toPArea('privacy','')" href="#">Preferenze e privacy</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a id="logout" class="dropdown-item" onclick="logout()" href="">Esci</a>
+                                    </div>
+                                </li>
+                                <!-- end desktop dropdown-->
 
-        </ul>
-        <i class="fas fa-edit" onclick="showDishes()"></i>
-    </div>
-    <div class="hidden" id="setMenu">
-        <h1>Scegli i piatti da inserire nel tuo menù</h1>
-        <ul id="setMenu-list">
-            
-        </ul>
-        <button type="button" onclick="backMenu()">
-            <i class="fas fa-times-circle"></i>
-            Elimina modifiche
-        </button>
-        <button type="button" onclick="resetMenu()">
-            <i class="fas fa-trash-alt"></i>
-            Azzera men&uacute;
-        </button>
-        <button type="button" onclick="changeMenu()">
-            <i class="fas fa-check"></i>
-            Conferma men&uacute;
-        </button>
+                                <!-- mobile dropdown-->
+                                <li id="mobile-dropdown" class="hidden nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
+                                        aria-haspopup="true" aria-expanded="false" id="userArea-logged-pArea" href="">
+                                        Area personale
+                                        <i class="fas fa-user-circle"></i>
+                                    </a>
+                                    <div class="hidden dropdown-menu text-right mobile-dropdown">
+                                        <a id="mobile-userArea-logged-pArea-pdata" class="dropdown-item"
+                                            onclick="toPArea('pdata','mobile-')" href="#">Dati personali</a>
+                                        <a id="mobile-userArea-logged-pArea-payment" class="dropdown-item"
+                                            onclick="toPArea('payment','mobile-')" href="#">Metodi di pagamento</a>
+                                        <a id="mobile-userArea-logged-pArea-privacy" class="dropdown-item"
+                                            onclick="toPArea('privacy','mobile-')" href="#">Preferenze e privacy</a>
+                                        <a id="logout" class="dropdown-item" onclick="logout()" href="">Esci</a>
+                                    </div>
+                                </li>
+                                <!-- end mobile dropdown-->
+                                <li class="nav-item">
+                                    <a id="userArea-logged-orders" href="" class="nav-link">
+                                        I tuoi ordini
+                                        <i class="fas fa-shopping-bag"></i>
+                                    </a>
+                                </li>
+                                <li class="hidden nav-item" id="cartIcon">
+                                    <a class="nav-link" href="pages/cart.html">
+                                        Carrello
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </a>
+                                </li>
+                                <li class="hidden nav-item" id="menuIcon">
+                                    <a class="nav-link" href="pages/menuR.html">
+                                        Il tuo men&uacute;
+                                        <i class="fas fa-book-open"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- LOGO -->
+            <div class="text-center">
+                <a href="index.html">
+                    <img id="logo" src="/images/FastfoodLogov2.png" alt="fastFood-logo-bluprofile" class="img-fluid">
+                </a>
+            </div>
+            <!-- END LOGO -->
+        </header>
     </div>
 
+    <div class="container">
+        <div id="yourMenu">
+            <h2 style="text-align: center;">Il tuo men&uacute; <i style="    font-size: small;" class="fas fa-edit"
+                    onclick="showDishes()"></i></h2>
+            <h4 style="text-align: center;" id="yourMenu-averagePrice">Prezzo medio: </h4>
+                <ul id="yourMenu-list" class="list-group list-group-horizontal">
+
+                </ul>
+
+        </div>
+        <div class="hidden menuButtons" id="setMenu">
+            <h3>Scegli i piatti da inserire nel tuo menù</h3>
+            <ul id="setMenu-list" class="list-group list-group-horizontal">
+
+            </ul>
+            <button class="btn btn-danger" type="button" onclick="backMenu()">
+                <i class="fas fa-times-circle"></i>
+                Elimina modifiche
+            </button>
+            <button type="button" class="btn btn-secondary" onclick="resetMenu()">
+                <i class="fas fa-trash-alt"></i>
+                Azzera men&uacute;
+            </button>
+            <button type="button" class="btn btn-success" onclick="changeMenu()">
+                <i class="fas fa-check"></i>
+                Conferma men&uacute;
+            </button>
+        </div>
+    </div>
 </body>
+
 </html>

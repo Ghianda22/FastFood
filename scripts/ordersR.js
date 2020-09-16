@@ -17,7 +17,8 @@
 function logout(){
     sessionStorage.removeItem("logged");
     sessionStorage.removeItem("cart");
-    location.reload();
+    document.getElementById("logout").href = "../index.html";
+    document.getElementById("logout-mob").href = "../index.html";
 }
 function toPArea(data){
     sessionStorage.setItem("pArea-data", JSON.stringify(data));
@@ -25,6 +26,11 @@ function toPArea(data){
 }
 /* -- END DEFAULT -- */
 
+
+function toPArea(data){
+    sessionStorage.setItem("pArea-data", JSON.stringify(data));
+    document.getElementById("userArea-logged-pArea-" + data).href = "personalAreaR.html";
+}
 
 let res = JSON.parse(sessionStorage.getItem("logged"));
 let ordersList = JSON.parse(localStorage.getItem("orderList"));

@@ -1,3 +1,63 @@
 label{
     text-align: center;
 }
+
+div#logPage{
+    max-width: 500px !important;
+    margin-top: 300px;
+    padding: 40px;
+}
+
+footer{
+    position: absolute;
+    bottom: 0;
+    left: 45%;
+}
+
+#register:hover{
+    text-decoration: none;
+    color: #f8cd6d;
+}
+#register{
+    color: #F4AC0C;
+}
+
+.svgDiv{
+    background-image: url(../images/login.svg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: bottom;
+    height: 100%;
+    max-height: 100%;
+    width: 100%;
+    bottom: 0px;
+    position: fixed;
+    z-index: -9999;
+}
+
+html, body {
+    margin: 0; 
+    height: 100%; 
+    overflow: hidden
+}
+
+.btn{
+    margin-bottom: 5px;
+}
+
+label a{
+    text-decoration: none;
+    color: #F4AC0C;
+}
+label a:hover{
+    text-decoration: none;
+}
+
+.custom-checkbox .custom-control-input:checked~.custom-control-label::before{
+    background-color:#F4AC0C;
+    border: black;
+}
+.custom-control-input:checked ~ .custom-control-label::before {
+    background-color:#F4AC0C;
+    border: black;
+}

@@ -6,10 +6,22 @@ for (let j = 0; j < users.length; j++) {
         corresp = j;
     }
 }
+
+let payArr = ["Paypal", "Prepagata", "Carta di credito", "Contanti"]
+
 function updateUser(){
     sessionStorage.setItem("logged",JSON.stringify(user));
     users[corresp] = user;
     localStorage.setItem("restaurateurs",JSON.stringify(users));
+}
+function toPArea(data){
+    sessionStorage.setItem("pArea-data", JSON.stringify(data));
+    document.getElementById("userArea-logged-pArea-" + data).href = "personalAreaR.html";
+}
+function logout(){
+    sessionStorage.removeItem("logged");
+    document.getElementById("logout").href = "../index.html";
+    document.getElementById("logout-mob").href = "../index.html";
 }
 
 function exitModify(){
@@ -23,22 +35,8 @@ function exitModify(){
     }
     paymentOk();
 }
-function showData(data){
-    document.getElementById("pArea-"+data+"-show").style.display = "block";
-    document.getElementById("pArea-"+data+"-down").style.display = "none";
-    document.getElementById("pArea-"+data+"-up").style.display = "inline";
 
-}
-function hideData(data){
-    document.getElementById("pArea-"+data+"-show").style.display = "none";
-    document.getElementById("pArea-"+data+"-down").style.display = "inline";
-    document.getElementById("pArea-"+data+"-up").style.display = "none";
-}
-
-
-/* -- BUSINESS DATA -- */
-{
-    function pswCheck(){
+function pswCheck(){
         if(document.getElementById("pArea-pData-mod-psw-input").value != document.getElementById("pArea-pData-mod-pswOk-input").value){
             //warning
             document.getElementById("psw-warning").style.display = "inline";
@@ -47,29 +45,65 @@ function hideData(data){
             document.getElementById("psw-warning").style.display = "none";
             return true;
         }
+}
+
+/* -- SHOW -- */
+{
+    function insertData(){
+        showPersonalData();        
+        showPayment();
+        showAddress();  
     }
 
-    //show
     function showPersonalData(){
         document.getElementById("pArea-pData-show-businessName-p").innerHTML = user.businessName;
         document.getElementById("pArea-pData-show-phone-p").innerHTML = user.phone;
         document.getElementById("pArea-pData-show-email-p").innerHTML = user.email;
         document.getElementById("pArea-pData-show-vatNum-p").innerHTML = user.vatNum;
         if(user.img != ""){
-            document.getElementById("pArea-pData-show-img-view").src = user.img;
-        }else{
-            document.getElementById("pArea-pData-show-img-view").src = "https://place-hold.it/300x200/C2BDBA/588C99.jpg?text=Inserisci+una+foto+di+presentazione&bold&italic";
+            document.getElementById("pArea-pData-show-img-view").src = ("../" + user.img);
         }
-        showData('pData');
+        if(user.banner != ""){
+            document.getElementById("pArea-pData-show-banner-view").src = user.banner;
+        }
+    }
+    function showPayment(){
+        for (let i = 0; i < user.payment.length; i++) {
+            if(user.payment[i] == true){
+                let p = document.createElement("p");
+                p.id = "pArea-payment-show-all-" + payArr[i];
+                p.innerHTML = payArr[i];
+                p.className = "w-100 my-1 text-left";
+                (document.getElementById("pArea-payment-show-all")).appendChild(p);
+            }
+        }
+    }
+    function resetPayment(){
+        while((document.getElementById("pArea-payment-show-all")).childElementCount != 0){
+            document.getElementById("pArea-payment-show-all").firstChild.remove();
+        }
     }
 
-    //modify
+    function showAddress(){
+        document.getElementById("pArea-address-show-line0").innerHTML = user.address.owner;
+        document.getElementById("pArea-address-show-line1").innerHTML = user.address.street +" "+ user.address.civN;
+        document.getElementById("pArea-address-show-line2").innerHTML = user.address.zip + ", " + user.address.city + " (" + user.address.province + ")";
+        if(user.address.other == false){
+            document.getElementById(id="pArea-address-show-line3").style.display = "none";
+        }else{
+            document.getElementById("pArea-address-show-line3").innerHTML = user.address.other;
+        }
+    }
+}
+
+
+/* -- FUNCTIONING -- */   
+{
+    //commercial data
     function pDataModifier(data){
         document.getElementById("pArea-pData-show-"+data).style.display="none";
         document.getElementById("pArea-pData-mod-"+data).style.display="block";
     }
-
-    //ok
     function pDataOk(data){
         if(document.getElementById("pArea-pData-mod-"+data+"-input").value != ""){
             user[data] = document.getElementById("pArea-pData-mod-"+data+"-input").value;
@@ -89,8 +123,6 @@ function hideData(data){
             updateUser();
         }
     }
-
-    //img
     function showImg(input){
         if (input.files && input.files[0]) {
             var reader = new FileReader();
@@ -102,33 +134,25 @@ function hideData(data){
             reader.readAsDataURL(input.files[0]);
         }
     }
-}
-
-
-/* -- PAYMENT -- */   
-//[paypal, prepagata, carta di credito, contanti]
-{
-    function payment(){
-        for (let i = 0; i < user.payment.length; i++) {
-            if(user.payment[i] != false){
-                document.getElementById("pArea-payment-show-"+i).style.display = "block";
-            }else{
-                document.getElementById("pArea-payment-show-"+i).style.display = "none";
+    function showBanner(input){
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                document.getElementById("pArea-pData-show-banner-view").src = e.target.result;
+                user.img = e.target.result;
+                updateUser();
             }
+            reader.readAsDataURL(input.files[0]);
         }
     }
 
-    //show
-    function showPaymentData(){     
-        showData('payment');
-        payment();
-    }
-
-    //modify
+    //payment
+    //[paypal, prepagata, carta di credito, contanti]
     function paymentModifier(){     //prev +
-        for (const tag of document.getElementById("pArea-payment-show-all").getElementsByTagName("p")){
+        for (let i = 0; i < payArr.length; i++){
+            let tag = document.getElementById("pArea-payment-show-" + i);
             let prev = tag.previousElementSibling;
-            if(tag.style.display == "block"){
+            if(user.payment[i] == true){
                 prev.style.display = "none";
                 prev.previousElementSibling.style.display = "inline";
             }else{
@@ -137,7 +161,8 @@ function hideData(data){
             }
             tag.style.display = "block";
         }
-        document.getElementById("pArea-payment-show").firstChild.innerHTML = "Aggiungi(+) o rimuovi(-) i metodi di pagamento";
+        document.getElementById("pArea-payment-mod").style.display = "block";
+        document.getElementById("pArea-payment-show-all").style.display = "none";
         document.getElementById("pArea-payment-show-ok").style.display = "block";
         document.getElementById("pArea-payment-show-mod").style.display = "none";
     }
@@ -155,34 +180,18 @@ function hideData(data){
         prev.previousElementSibling.style.display = "none";
         updateUser();
     }
-
-    //ok
     function paymentOk(){
-        payment();
-        for (const i of document.getElementById("pArea-payment-show-all").getElementsByTagName("i")){
-            i.style.display = "none";
-        }
-        document.getElementById("pArea-payment-show").firstChild.innerHTML = "Metodi di pagamento attivi:";
+        resetPayment();
+        showPayment();
+        document.getElementById("pArea-payment-show-all").style.display = "block";
+        document.getElementById("pArea-payment-mod").style.display = "none";
         document.getElementById("pArea-payment-show-ok").style.display = "none";
-        document.getElementById("pArea-payment-show-mod").style.display = "inline";
+        document.getElementById("pArea-payment-show-mod").style.display = "block";
     }
 }
 
 
 /* -- ADDRESS -- */
-{
-    //show
-    function showAddressData(){
-        document.getElementById("pArea-address-show-line0").innerHTML = user.address.owner;
-        document.getElementById("pArea-address-show-line1").innerHTML = user.address.street +" "+ user.address.civN;
-        document.getElementById("pArea-address-show-line2").innerHTML = user.address.zip + ", " + user.address.city + " (" + user.address.province + ")";
-        if(user.address.other == false){
-            document.getElementById(id="pArea-address-show-line3").style.display = "none";
-        }else{
-            document.getElementById("pArea-address-show-line3").innerHTML = user.address.other;
-        }
-        showData('address');
-    }
 
     //modify
     function addressModifier(){
@@ -209,19 +218,8 @@ function hideData(data){
         document.getElementById("pArea-address-show-venue").style.display="block";
         document.getElementById("pArea-address-mod-venue").style.display="none";
     }
-}
 
 
-/* -- ADS -- */
-{
-    //popup
-    function popup(data){
-        document.getElementById("pArea-ads-show-"+data+"-text").style.display = "block";
-    }
-    function closePopup(data){
-        document.getElementById("pArea-ads-show-"+data+"-text").style.display = "none";
-    }
-}
 
 
 /* -- ELIMINA -- */

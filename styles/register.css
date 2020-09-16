@@ -1,0 +1,83 @@
+label{
+    text-align: center;
+}
+
+div#newAcc{
+    max-width: 600px !important;
+    margin-top: 100px;
+    padding: 40px;
+}
+
+footer{
+    position: absolute;
+    bottom: 0;
+    left: 45%;
+}
+
+#register:hover{
+    text-decoration: none;
+}
+
+.svgDiv{
+    background-image: url(../images/login.svg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: bottom;
+    height: 100%;
+    max-height: 100%;
+    width: 100%;
+    bottom: 0px;
+    position: fixed;
+    z-index: -9999;
+}
+
+html, body {
+    margin: 0; 
+    height: 100%; 
+    overflow: hidden;
+}
+
+#newAcc-formChoice{
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.consents{
+    text-align: center;
+    vertical-align: middle;
+    margin-top: 30px;
+}
+.buttons{
+    margin-top: 20px;
+    text-align: center;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+label a{
+    text-decoration: none;
+    color: #F4AC0C;
+}
+label a:hover{
+    text-decoration: none;
+    color: #f8cd6d;
+}
+
+.custom-checkbox .custom-control-input:checked~.custom-control-label::before{
+    background-color:#F4AC0C;
+    border: black;
+}
+.custom-control-input:checked ~ .custom-control-label::before {
+    background-color:#F4AC0C;
+    border: black;
+}

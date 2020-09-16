@@ -26,11 +26,11 @@
     
     <title>Home - FastFood</title>
 </head>
-<body onload="detectUser();showRestaurants();">
+<body onload="loadPage()">
     <div class="container">
         <header>
             <!-- NAV AREA-->
-            <nav id="mainNav" class="navbar navbar-expand-sm navbar-light fixed-top justify-content-end">
+            <nav id="mainNav" class="navbar navbar-expand-sm navbar-light fixed-top justify-content-end bg-yellow">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -59,7 +59,7 @@
                                         <a id="userArea-logged-pArea-payment" class="dropdown-item" onclick="toPArea('payment','')" href="#">Metodi di pagamento</a>
                                         <a id="userArea-logged-pArea-privacy" class="dropdown-item" onclick="toPArea('privacy','')" href="#">Preferenze e privacy</a>
                                         <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" onclick="logout()" href="">Esci</a>
+                                        <a id="logout" class="dropdown-item" onclick="logout()" href="">Esci</a>
                                     </div>
                                 </li>
                                 <!-- end desktop dropdown-->
@@ -74,7 +74,7 @@
                                         <a id="mobile-userArea-logged-pArea-pdata" class="dropdown-item" onclick="toPArea('pdata','mobile-')" href="#">Dati personali</a>
                                         <a id="mobile-userArea-logged-pArea-payment" class="dropdown-item" onclick="toPArea('payment','mobile-')" href="#">Metodi di pagamento</a>
                                         <a id="mobile-userArea-logged-pArea-privacy" class="dropdown-item" onclick="toPArea('privacy','mobile-')" href="#">Preferenze e privacy</a>
-                                        <a class="dropdown-item" onclick="logout()" href="">Esci</a>
+                                        <a id="logout" class="dropdown-item" onclick="logout()" href="">Esci</a>
                                     </div>
                                 </li>
                                 <!-- end mobile dropdown-->
@@ -121,13 +121,13 @@
         </ol>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="images\slideshow\img1.jpeg" class="img-carousel" alt="Roadhouse">
+            <img src="images\slideshow\banner-amici-miei.png" class="w-100 img-carousel" alt="">
           </div>
           <div class="carousel-item">
-            <img src="images\slideshow\img2.jpeg" class="img-carousel" alt="...">
+            <img src="images\slideshow\banner-foto-sushi.jpg" class="w-100 img-carousel" alt="">
           </div>
           <div class="carousel-item">
-            <img src="images\slideshow\img3.jpeg" class="img-carousel" alt="...">
+            <img src="images\slideshow\banner.jpg" class="w-100 img-carousel" alt="">
           </div>
         </div>
         <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
@@ -141,32 +141,62 @@
     </div>    
       <!-- END SLIDE SHOW -->
 
+
+    <!-- FILTER NAV -->
     <div>
-        <nav id="desktopFilterNav" class="navbar navbar-expand-sm navbar-light mb-3">
+        <nav id="desktopFilterNav" class="navbar navbar-expand-sm navbar-light bg-yellow">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarFilterNav" aria-controls="navbarFilterNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse flex-grow-1" id="navbarFilterNav">
-                <div id="desktopFilterNav-dropdownFilters" class="list-item">
-                    filters
+            <div class="collapse navbar-collapse flex-grow-1 row row-cols-1 row-cols-sm-3 align-items-center" id="navbarFilterNav">
+                <div id="desktopFilterNav-dropdownFilters" class="col">
+                    <p class="my-auto">
+                        <i class="fas fa-filter"></i>
+                        Filtra
+                        <i id="dropdownFilters-down" class="fas fa-chevron-down" onclick="showFilterMenu()"></i>
+                        <i id="dropdownFilters-up" class="hidden fas fa-chevron-up" onclick="hideFilterMenu()"></i>
+                    </p>
                 </div>
-                <div id="desktopFilterNav-filterButton" class="list-item">
-                    <ul class="nav nav-pill nav-fill">
-                        <li class="nav-item" onclick="">
-                            <span>Nome</span>
+                <div id="desktopFilterNav-appliedFilters" class="col">
+                    <ul id="desktopFilterNav-appliedFilters-ul" class="nav nav-pills nav-fill align-items-center">
+                        <li class="nav-item fit-content mx-1 my-auto">
+                            <p class="p-2 px-3 my-auto bold">Filtri attivi:</p>
                         </li>
                     </ul>
                 </div>
-                <div id="desktopFilterNav-search" class="list-item">
-                    <form class="form-inline my-2 my-lg-0" onsubmit="searchBar();return false">
+                <div id="desktopFilterNav-search" class="col">
+                    <form class="form-inline my-2 my-lg-0 justify-content-end" onsubmit="searchBar();return false">
                         <input id="desktopFilterNav-search-input" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                       </form>
                 </div>
             </div>
         </nav>
+        
+        <div id="dropdownFilters-menu" class="hidden bg-yellow fit-content text-left">
+            <div class="dropdown dropdown-item">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="userArea-logged-pArea" href="">
+                    Cucina
+                </a>
+                <div id="dropdownFilters-menu-cuisine" class="dropdown-menu mobile-dropdown">
+                </div>
+            </div>
+            <div class="dropdown dropdown-item">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="userArea-logged-pArea" href="">
+                    Categorie
+                </a>
+                <div id="dropdownFilters-menu-category" class="dropdown-menu mobile-dropdown">
+                </div>
+            </div>
+            <div class="dropdown-item">
+                <p class="py-2" onclick="removeFilters()">
+                    Elimina filtri
+                    <i class="fas fa-times"></i>
+                </p>
+            </div>
+        </div>
     </div>
-
+    <!-- END FILTER NAV -->
 
     <div class="container-fluid">
         <main id="main">  

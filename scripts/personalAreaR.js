@@ -14,9 +14,15 @@ function updateUser(){
     users[corresp] = user;
     localStorage.setItem("restaurateurs",JSON.stringify(users));
 }
-function toPArea(data){
+function toPArea(data,option){
     sessionStorage.setItem("pArea-data", JSON.stringify(data));
-    document.getElementById("userArea-logged-pArea-" + data).href = "personalAreaR.html";
+    let user = JSON.parse(sessionStorage.getItem("logged"));
+    if(user.vatNum == null){
+        document.getElementById(option + "userArea-logged-pArea-" + data).href = "personalAreaC.html";
+    }
+    else{
+        document.getElementById(option + "userArea-logged-pArea-" + data).href = "personalAreaR.html";
+    }
 }
 function logout(){
     sessionStorage.removeItem("logged");
@@ -47,9 +53,24 @@ function pswCheck(){
         }
 }
 
+function checkShowData(){
+    let data = JSON.parse(sessionStorage.getItem("pArea-data"));
+    if(data == "pdata"){
+        document.getElementById("datiPersonali").style.display = "block";
+    }else if(data == "payment"){
+        document.getElementById("pArea-payment-show").style.display = "block";
+    }else if(data == "privacy"){
+        document.getElementById("privacy").style.display = "block";
+    }
+    sessionStorage.removeItem("pArea-data");
+}
+
+
+
 /* -- SHOW -- */
 {
     function insertData(){
+        checkShowData();
         showPersonalData();        
         showPayment();
         showAddress();  

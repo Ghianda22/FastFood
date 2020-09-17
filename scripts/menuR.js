@@ -25,6 +25,16 @@ function updateAveragePrice(){
     }
     user.averagePrice = (tot / user.menu.length).toFixed(2);
 }
+function toPArea(data,option){
+    sessionStorage.setItem("pArea-data", JSON.stringify(data));
+    let user = JSON.parse(sessionStorage.getItem("logged"));
+    if(user.vatNum == null){
+        document.getElementById(option + "userArea-logged-pArea-" + data).href = "personalAreaC.html";
+    }
+    else{
+        document.getElementById(option + "userArea-logged-pArea-" + data).href = "personalAreaR.html";
+    }
+}
 
 
 /* -- SHOW -- */
@@ -53,7 +63,7 @@ function updateAveragePrice(){
     function showMenu(){
         resetShowDishes();
         let menu = user.menu;
-        document.getElementById("yourMenu-averagePrice").innerHTML += user.averagePrice;
+        document.getElementById("yourMenu-averagePrice").innerHTML = "Prezzo medio: " + user.averagePrice + "€";
         for(let el of menu) {
             for (let dish of dishes) {
                 if(el == dish.id){

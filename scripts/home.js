@@ -27,7 +27,7 @@ function toPArea(data,option){
         document.getElementById(option + "userArea-logged-pArea-" + data).href = "pages/personalAreaC.html";
     }
     else{
-        document.getElementById(option + "userArea-logged-pArea-" + data).href = "pages/personalAreaRAle.html";
+        document.getElementById(option + "userArea-logged-pArea-" + data).href = "pages/personalAreaR.html";
     }
 }
 
@@ -68,8 +68,8 @@ function loadPage(){
     detectUser();
     showRestaurants();
     showFilterTags();
-    for(const tag of document.getElementById("carousel").getElementsByClassName("carousel-item")){
-        tag.style.maxHeight = ((window.innerHeight)*0.5) + "px";
+    for(const tag of document.getElementById("carousel").getElementsByClassName("img-carousel")){
+        tag.style.height = ((window.innerHeight)*0.6) + "px";
     }
 }
 

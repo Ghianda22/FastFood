@@ -48,9 +48,9 @@
                                         <i class="fas fa-user-circle"></i>
                                     </a>
                                     <div class="dropdown-menu">
-                                        <a id="userArea-logged-pArea-pdata" class="dropdown-item" href="#">Dati personali</a>
-                                        <a id="userArea-logged-pArea-payment" class="dropdown-item" href="#">Metodi di pagamento</a>
-                                        <a id="userArea-logged-pArea-privacy" class="dropdown-item" href="#">Preferenze e privacy</a>
+                                        <a id="userArea-logged-pArea-pdata" class="dropdown-item" onclick="toPArea('pdata','')" href="#">Dati personali</a>
+                                        <a id="userArea-logged-pArea-payment" class="dropdown-item" onclick="toPArea('payment','')" href="#">Metodi di pagamento</a>
+                                        <a id="userArea-logged-pArea-privacy" class="dropdown-item" onclick="toPArea('privacy','')" href="#">Preferenze e privacy</a>
                                         <div class="dropdown-divider"></div>
                                         <a id="logout" class="dropdown-item" onclick="logout()" href="">Esci</a>
                                     </div>
@@ -64,9 +64,9 @@
                                         <i class="fas fa-user-circle"></i>
                                     </a>
                                     <div class="hidden dropdown-menu text-right mobile-dropdown">
-                                        <a id="mobile-userArea-logged-pArea-pdata" class="dropdown-item" href="#">Dati personali</a>
-                                        <a id="mobile-userArea-logged-pArea-payment" class="dropdown-item" href="#">Metodi di pagamento</a>
-                                        <a id="mobile-userArea-logged-pArea-privacy" class="dropdown-item" href="#">Preferenze e privacy</a>
+                                        <a id="mobile-userArea-logged-pArea-pdata" class="dropdown-item" onclick="toPArea('pdata','mobile-')" href="#">Dati personali</a>
+                                        <a id="mobile-userArea-logged-pArea-payment" class="dropdown-item" onclick="toPArea('payment','mobile-')" href="#">Metodi di pagamento</a>
+                                        <a id="mobile-userArea-logged-pArea-privacy" class="dropdown-item" onclick="toPArea('privacy','mobile-')" href="#">Preferenze e privacy</a>
                                         <a id="logout-mob" class="dropdown-item" onclick="logout()" href="">Esci</a>
                                     </div>
                                 </li>
@@ -78,7 +78,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item" id="cartIcon">
-                                    <a class="nav-link"  href="../pages/cart.html">
+                                    <a class="nav-link"  href="cart.html">
                                         Carrello
                                         <i class="fas fa-shopping-cart"></i>
                                     </a>    

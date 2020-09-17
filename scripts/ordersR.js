@@ -27,9 +27,15 @@ function toPArea(data){
 /* -- END DEFAULT -- */
 
 
-function toPArea(data){
+function toPArea(data,option){
     sessionStorage.setItem("pArea-data", JSON.stringify(data));
-    document.getElementById("userArea-logged-pArea-" + data).href = "personalAreaR.html";
+    let user = JSON.parse(sessionStorage.getItem("logged"));
+    if(user.vatNum == null){
+        document.getElementById(option + "userArea-logged-pArea-" + data).href = "personalAreaC.html";
+    }
+    else{
+        document.getElementById(option + "userArea-logged-pArea-" + data).href = "personalAreaR.html";
+    }
 }
 
 let res = JSON.parse(sessionStorage.getItem("logged"));
@@ -130,6 +136,7 @@ function showOrders(){
                 divProgress.id = divStatus.id + "-progress";
                 let progressButton = document.createElement("button");
                 progressButton.id = divProgress.id + "-button";
+                progressButton.className = "btn-warning";
                 for (let i = 0; i < statusArray.length; i++) {
                     if(order.status == statusArray[i]){
                         progressButton.innerHTML = statusArray[i+1];
@@ -309,11 +316,13 @@ function updateOrderStatus(orderId){
                 if(ordersList[j].status == statusArray[i]){
                     ordersList[j].status = statusArray[i+1];
                     document.getElementById("orderList-container-ul-" + orderId + "-orderInfo-title-status-value").innerHTML = ordersList[j].status;
-                    if(i == statusArray.length-1){
+
+                    if(ordersList[j].status == "Completato"){
                         document.getElementById("orderList-container-ul-" + orderId + "-orderInfo-title-status-progress-button").style.display = "none";
                         document.getElementById("orderList-container-ul-" + orderId + "-orderInfo-title-status-progress-date").style.display = "inline";
+                    }else{
+                        document.getElementById("orderList-container-ul-" + orderId + "-orderInfo-title-status-progress-button").innerHTML = statusArray[i+2];
                     }
-                    document.getElementById("orderList-container-ul-" + orderId + "-orderInfo-title-status-progress-button").innerHTML = statusArray[i+2];
                     localStorage.setItem("orderList",JSON.stringify(ordersList));
                     break;
                 }

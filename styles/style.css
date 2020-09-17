@@ -8,6 +8,9 @@
 i.hidden{
     display: none;
 }
+.warning{
+    color: red;
+}
 
 /* -- STYLE -- */
 
@@ -56,6 +59,17 @@ img.banner{
 .address{
     margin: 0 auto;
     padding: 0 auto;
+}
+.btn-warning{
+    background-color: #F4AC0C;
+    border-radius: 50px;
+    font-weight: bold;
+    width: fit-content;
+}
+.btn-confirm{
+    border-radius: 50px;
+    border: 2px solid #F4AC0C;
+    width: fit-content;
 }
 
 
@@ -154,13 +168,7 @@ nav .fixed-top{
     background-color:#F4AC0C;
     border: black;
 }
-
-/* checkbox */
-.custom-checkbox .custom-control-input:checked~.custom-control-label::before{
-    background-color:#F4AC0C;
-    border: black;
-}
-.custom-control-input:checked ~ .custom-control-label::before {
-    background-color:#F4AC0C;
-    border: black;
+.form-control:focus {
+    border-color: #F4AC0C;
+    box-shadow: 0 0 0 0.2rem rgba(244, 172, 12, 0.5);
 }

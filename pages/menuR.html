@@ -88,19 +88,13 @@
                                 </li>
                                 <!-- end mobile dropdown-->
                                 <li class="nav-item">
-                                    <a id="userArea-logged-orders" href="" class="nav-link">
+                                    <a id="userArea-logged-orders" href="ordersR.html" class="nav-link">
                                         I tuoi ordini
                                         <i class="fas fa-shopping-bag"></i>
                                     </a>
                                 </li>
-                                <li class="hidden nav-item" id="cartIcon">
-                                    <a class="nav-link" href="pages/cart.html">
-                                        Carrello
-                                        <i class="fas fa-shopping-cart"></i>
-                                    </a>
-                                </li>
-                                <li class="hidden nav-item" id="menuIcon">
-                                    <a class="nav-link" href="pages/menuR.html">
+                                <li class="nav-item" id="menuIcon">
+                                    <a class="nav-link" href="menuR.html">
                                         Il tuo men&uacute;
                                         <i class="fas fa-book-open"></i>
                                     </a>
@@ -113,8 +107,8 @@
 
             <!-- LOGO -->
             <div class="text-center">
-                <a href="index.html">
-                    <img id="logo" src="/images/FastfoodLogov2.png" alt="fastFood-logo-bluprofile" class="img-fluid">
+                <a href="../index.html">
+                    <img id="logo" src="../images/FastfoodLogov2.png" alt="fastFood-logo-bluprofile" class="img-fluid">
                 </a>
             </div>
             <!-- END LOGO -->
@@ -125,15 +119,15 @@
         <div id="yourMenu">
             <h2 style="text-align: center;">Il tuo men&uacute; <i style="    font-size: small;" class="fas fa-edit"
                     onclick="showDishes()"></i></h2>
-            <h4 style="text-align: center;" id="yourMenu-averagePrice">Prezzo medio: </h4>
-                <ul id="yourMenu-list" class="list-group list-group-horizontal">
+            <h4 style="text-align: center;" id="yourMenu-averagePrice"></h4>
+                <ul id="yourMenu-list" class="nav nav-tabs justify-content-center">
 
                 </ul>
 
         </div>
         <div class="hidden menuButtons" id="setMenu">
             <h3>Scegli i piatti da inserire nel tuo menù</h3>
-            <ul id="setMenu-list" class="list-group list-group-horizontal">
+            <ul id="setMenu-list" class="nav nav-tabs justify-content-center">
 
             </ul>
             <button class="btn btn-danger" type="button" onclick="backMenu()">

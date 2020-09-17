@@ -81,3 +81,7 @@ label a:hover{
     background-color:#F4AC0C;
     border: black;
 }
+.form-control:focus {
+    border-color: #F4AC0C;
+    box-shadow: 0 0 0 0.2rem rgba(244, 172, 12, 0.5);
+}

@@ -46,6 +46,16 @@ function updateOrder(order){
     }
     localStorage.setItem("orderList",JSON.stringify(ordersList));
 }
+function toPArea(data,option){
+    sessionStorage.setItem("pArea-data", JSON.stringify(data));
+    let user = JSON.parse(sessionStorage.getItem("logged"));
+    if(user.vatNum == null){
+        document.getElementById(option + "userArea-logged-pArea-" + data).href = "personalAreaC.html";
+    }
+    else{
+        document.getElementById(option + "userArea-logged-pArea-" + data).href = "personalAreaR.html";
+    }
+}
 
 //SHOW
 
@@ -176,7 +186,7 @@ function showOrders(){
                 spanDate.id = divRefresh.id + "-date";
                 spanDate.className = "hidden";
                 let thatDate = new Date(order.date);
-                spanDate.innerHTML = thatDate.getDate() + "/" + thatDate.getMonth();
+                spanDate.innerHTML = thatDate.getDate() + "/" + (thatDate.getMonth()+1);
                 if(order.status == "Completato"){
                     spanDate.style.display = "inline";
                     refreshIcon.style.display = "none";
@@ -231,17 +241,18 @@ function showOrders(){
                 let line0 = document.createElement("p");
                 let content0 = document.createTextNode("Indirizzo di ritiro: ");
                 line0.id = divAddress.id + "-line0";
+                line0.className = "pTitle";
                 line0.appendChild(content0);
                 let line1 = document.createElement("p");
                 let content1 = document.createTextNode(res.address.street +" "+ res.address.civN);
                 line1.id = divAddress.id + "-line1";
                 line1.appendChild(content1);
-                //class name
+                line1.className = "address";
                 let line2 = document.createElement("p");
                 let content2 = document.createTextNode(res.address.zip + ", " + res.address.city + " (" + res.address.province + ")");
                 line2.id = divAddress.id + "-line2";
                 line2.appendChild(content2);
-                //class name
+                line2.className = "address";
                 divAddress.appendChild(line0);
                 divAddress.appendChild(line1);
                 divAddress.appendChild(line2);
